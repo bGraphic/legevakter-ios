@@ -17,7 +17,6 @@
 		17EA083917024A80007C2B48 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083817024A80007C2B48 /* Default@2x.png */; };
 		17EA083B17024A80007C2B48 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083A17024A80007C2B48 /* Default-568h@2x.png */; };
 		17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */; };
-		17EA084117024A80007C2B48 /* TESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA084017024A80007C2B48 /* TESViewController.m */; };
 		17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA08631702523B007C2B48 /* TESTableViewController.m */; };
 		41F6617988DF491CACBD3842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B996927B2DD4776A30CAC02 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -37,8 +36,6 @@
 		17EA083817024A80007C2B48 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		17EA083A17024A80007C2B48 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17EA083D17024A80007C2B48 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		17EA083F17024A80007C2B48 /* TESViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TESViewController.h; sourceTree = "<group>"; };
-		17EA084017024A80007C2B48 /* TESViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TESViewController.m; sourceTree = "<group>"; };
 		17EA08621702523B007C2B48 /* TESTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESTableViewController.h; sourceTree = "<group>"; };
 		17EA08631702523B007C2B48 /* TESTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableViewController.m; sourceTree = "<group>"; };
 		5B996927B2DD4776A30CAC02 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,8 +92,6 @@
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
 				17EA083417024A80007C2B48 /* TESAppDelegate.m */,
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
-				17EA083F17024A80007C2B48 /* TESViewController.h */,
-				17EA084017024A80007C2B48 /* TESViewController.m */,
 				17EA08621702523B007C2B48 /* TESTableViewController.h */,
 				17EA08631702523B007C2B48 /* TESTableViewController.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
@@ -205,7 +200,6 @@
 			files = (
 				17EA083117024A80007C2B48 /* main.m in Sources */,
 				17EA083517024A80007C2B48 /* TESAppDelegate.m in Sources */,
-				17EA084117024A80007C2B48 /* TESViewController.m in Sources */,
 				17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
