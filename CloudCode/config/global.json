@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Legevakta": {
+            "applicationId": "b8miWZyVIuwxB47cjOTa6ik6B5DiaO4bnZeVQgNA", 
+            "masterKey": "WUQb4U5Swa5Lk8IPxkQ0wVvNTpWNuZ7Ing0TDDEm"
+        }, 
+        "_default": {
+            "link": "Legevakta"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.2"
+    }
+}
