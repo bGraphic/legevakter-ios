@@ -18,6 +18,8 @@
 		17EA083B17024A80007C2B48 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083A17024A80007C2B48 /* Default-568h@2x.png */; };
 		17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */; };
 		17EA084117024A80007C2B48 /* TESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA084017024A80007C2B48 /* TESViewController.m */; };
+		17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA08631702523B007C2B48 /* TESTableViewController.m */; };
+		41F6617988DF491CACBD3842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B996927B2DD4776A30CAC02 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		17EA083D17024A80007C2B48 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		17EA083F17024A80007C2B48 /* TESViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TESViewController.h; sourceTree = "<group>"; };
 		17EA084017024A80007C2B48 /* TESViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TESViewController.m; sourceTree = "<group>"; };
+		17EA08621702523B007C2B48 /* TESTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESTableViewController.h; sourceTree = "<group>"; };
+		17EA08631702523B007C2B48 /* TESTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableViewController.m; sourceTree = "<group>"; };
+		5B996927B2DD4776A30CAC02 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5C1EAF860243329134BEBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,9 +50,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EA082917024A80007C2B48 /* CoreGraphics.framework in Frameworks */,
 				17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */,
 				17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */,
-				17EA082917024A80007C2B48 /* CoreGraphics.framework in Frameworks */,
+				41F6617988DF491CACBD3842 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +66,7 @@
 				17EA082A17024A80007C2B48 /* Legevakt */,
 				17EA082317024A80007C2B48 /* Frameworks */,
 				17EA082217024A80007C2B48 /* Products */,
+				FA5C1EAF860243329134BEBC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +84,7 @@
 				17EA082417024A80007C2B48 /* UIKit.framework */,
 				17EA082617024A80007C2B48 /* Foundation.framework */,
 				17EA082817024A80007C2B48 /* CoreGraphics.framework */,
+				5B996927B2DD4776A30CAC02 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,6 +97,8 @@
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
 				17EA083F17024A80007C2B48 /* TESViewController.h */,
 				17EA084017024A80007C2B48 /* TESViewController.m */,
+				17EA08621702523B007C2B48 /* TESTableViewController.h */,
+				17EA08631702523B007C2B48 /* TESTableViewController.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 			);
 			path = Legevakt;
@@ -117,6 +128,7 @@
 				17EA081D17024A80007C2B48 /* Sources */,
 				17EA081E17024A80007C2B48 /* Frameworks */,
 				17EA081F17024A80007C2B48 /* Resources */,
+				161A1AD02EB64ACFB19742CC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -135,7 +147,7 @@
 			attributes = {
 				CLASSPREFIX = TES;
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "Tom Erik Støwer";
+				ORGANIZATIONNAME = "Tom Erik St√∏wer";
 			};
 			buildConfigurationList = 17EA081C17024A80007C2B48 /* Build configuration list for PBXProject "Legevakt" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -169,6 +181,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		161A1AD02EB64ACFB19742CC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		17EA081D17024A80007C2B48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -177,6 +206,7 @@
 				17EA083117024A80007C2B48 /* main.m in Sources */,
 				17EA083517024A80007C2B48 /* TESAppDelegate.m in Sources */,
 				17EA084117024A80007C2B48 /* TESViewController.m in Sources */,
+				17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +290,7 @@
 		};
 		17EA084517024A80007C2B48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5C1EAF860243329134BEBC /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Legevakt/Legevakt-Prefix.pch";
@@ -271,6 +302,7 @@
 		};
 		17EA084617024A80007C2B48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5C1EAF860243329134BEBC /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Legevakt/Legevakt-Prefix.pch";
@@ -299,6 +331,7 @@
 				17EA084617024A80007C2B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
