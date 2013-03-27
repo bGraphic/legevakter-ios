@@ -7,6 +7,7 @@
 //
 
 #import "TESTableViewController.h"
+#import "HealthService.h"
 
 @interface TESTableViewController ()
 
@@ -37,7 +38,7 @@
     
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (!error) {
-            PFQuery *query = [PFQuery queryWithClassName:@"HealthService"];
+            PFQuery *query = [HealthService query];
             [query whereKey:@"geoPoint" nearGeoPoint:geoPoint withinKilometers:25.0];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
@@ -79,10 +80,10 @@
     static NSString *CellIdentifier = @"LegevaktCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    PFObject *legevakt = [self.healthServices objectAtIndex:indexPath.row];
+    HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [legevakt objectForKey:@"HealthServiceDisplayName"];
-    cell.detailTextLabel.text = [legevakt objectForKey:@"HealthServicePhone"];
+    cell.textLabel.text = [healthService displayName];
+    cell.detailTextLabel.text = [healthService address];
     
     
     // Configure the cell...

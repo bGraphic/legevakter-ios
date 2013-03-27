@@ -1,3 +1,4 @@
 platform :ios, '5.0'
 
-pod 'Parse', '1.1.32'
+pod 'Facebook-iOS-SDK', '~> 3.2.1'
+pod 'Parse'

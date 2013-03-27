@@ -7,6 +7,7 @@
 //
 
 #import "TESAppDelegate.h"
+#import "HealthService.h"
 
 @implementation TESAppDelegate
 
@@ -14,6 +15,7 @@
 {
     // Override point for customization after application launch.
     
+    [HealthService registerSubclass];
     [Parse setApplicationId:@"b8miWZyVIuwxB47cjOTa6ik6B5DiaO4bnZeVQgNA"
                   clientKey:@"JfwW2gSOqDJfNyMmbESjjIhYg6T19HV2lxPzrATO"];
     
