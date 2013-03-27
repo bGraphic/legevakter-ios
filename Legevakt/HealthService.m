@@ -7,18 +7,29 @@
 //
 
 #import "HealthService.h"
+#import <Parse/Parse.h>
+#import "OpeningHours.h"
+
+//  Define Parse global Parse keys here
+#define HealthServiceDisplayName    @"HealthServiceDisplayName"
+#define HealthServicePhoneNumber    @"HealthServicePhone"
+#define HealthServiceStreetAddress  @"VisitAddressStreet"
+#define HealthServicePostalCode     @"VisitAddressPostNr"
+#define HealthServicePostalPlace    @"VisitAddressPostName"
+#define HealthServiceGeoPoint       @"geoPoint"
 
 @implementation HealthService
 
 #pragma mark public
+
 - (NSString *)displayName
 {
-    return [self objectForKey:@"HealthServiceDisplayName"];
+    return [self objectForKey:HealthServiceDisplayName];
 }
 
 - (NSString *)phoneNumber
 {
-    return [self objectForKey:@"HealthServicePhone"];
+    return [self objectForKey:HealthServicePhoneNumber];
 }
 - (NSString *)address
 {
@@ -31,8 +42,7 @@
 
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location
 {
-    PFGeoPoint *locationAsGeoPoint = [PFGeoPoint geoPointWithLocation:location];
-    NSNumber *distanceAsNumber = [self distanceFromGeoPoint:locationAsGeoPoint];
+    NSNumber *distanceAsNumber = [self distanceFromGeoPoint:[self geoPointWithLocation:location]];
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setPositiveFormat:@"0.#"];
@@ -41,34 +51,48 @@
     return formattedDistanceString;
 }
 
+- (NSString *)testOpeningHours
+{
+    OpeningHours *hours = [[OpeningHours alloc] initWithOpeningHoursString:[self objectForKey:@"OpeningHours"]];
+    return @"";
+}
+
 #pragma mark private
 
 - (NSString *)streetAddress
 {
-    return [self objectForKey:@"VisitAddressStreet"];
+    return [self objectForKey:HealthServiceStreetAddress];
 }
 
 - (NSString *)postalCode
 {
-    return [self objectForKey:@"VisitAddressPostNr"];
+    return [self objectForKey:HealthServicePostalCode];
 }
 
 - (NSString *)postalPlace
 {
-    return [self objectForKey:@"VisitAddressPostNr"];
+    return [self objectForKey:HealthServicePostalPlace];
+}
+
+- (PFGeoPoint *)geoPoint
+{
+    return (PFGeoPoint *)[self objectForKey:HealthServiceGeoPoint];
+}
+
+- (PFGeoPoint *)geoPointWithLocation:(CLLocation *)location
+{
+    return [PFGeoPoint geoPointWithLocation:location];
 }
 
 - (NSNumber *)distanceFromGeoPoint:(PFGeoPoint *)geoPoint
 {
-    PFGeoPoint *healthServiceGeoPoint = [self objectForKey:@"geoPoint"];
-    NSNumber *distance = [NSNumber numberWithDouble:[healthServiceGeoPoint distanceInKilometersTo:geoPoint]];
+    NSNumber *distance = [NSNumber numberWithDouble:[[self geoPoint] distanceInKilometersTo:geoPoint]];
     
     return distance;
 }
 
 #pragma mark -
 #pragma mark Class Methods
-
 
 + (NSString *)parseClassName
 {

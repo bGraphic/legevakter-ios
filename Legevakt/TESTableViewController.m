@@ -46,7 +46,7 @@
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         _locationManager.distanceFilter = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     }
     return _locationManager;
 }
@@ -95,7 +95,7 @@
     HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [healthService displayName];
-    cell.detailTextLabel.text = [healthService formattedDistanceFromLocation:self.myLocation];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Avstand: %@", [healthService formattedDistanceFromLocation:self.myLocation]];
     
     // Configure the cell...
     
@@ -152,6 +152,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    HealthService *service = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
+    
+    [service testOpeningHours];
+    
 }
 
 @end

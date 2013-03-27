@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface HealthService : PFObject<PFSubclassing>
+@interface HealthService : PFObject <PFSubclassing>
 
 - (NSString *)displayName;
 - (NSString *)phoneNumber;
 - (NSString *)address;
-
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
-
+- (NSString *)testOpeningHours;
 #pragma mark Class Methods
 + (NSString *)parseClassName;
 
