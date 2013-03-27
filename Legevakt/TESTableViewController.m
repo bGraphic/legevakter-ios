@@ -9,10 +9,11 @@
 #import "TESTableViewController.h"
 #import "HealthService.h"
 
-@interface TESTableViewController ()
+@interface TESTableViewController()
 
 @property (strong,nonatomic) NSArray *healthServices;
 @property (retain) CLLocation *myLocation;
+@property (strong,nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -28,17 +29,33 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
+    [self startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+# pragma mark lazy instantiation
+
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    }
+    return _locationManager;
+}
+
+# pragma mark private methods
+
+- (void)startUpdatingLocation
+{
+    [self.locationManager startUpdatingLocation];
 }
 
 # pragma mark CLLocationManagerDelegate

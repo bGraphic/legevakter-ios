@@ -10,8 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "HealthServiceManager.h"
 
-@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, HealthServiceManagerDelegate> {
-    CLLocationManager *locationManager;
-}
+@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, HealthServiceManagerDelegate>
 
 @end
