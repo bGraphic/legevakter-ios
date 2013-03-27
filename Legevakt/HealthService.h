@@ -14,6 +14,8 @@
 - (NSString *)phoneNumber;
 - (NSString *)address;
 
+- (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
+
 #pragma mark Class Methods
 + (NSString *)parseClassName;
 

@@ -19,6 +19,7 @@
 		17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */; };
 		17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA08631702523B007C2B48 /* TESTableViewController.m */; };
 		17EA086A17030527007C2B48 /* HealthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA086917030527007C2B48 /* HealthService.m */; };
+		17EA086D17032580007C2B48 /* HealthServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA086C17032580007C2B48 /* HealthServiceManager.m */; };
 		41F6617988DF491CACBD3842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B996927B2DD4776A30CAC02 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,8 @@
 		17EA08631702523B007C2B48 /* TESTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableViewController.m; sourceTree = "<group>"; };
 		17EA086817030527007C2B48 /* HealthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthService.h; sourceTree = "<group>"; };
 		17EA086917030527007C2B48 /* HealthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthService.m; sourceTree = "<group>"; };
+		17EA086B17032580007C2B48 /* HealthServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthServiceManager.h; sourceTree = "<group>"; };
+		17EA086C17032580007C2B48 /* HealthServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthServiceManager.m; sourceTree = "<group>"; };
 		5B996927B2DD4776A30CAC02 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5C1EAF860243329134BEBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -99,6 +102,8 @@
 				17EA08631702523B007C2B48 /* TESTableViewController.m */,
 				17EA086817030527007C2B48 /* HealthService.h */,
 				17EA086917030527007C2B48 /* HealthService.m */,
+				17EA086B17032580007C2B48 /* HealthServiceManager.h */,
+				17EA086C17032580007C2B48 /* HealthServiceManager.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 			);
 			path = Legevakt;
@@ -207,6 +212,7 @@
 				17EA083517024A80007C2B48 /* TESAppDelegate.m in Sources */,
 				17EA08641702523B007C2B48 /* TESTableViewController.m in Sources */,
 				17EA086A17030527007C2B48 /* HealthService.m in Sources */,
+				17EA086D17032580007C2B48 /* HealthServiceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

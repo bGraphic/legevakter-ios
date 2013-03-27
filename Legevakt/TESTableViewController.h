@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "HealthServiceManager.h"
 
-@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, HealthServiceManagerDelegate> {
+    CLLocationManager *locationManager;
+}
 
 @end

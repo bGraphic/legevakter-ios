@@ -12,19 +12,11 @@
 @interface TESTableViewController ()
 
 @property (strong,nonatomic) NSArray *healthServices;
+@property (retain) CLLocation *myLocation;
 
 @end
 
 @implementation TESTableViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -36,29 +28,32 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-        if (!error) {
-            PFQuery *query = [HealthService query];
-            [query whereKey:@"geoPoint" nearGeoPoint:geoPoint withinKilometers:25.0];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    self.healthServices = [NSArray arrayWithArray:objects];
-                    [self.tableView reloadData];
-                } else {
-                    NSLog(@"%@", error);
-                }
-            }];
-        } else {
-            NSLog(@"%@", error.description);
-        }
-    }];
-    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+# pragma mark CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    self.myLocation = [locations lastObject];
+    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
+    [manager stopUpdatingLocation];
+}
+
+#pragma mark HealthServiceManagerDelegate
+- (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
+{
+    self.healthServices = healthServices;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -83,8 +78,7 @@
     HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [healthService displayName];
-    cell.detailTextLabel.text = [healthService address];
-    
+    cell.detailTextLabel.text = [healthService formattedDistanceFromLocation:self.myLocation];
     
     // Configure the cell...
     
