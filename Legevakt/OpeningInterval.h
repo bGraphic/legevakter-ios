@@ -13,4 +13,6 @@
 - (id)initWithInterval:(NSString *)interval;
 - (NSString *)description;
 
++ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals;
+
 @end

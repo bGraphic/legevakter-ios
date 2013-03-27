@@ -16,6 +16,8 @@
 @end
 
 #define MINUTES_PER_DAY 1440
+#define MINUTES_PER_HOUR 60
+#define DAYS_PER_WEEK 7
 #define WEEK_DAY_NAMES @[@"Mandag", @"Tirsdag", @"Onsdag", @"Torsdag", @"Fredag", @"Lørdag", @"Søndag"]
 #define ALL_DAYS @"Alle dager"
 #define OPEN_ALL_DAYS @"Åpent alle dager"
@@ -116,6 +118,30 @@
 #pragma mark -
 #pragma mark Class Methods
 
+#pragma mark Public
++ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals
+{
+    NSString *timeString = @"";
+    
+    NSLog(@"number of intervals: %d", intervals.count);
+    if (intervals.count == 7) {
+        timeString = [timeString stringByAppendingFormat:@"%@: ", ALL_DAYS];
+    }
+    else {
+        timeString = [timeString stringByAppendingFormat:@"%@ - ",[(OpeningInterval *)intervals[0] startDayOfWeek]];
+        timeString = [timeString stringByAppendingFormat:@"%@: ", [[(OpeningInterval *)intervals[intervals.count - 1] stopDayOfWeek] lowercaseString]];
+        
+    }
+    
+    timeString = [timeString stringByAppendingFormat:@"%@-",[OpeningInterval timeStringFromHours:[(OpeningInterval *)intervals[0] startHours]
+                                                                         andMinutes:[(OpeningInterval *)intervals[0] startMinutes]]];
+    timeString = [timeString stringByAppendingFormat:@"%@;", [OpeningInterval timeStringFromHours:[(OpeningInterval *)intervals[0] stopHours]
+                                                                          andMinutes:[(OpeningInterval *)intervals[0] stopMinutes]]];
+    
+    return timeString;
+}
+
+#pragma mark Private
 + (NSString *)dayOfWeekFromTime:(int)time
 {
     NSString *dayOfWeekName = @"";
@@ -128,7 +154,7 @@
 
 + (NSString *)dayOfWeekNameFromDayOfWeekNumber:(int)dayOfWeekNumber
 {
-    int weekDayIndex = dayOfWeekNumber % 7;
+    int weekDayIndex = dayOfWeekNumber % DAYS_PER_WEEK;
     return WEEK_DAY_NAMES[weekDayIndex];
 }
 
@@ -139,33 +165,12 @@
 
 + (int)hoursFromTime:(int)time
 {
-    return (time % MINUTES_PER_DAY) / 60;
+    return (time % MINUTES_PER_DAY) / MINUTES_PER_HOUR;
 }
 
 + (int)minutesFromTime:(int)time
 {
-    return (time % 1440) % 60;
-}
-
-+ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals
-{
-    NSString *timeString = @"";
-    
-    if (intervals.count == 7) {
-        [timeString stringByAppendingFormat:@"%@: ", ALL_DAYS];
-    }
-    else {
-        [timeString stringByAppendingFormat:@"%@ - ",[(OpeningInterval *)intervals[0] startDayOfWeek]];
-        [timeString stringByAppendingFormat:@"%@: ", [[(OpeningInterval *)intervals[intervals.count - 1] stopDayOfWeek] lowercaseString]];
-        
-    }
-    
-    [timeString stringByAppendingFormat:@"%@-",[OpeningInterval timeStringFromHours:[(OpeningInterval *)intervals[0] startHours]
-                                                                         andMinutes:[(OpeningInterval *)intervals[0] startMinutes]]];
-    [timeString stringByAppendingFormat:@"%@;", [OpeningInterval timeStringFromHours:[(OpeningInterval *)intervals[0] stopHours]
-                                                                          andMinutes:[(OpeningInterval *)intervals[0] stopMinutes]]];
-    
-    return timeString;
+    return (time % MINUTES_PER_DAY) % MINUTES_PER_HOUR;
 }
 
 + (NSString *)timeStringFromHours:(int)hours andMinutes:(int)minutes
@@ -183,8 +188,5 @@
     
     return [NSString stringWithFormat:@"%@.%@", hoursAsString, minutesAsString];
 }
-
-
-
 
 @end

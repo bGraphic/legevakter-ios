@@ -20,11 +20,24 @@
 
 - (void)parseOpeningHoursFromString:(NSString *)string
 {
-    NSArray *intervals = [string componentsSeparatedByString:@","];
-    [intervals enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:(NSString *)obj];
-        NSLog(@"%@", interval);
-    }];
+    NSArray *components = [string componentsSeparatedByString:@","];
+    NSMutableArray *intervals;
+    
+//    [components enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:(NSString *)obj];
+//        [intervals addObject:interval];
+//    }];
+    
+    for (id component in components) {
+        OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:component];
+        if (!intervals)
+            intervals = [NSMutableArray arrayWithObject:interval];
+        else
+            [intervals addObject:interval];
+    }
+    
+    NSLog(@"Åpningstider: %@",[OpeningInterval timeStringMergedIntervalFromIntervals:intervals]);
+
 }
 
 
