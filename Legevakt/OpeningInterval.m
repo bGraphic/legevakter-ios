@@ -28,8 +28,9 @@
     self = [super init];
     
     NSArray *tokenizedInterval = [interval componentsSeparatedByString:@"-"];
-    self.start = (int)tokenizedInterval[0];
-    self.stop = (int)tokenizedInterval[1];
+    
+    self.start = [tokenizedInterval[0] intValue];
+    self.stop = [tokenizedInterval[1] intValue];
     
     return self;
 }
