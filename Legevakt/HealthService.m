@@ -51,12 +51,6 @@
     return formattedDistanceString;
 }
 
-- (NSString *)testOpeningHours
-{
-    OpeningHours *hours = [[OpeningHours alloc] initWithOpeningHoursString:[self objectForKey:@"OpeningHours"]];
-    return @"";
-}
-
 #pragma mark private
 
 - (NSString *)streetAddress
