@@ -12,4 +12,6 @@
 
 - (id)initWithOpeningHoursString:(NSString *)openingHoursString;
 - (NSString *)openingHoursAsString;
+- (BOOL)isOpenWithDate:(NSDate *)date;
+
 @end

@@ -65,6 +65,11 @@
     return [self.openingHours openingHoursAsString];
 }
 
+- (BOOL)isOpen
+{
+    return [self.openingHours isOpenWithDate:[NSDate date]];
+}
+
 #pragma mark private
 
 - (NSString *)streetAddress

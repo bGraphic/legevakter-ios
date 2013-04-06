@@ -71,6 +71,74 @@
     return returnString;
 }
 
+- (BOOL)dateIsInInterval:(NSDate *)date
+{
+    BOOL open = NO;
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setFirstWeekday:0];
+
+    NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
+    NSDateComponents *hourComponents = [gregorian components:NSHourCalendarUnit fromDate:date];
+    NSDateComponents *minuteComponents = [gregorian components:NSMinuteCalendarUnit fromDate:date];
+    
+    int todaysWeekday = [weekdayComponents weekday];
+    int todaysHour = [hourComponents hour];
+    int todaysMinute = [minuteComponents minute];
+    
+    int startWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.start];
+    int stopWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.stop];
+    
+    // always open
+    if (!self.start && self.stop >= 10079) {
+        open = YES;
+    }
+    
+    // open on weekends
+    
+    else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079) {
+        
+        if ((todaysWeekday == 5
+            && todaysHour >= 15)
+            || todaysWeekday == 6
+            || todaysWeekday == 7)
+            open = YES;
+    }
+    
+    
+    else if ((startWeekday == 0 && stopWeekday == 0)
+        || todaysWeekday == startWeekday
+        || todaysWeekday == stopWeekday) {
+        
+        if (todaysHour >= [self startHours]
+            && todaysHour <= [self stopHours]) {
+            
+            if (todaysMinute >= [self startMinutes]
+                && todaysMinute < [self stopMinutes]) {
+         
+                open = YES;
+            }
+        }
+    }
+    
+
+    
+    NSLog(@"today: %d", todaysWeekday);
+    NSLog(@"startWeekday: %d", startWeekday);
+    NSLog(@"stopWeekday: %d", stopWeekday);
+    
+    NSLog(@"startHours: %d", [self startHours]);
+    NSLog(@"stopHours: %d", [self stopHours]);
+    NSLog(@"myHours: %d", [hourComponents hour]);
+    
+    NSLog(@"startMinutes: %d", [self startMinutes]);
+    NSLog(@"stopMinutes: %d", [self stopMinutes]);
+    
+    
+    
+    return open;
+}
+
 #pragma mark -
 #pragma mark Private methods
 

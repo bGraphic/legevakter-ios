@@ -97,6 +97,11 @@
     cell.textLabel.text = [healthService displayName];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Avstand: %@", [healthService formattedDistanceFromLocation:self.myLocation]];
     
+    if ([healthService isOpen])
+        cell.imageView.image = [UIImage imageNamed:@"open"];
+    else
+        cell.imageView.image = [UIImage imageNamed:@"closed"];
+    
     // Configure the cell...
     
     return cell;

@@ -12,6 +12,8 @@
 
 - (id)initWithInterval:(NSString *)interval;
 - (NSString *)description;
+- (BOOL)dateIsInInterval:(NSDate *)date;
+
 
 + (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals;
 + (NSString *)timeStringCombinedFromIntervals:(NSArray *)intervals;

@@ -41,4 +41,18 @@
     return [OpeningInterval timeStringCombinedFromIntervals:intervals];
 }
 
+- (BOOL)isOpenWithDate:(NSDate *)date
+{
+    BOOL open = NO;
+    
+    for (id obj in intervals) {
+        OpeningInterval *interval = (OpeningInterval *)obj;
+        
+        if ([interval dateIsInInterval:date])
+            open = YES;
+    }
+
+    return open;
+}
+
 @end

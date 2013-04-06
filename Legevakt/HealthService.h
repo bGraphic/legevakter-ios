@@ -16,6 +16,9 @@
 - (NSString *)address;
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
 - (NSString *)formattedOpeningHoursAsString;
+
+- (BOOL)isOpen;
+
 #pragma mark Class Methods
 + (NSString *)parseClassName;
 

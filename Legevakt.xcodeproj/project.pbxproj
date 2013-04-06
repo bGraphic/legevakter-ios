@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
+		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
 		17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082417024A80007C2B48 /* UIKit.framework */; };
 		17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082617024A80007C2B48 /* Foundation.framework */; };
 		17EA082917024A80007C2B48 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082817024A80007C2B48 /* CoreGraphics.framework */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
+		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		17EA082117024A80007C2B48 /* Legevakt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Legevakt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17EA082417024A80007C2B48 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		17EA082617024A80007C2B48 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,6 +126,8 @@
 		17EA082B17024A80007C2B48 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				17973A6F1710C5E400FBDF48 /* closed.png */,
+				17973A6C1710B5E900FBDF48 /* open.png */,
 				17EA082C17024A80007C2B48 /* Legevakt-Info.plist */,
 				17EA082D17024A80007C2B48 /* InfoPlist.strings */,
 				17EA083017024A80007C2B48 /* main.m */,
@@ -191,6 +197,8 @@
 				17EA083917024A80007C2B48 /* Default@2x.png in Resources */,
 				17EA083B17024A80007C2B48 /* Default-568h@2x.png in Resources */,
 				17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */,
+				17973A6E1710B5E900FBDF48 /* open.png in Resources */,
+				17973A701710C5E400FBDF48 /* closed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
