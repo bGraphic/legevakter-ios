@@ -14,5 +14,6 @@
 - (NSString *)description;
 
 + (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals;
++ (NSString *)timeStringCombinedFromIntervals:(NSArray *)intervals;
 
 @end

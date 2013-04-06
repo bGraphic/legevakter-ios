@@ -17,8 +17,17 @@
 #define HealthServicePostalCode     @"VisitAddressPostNr"
 #define HealthServicePostalPlace    @"VisitAddressPostName"
 #define HealthServiceGeoPoint       @"geoPoint"
+#define HealthServiceOpeningHours   @"OpeningHours"
+
+@interface HealthService ()
+
+@property (strong, nonatomic) OpeningHours* openingHours;
+
+@end
 
 @implementation HealthService
+
+@synthesize openingHours  = _openingHours;
 
 #pragma mark public
 
@@ -51,6 +60,11 @@
     return formattedDistanceString;
 }
 
+- (NSString *)formattedOpeningHoursAsString
+{
+    return [self.openingHours openingHoursAsString];
+}
+
 #pragma mark private
 
 - (NSString *)streetAddress
@@ -73,6 +87,13 @@
     return (PFGeoPoint *)[self objectForKey:HealthServiceGeoPoint];
 }
 
+- (OpeningHours *)openingHours
+{
+    if (!_openingHours)
+        _openingHours = [[OpeningHours alloc] initWithOpeningHoursString:[self objectForKey:HealthServiceOpeningHours]];
+    return _openingHours;
+}
+
 - (PFGeoPoint *)geoPointWithLocation:(CLLocation *)location
 {
     return [PFGeoPoint geoPointWithLocation:location];
@@ -81,7 +102,6 @@
 - (NSNumber *)distanceFromGeoPoint:(PFGeoPoint *)geoPoint
 {
     NSNumber *distance = [NSNumber numberWithDouble:[[self geoPoint] distanceInKilometersTo:geoPoint]];
-    
     return distance;
 }
 

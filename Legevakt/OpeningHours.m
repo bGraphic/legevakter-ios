@@ -34,10 +34,11 @@
         else
             [intervals addObject:interval];
     }
-    
-    NSLog(@"Åpningstider: %@",[OpeningInterval timeStringMergedIntervalFromIntervals:intervals]);
-
 }
 
+- (NSString *)openingHoursAsString
+{
+    return [OpeningInterval timeStringCombinedFromIntervals:intervals];
+}
 
 @end

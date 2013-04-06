@@ -119,7 +119,7 @@
 #pragma mark Class Methods
 
 #pragma mark Public
-+ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals
++ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals // don't use this method unless you're sure you want to
 {
     NSString *timeString = @"";
     
@@ -138,6 +138,19 @@
     timeString = [timeString stringByAppendingFormat:@"%@;", [OpeningInterval timeStringFromHours:[(OpeningInterval *)intervals[0] stopHours]
                                                                           andMinutes:[(OpeningInterval *)intervals[0] stopMinutes]]];
     
+    return timeString;
+}
+
++ (NSString *)timeStringCombinedFromIntervals:(NSArray *)intervals
+{
+    NSString *timeString = @"";
+    
+    for (id obj in intervals) {
+        OpeningInterval *interval = (OpeningInterval *)obj;
+        timeString = [timeString stringByAppendingFormat:@"%@\n", interval.description];
+        
+    }
+
     return timeString;
 }
 

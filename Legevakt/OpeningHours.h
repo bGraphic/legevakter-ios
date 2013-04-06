@@ -11,5 +11,5 @@
 @interface OpeningHours : NSObject
 
 - (id)initWithOpeningHoursString:(NSString *)openingHoursString;
-
+- (NSString *)openingHoursAsString;
 @end

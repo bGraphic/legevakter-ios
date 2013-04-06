@@ -155,7 +155,12 @@
     
     HealthService *service = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
     
-    [service testOpeningHours];
+    NSLog(@"%@" ,[service formattedOpeningHoursAsString]);
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Åpningstider"
+                                                        message:[service formattedOpeningHoursAsString]
+                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
     
 }
 

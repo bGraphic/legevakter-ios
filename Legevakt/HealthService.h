@@ -15,7 +15,7 @@
 - (NSString *)phoneNumber;
 - (NSString *)address;
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
-- (NSString *)testOpeningHours;
+- (NSString *)formattedOpeningHoursAsString;
 #pragma mark Class Methods
 + (NSString *)parseClassName;
 
