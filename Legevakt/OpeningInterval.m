@@ -94,8 +94,7 @@
         open = YES;
     }
     
-    // open on weekends
-    
+    // or open on weekends
     else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079) {
         
         if ((todaysWeekday == 5
@@ -105,7 +104,7 @@
             open = YES;
     }
     
-    
+    // other cases
     else if ((startWeekday == 0 && stopWeekday == 0)
         || todaysWeekday == startWeekday
         || todaysWeekday == stopWeekday) {
@@ -120,21 +119,6 @@
             }
         }
     }
-    
-
-    
-    NSLog(@"today: %d", todaysWeekday);
-    NSLog(@"startWeekday: %d", startWeekday);
-    NSLog(@"stopWeekday: %d", stopWeekday);
-    
-    NSLog(@"startHours: %d", [self startHours]);
-    NSLog(@"stopHours: %d", [self stopHours]);
-    NSLog(@"myHours: %d", [hourComponents hour]);
-    
-    NSLog(@"startMinutes: %d", [self startMinutes]);
-    NSLog(@"stopMinutes: %d", [self stopMinutes]);
-    
-    
     
     return open;
 }
