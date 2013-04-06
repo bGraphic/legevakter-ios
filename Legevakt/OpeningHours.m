@@ -9,6 +9,11 @@
 #import "OpeningHours.h"
 #import "OpeningInterval.h"
 
+@interface OpeningHours() {
+    NSMutableArray *intervals;
+}
+@end
+
 @implementation OpeningHours
 
 - (id)initWithOpeningHoursString:(NSString *)openingHoursString
@@ -21,12 +26,6 @@
 - (void)parseOpeningHoursFromString:(NSString *)string
 {
     NSArray *components = [string componentsSeparatedByString:@","];
-    NSMutableArray *intervals;
-    
-//    [components enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:(NSString *)obj];
-//        [intervals addObject:interval];
-//    }];
     
     for (id component in components) {
         OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:component];
