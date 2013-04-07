@@ -24,6 +24,9 @@
 #define ALL_DAYS @"Alle dager"
 #define OPEN_ALL_DAYS @"Åpent alle dager"
 #define OPEN_WEEKENDS @"Åpent helg"
+#define MINUTES_TO_THURSDAY_AT_3_PM 6660
+#define MINUTES_TO_THURSDAY_AT_MIDNIGHT 7200
+#define MINUTES_TO_SUNDAY_AT_MIDNIGHT 10079
 
 @implementation OpeningInterval
 
@@ -49,12 +52,13 @@
     {
         returnString = OPEN_ALL_DAYS;
     }
+    
     else if ([self isWeekendInterval])
     {
         returnString = OPEN_WEEKENDS;
     }
-    else if ([OpeningInterval dayOfWeekNumberFromTime:self.start] == [OpeningInterval dayOfWeekNumberFromTime:self.stop]
-             || ([OpeningInterval dayOfWeekNumberFromTime:self.start] + 1 == [OpeningInterval dayOfWeekNumberFromTime:self.stop] && [self stopHours] < 4))
+    
+    else if ([self startAndStopWeekdayAreEqual] || [self startWeekdayIsTheDayBeforeStopWeekday])
     {
         returnString = [NSString stringWithFormat:@"%@: %@-%@",
                         [self startDayOfWeek],
@@ -62,7 +66,9 @@
                         [OpeningInterval timeStringFromHours:[self stopHours] andMinutes:[self stopMinutes]]];
         
     }
-    else {
+    
+    else
+    {
         returnString = [NSString stringWithFormat:@"%@: %@ - %@: %@",
                         [self startDayOfWeek],
                         [OpeningInterval timeStringFromHours:[self startHours] andMinutes:[self startMinutes]],
@@ -70,7 +76,6 @@
                         [OpeningInterval timeStringFromHours:[self stopHours] andMinutes:[self stopMinutes]]];
         
     }
-    
     
     return returnString;
 }
@@ -202,7 +207,9 @@
 {
     BOOL isWeekendInterval = NO;
     
-    if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079)
+    if (self.start >= MINUTES_TO_THURSDAY_AT_3_PM
+        && self.start <= MINUTES_TO_THURSDAY_AT_MIDNIGHT
+        && self.stop >= MINUTES_TO_SUNDAY_AT_MIDNIGHT)
         isWeekendInterval = YES;
     
     return isWeekendInterval;
@@ -218,11 +225,31 @@
     return isValidForAllWeekdays;
 }
 
+- (BOOL)startAndStopWeekdayAreEqual
+{
+    BOOL equals = NO;
+    
+    if ([self startWeekday] == [self stopWeekday])
+        equals = YES;
+    
+    return equals;
+}
+
+- (BOOL)startWeekdayIsTheDayBeforeStopWeekday
+{
+    BOOL answer = NO;
+    
+    if ([self startWeekday] + 1 == [self stopWeekday])
+        answer = YES;
+    
+    return answer;
+}
+
 - (BOOL)startAndStopWeekdayEqualsWeekdayOfDateWeekday:(int)datesWeekday
 {
     BOOL equals = NO;
     
-    if (datesWeekday == [self startWeekday] && datesWeekday == [self stopWeekday])
+    if ([self startAndStopWeekdayAreEqual] && datesWeekday == [self startWeekday])
         equals = YES;
     
     return equals;
