@@ -75,14 +75,18 @@
     return returnString;
 }
 
+#pragma mark -
+#pragma mark dateIsInInterval with private helpers
+
+// consider moving this to a helper class
 - (BOOL)dateIsInInterval:(NSDate *)date
 {
     BOOL open = NO;
     
     
-    int todaysWeekday = [self weekdayNumberFromDate:date];
-    int todaysHour = [self hourFromDate:date];
-    int todaysMinute = [self minuteFromDate:date];
+    int datesWeekday = [self weekdayNumberFromDate:date];
+    int datesHour = [self hourFromDate:date];
+    int datesMinute = [self minuteFromDate:date];
     
     int startWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.start];
     int stopWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.stop];
@@ -95,52 +99,51 @@
     // or open on weekends
     else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079) {
         
-        if ((todaysWeekday == 4
-            && todaysHour >= 15)
-            || todaysWeekday == 5
-            || todaysWeekday == 6
-            || todaysWeekday == 7) {
+        if ((datesWeekday == 4
+            && datesHour >= 15)
+            || datesWeekday == 5
+            || datesWeekday == 6
+            || datesWeekday == 7) {
 
             open = YES;
         }
         
     }
     
-    // same opening hours every day
-    else if (startWeekday == 0 && stopWeekday == 0) {
+    // same opening hours every day, or interval starts and stops on date's week day
+    else if ((startWeekday == 0 && stopWeekday == 0)
+             || (datesWeekday == startWeekday && datesWeekday == stopWeekday)) {
         
-        if (todaysHour >= [self startHours]
-            && todaysMinute >= [self startMinutes]
-            && todaysHour <= [self stopHours]
-            && ([self stopMinutes] == 0 || todaysMinute < [self stopMinutes])) {
+        if (datesHour >= [self startHours]
+            && datesMinute >= [self startMinutes]
+            && datesHour <= [self stopHours]
+            && ([self stopMinutes] == 0 || datesMinute < [self stopMinutes])) {
             
             open = YES;
         }
     }
     
-    // todays week day is on the first day of a multiple day interval
-    else if (todaysWeekday == startWeekday
-             && todaysWeekday != stopWeekday) {
+    // date's week day is on the first day of a multiple day interval
+    else if (datesWeekday == startWeekday
+             && datesWeekday != stopWeekday) {
         
-        if (todaysHour >= [self startHours]
-            && todaysMinute >= [self startMinutes]) {
+        if (datesHour >= [self startHours]
+            && datesMinute >= [self startMinutes]) {
             
             open = YES;
         }
     }
     
-    // todays week day is on the last day of a multiple day interval
-    else if (todaysWeekday == stopWeekday
-             && todaysWeekday != startWeekday) {
+    // date's week day is on the last day of a multiple day interval
+    else if (datesWeekday == stopWeekday
+             && datesWeekday != startWeekday) {
         
-        if(todaysHour <= [self stopHours]
-           && todaysMinute < [self stopMinutes]) {
+        if(datesHour <= [self stopHours]
+           && datesMinute < [self stopMinutes]) {
             
             open = YES;
         }
     }
-    
-    
     
     return open;
 }
