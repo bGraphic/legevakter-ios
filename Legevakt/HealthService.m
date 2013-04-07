@@ -9,27 +9,45 @@
 #import "HealthService.h"
 #import <Parse/Parse.h>
 #import "OpeningHours.h"
+#import "Municipality.h"
 
 //  Define Parse global Parse keys here
-#define HealthServiceDisplayName    @"HealthServiceDisplayName"
-#define HealthServicePhoneNumber    @"HealthServicePhone"
-#define HealthServiceStreetAddress  @"VisitAddressStreet"
-#define HealthServicePostalCode     @"VisitAddressPostNr"
-#define HealthServicePostalPlace    @"VisitAddressPostName"
-#define HealthServiceGeoPoint       @"geoPoint"
-#define HealthServiceOpeningHours   @"OpeningHours"
+#define HealthServiceDisplayName                @"HealthServiceDisplayName"
+#define HealthServicePhoneNumber                @"HealthServicePhone"
+#define HealthServiceStreetAddress              @"VisitAddressStreet"
+#define HealthServicePostalCode                 @"VisitAddressPostNr"
+#define HealthServicePostalPlace                @"VisitAddressPostName"
+#define HealthServiceGeoPoint                   @"geoPoint"
+#define HealthServiceOpeningHours               @"OpeningHours"
+#define HealthServiceApplicableMunicipalities   @"AppliesToMunicipalityCodes"
 
 @interface HealthService ()
 
 @property (strong, nonatomic) OpeningHours* openingHours;
+@property (strong, readwrite) NSMutableArray *applicableMunicipalities;
 
 @end
 
 @implementation HealthService
 
 @synthesize openingHours  = _openingHours;
+@synthesize applicableMunicipalities = _applicableMunicipalities;
 
-#pragma mark public
+- (void)initializeApplicableMunicipalities
+{
+    if (!_applicableMunicipalities) {
+        NSString *raw = [self objectForKey:HealthServiceApplicableMunicipalities];
+        NSArray *tokenized = [raw componentsSeparatedByString:@" "];
+        
+        for (id obj in tokenized)
+            [Municipality findMunicipalityWithCode:(NSString *)obj withDelegate:self];
+    }
+}
+
+- (NSString *)formattedApplicableMunicipalities
+{
+    return [Municipality formattedMunicipalities:self.applicableMunicipalities];
+}
 
 - (NSString *)displayName
 {
@@ -68,6 +86,16 @@
 - (BOOL)isOpen
 {
     return [self.openingHours isOpenWithDate:[NSDate date]];
+}
+
+#pragma mark MunicipalityDelegate
+
+- (void)foundMunicipality:(Municipality *)municipality
+{
+    if(!self.applicableMunicipalities)
+        self.applicableMunicipalities = [[NSMutableArray alloc] init];
+    
+    [self.applicableMunicipalities addObject:municipality];
 }
 
 #pragma mark private

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
 		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
+		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
 		17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082417024A80007C2B48 /* UIKit.framework */; };
 		17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082617024A80007C2B48 /* Foundation.framework */; };
 		17EA082917024A80007C2B48 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082817024A80007C2B48 /* CoreGraphics.framework */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
+		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
+		17973A721711D5E200FBDF48 /* Municipality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Municipality.m; sourceTree = "<group>"; };
 		17EA082117024A80007C2B48 /* Legevakt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Legevakt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17EA082417024A80007C2B48 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		17EA082617024A80007C2B48 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 				17EA086F1703467D007C2B48 /* OpeningHours.m */,
 				17EA087117038495007C2B48 /* OpeningInterval.h */,
 				17EA087217038495007C2B48 /* OpeningInterval.m */,
+				17973A711711D5E200FBDF48 /* Municipality.h */,
+				17973A721711D5E200FBDF48 /* Municipality.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 			);
 			path = Legevakt;
@@ -233,6 +238,7 @@
 				17EA086D17032580007C2B48 /* HealthServiceManager.m in Sources */,
 				17EA08701703467D007C2B48 /* OpeningHours.m in Sources */,
 				17EA087317038495007C2B48 /* OpeningInterval.m in Sources */,
+				17973A731711D5E200FBDF48 /* Municipality.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

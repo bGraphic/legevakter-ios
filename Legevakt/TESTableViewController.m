@@ -102,7 +102,9 @@
     else
         cell.imageView.image = [UIImage imageNamed:@"closed"];
     
-    // Configure the cell...
+    
+    // Should be done elsewhere - depends where you want to show the info?
+    [healthService initializeApplicableMunicipalities];
     
     return cell;
 }
@@ -162,8 +164,11 @@
     
     NSLog(@"%@" ,[service formattedOpeningHoursAsString]);
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Åpningstider"
-                                                        message:[service formattedOpeningHoursAsString]
+    NSMutableString *message = [[service formattedOpeningHoursAsString] mutableCopy];
+    [message appendString:[service formattedApplicableMunicipalities]];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Detaljer"
+                                                        message:message
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     

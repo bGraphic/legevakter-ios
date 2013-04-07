@@ -8,6 +8,7 @@
 
 #import "TESAppDelegate.h"
 #import "HealthService.h"
+#import "Municipality.h"
 
 @implementation TESAppDelegate
 
@@ -15,12 +16,19 @@
 {
     // Override point for customization after application launch.
     
+    [self initializeParse];
+    
+    return YES;
+}
+
+- (void)initializeParse
+{
     [HealthService registerSubclass];
+    [Municipality registerSubclass];
+    
     [Parse setApplicationId:@"b8miWZyVIuwxB47cjOTa6ik6B5DiaO4bnZeVQgNA"
                   clientKey:@"JfwW2gSOqDJfNyMmbESjjIhYg6T19HV2lxPzrATO"];
     
-    
-    return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -8,16 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Municipality.h"
 
-@interface HealthService : PFObject <PFSubclassing>
+@interface HealthService : PFObject <PFSubclassing, MunicipalityDelegate>
+
+@property (strong, readonly) NSMutableArray* applicableMunicipalities;
 
 - (NSString *)displayName;
 - (NSString *)phoneNumber;
 - (NSString *)address;
+- (NSString *)formattedApplicableMunicipalities;
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
 - (NSString *)formattedOpeningHoursAsString;
 
 - (BOOL)isOpen;
+
+- (void)initializeApplicableMunicipalities;
+
+#pragma mark MunicipalityDelegate
+- (void)foundMunicipality:(Municipality *)municipality;
 
 #pragma mark Class Methods
 + (NSString *)parseClassName;
