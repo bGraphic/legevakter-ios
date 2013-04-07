@@ -13,6 +13,8 @@
 @property int start;
 @property int stop;
 
+@property (strong, nonatomic) NSCalendar *calendar;
+
 @end
 
 #define MINUTES_PER_DAY 1440
@@ -24,6 +26,8 @@
 #define OPEN_WEEKENDS @"Åpent helg"
 
 @implementation OpeningInterval
+
+@synthesize calendar = _calendar;
 
 - (id)initWithInterval:(NSString *)interval
 {
@@ -75,16 +79,10 @@
 {
     BOOL open = NO;
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    [gregorian setFirstWeekday:0];
-
-    NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
-    NSDateComponents *hourComponents = [gregorian components:NSHourCalendarUnit fromDate:date];
-    NSDateComponents *minuteComponents = [gregorian components:NSMinuteCalendarUnit fromDate:date];
     
-    int todaysWeekday = [weekdayComponents weekday];
-    int todaysHour = [hourComponents hour];
-    int todaysMinute = [minuteComponents minute];
+    int todaysWeekday = [self weekdayNumberFromDate:date];
+    int todaysHour = [self hourFromDate:date];
+    int todaysMinute = [self minuteFromDate:date];
     
     int startWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.start];
     int stopWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.stop];
@@ -93,38 +91,107 @@
     if (!self.start && self.stop >= 10079) {
         open = YES;
     }
-    
+
     // or open on weekends
     else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079) {
         
-        if ((todaysWeekday == 5
+        if ((todaysWeekday == 4
             && todaysHour >= 15)
+            || todaysWeekday == 5
             || todaysWeekday == 6
-            || todaysWeekday == 7)
+            || todaysWeekday == 7) {
+
             open = YES;
+        }
+        
     }
     
-    // other cases
-    else if ((startWeekday == 0 && stopWeekday == 0)
-        || todaysWeekday == startWeekday
-        || todaysWeekday == stopWeekday) {
+    // same opening hours every day
+    else if (startWeekday == 0 && stopWeekday == 0) {
         
         if (todaysHour >= [self startHours]
-            && todaysHour <= [self stopHours]) {
+            && todaysMinute >= [self startMinutes]
+            && todaysHour <= [self stopHours]
+            && ([self stopMinutes] == 0 || todaysMinute < [self stopMinutes])) {
             
-            if (todaysMinute >= [self startMinutes]
-                && todaysMinute < [self stopMinutes]) {
-         
-                open = YES;
-            }
+            open = YES;
         }
     }
+    
+    // todays week day is on the first day of a multiple day interval
+    else if (todaysWeekday == startWeekday
+             && todaysWeekday != stopWeekday) {
+        
+        if (todaysHour >= [self startHours]
+            && todaysMinute >= [self startMinutes]) {
+            
+            open = YES;
+        }
+    }
+    
+    // todays week day is on the last day of a multiple day interval
+    else if (todaysWeekday == stopWeekday
+             && todaysWeekday != startWeekday) {
+        
+        if(todaysHour <= [self stopHours]
+           && todaysMinute < [self stopMinutes]) {
+            
+            open = YES;
+        }
+    }
+    
+    
     
     return open;
 }
 
+
+- (int)weekdayNumberFromDate:(NSDate *)date
+{
+    int weekdayNumber = [[self weekdayComponentsFromDate:date] weekday] - 1;
+    
+    if (weekdayNumber == 0)
+        weekdayNumber = 7;
+    return weekdayNumber;
+}
+
+- (int)hourFromDate:(NSDate *)date
+{
+    return [[self hourComponentsFromDate:date] hour];
+}
+
+- (int)minuteFromDate:(NSDate *)date
+{
+    return [[self minuteComponentsFromDate:date] minute];
+}
+
+- (NSDateComponents *)weekdayComponentsFromDate:(NSDate *)date
+{
+    return [self.calendar components:NSWeekdayCalendarUnit fromDate:date];
+}
+
+- (NSDateComponents *)hourComponentsFromDate:(NSDate *)date
+{
+    return [self.calendar components:NSHourCalendarUnit fromDate:date];
+}
+
+- (NSDateComponents *)minuteComponentsFromDate:(NSDate *)date
+{
+    return [self.calendar components:NSMinuteCalendarUnit fromDate:date];
+}
+
+- (NSCalendar *)calendar
+{
+    if (!_calendar) {
+        _calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    }
+    return _calendar;
+}
+
 #pragma mark -
 #pragma mark Private methods
+
+
 
 - (int)startTotalMinutes
 {
