@@ -45,11 +45,11 @@
 {
     NSString *returnString = @"";
     
-    if (!self.start && self.stop >= 10079)
+    if ([self isAlwaysOpen])
     {
         returnString = OPEN_ALL_DAYS;
     }
-    else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079)
+    else if ([self isWeekendInterval])
     {
         returnString = OPEN_WEEKENDS;
     }
@@ -83,22 +83,19 @@
 {
     BOOL open = NO;
     
-    
     int datesWeekday = [self weekdayNumberFromDate:date];
     int datesHour = [self hourFromDate:date];
     int datesMinute = [self minuteFromDate:date];
     
-    int startWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.start];
-    int stopWeekday = [OpeningInterval dayOfWeekNumberFromTime:self.stop];
-    
     // always open
-    if (!self.start && self.stop >= 10079) {
+    if ([self isAlwaysOpen]) {
         open = YES;
     }
 
     // or open on weekends
-    else if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079) {
+    else if ([self isWeekendInterval]) {
         
+        // date's weekday is thursday (but only after 3pm), or friday-sunday
         if ((datesWeekday == 4
             && datesHour >= 15)
             || datesWeekday == 5
@@ -107,12 +104,11 @@
 
             open = YES;
         }
-        
     }
     
     // same opening hours every day, or interval starts and stops on date's week day
-    else if ((startWeekday == 0 && stopWeekday == 0)
-             || (datesWeekday == startWeekday && datesWeekday == stopWeekday)) {
+    else if ([self isValidForAllWeekdays]
+             || [self startAndStopWeekdayEqualsWeekdayOfDateWeekday:datesWeekday]) {
         
         if (datesHour >= [self startHours]
             && datesMinute >= [self startMinutes]
@@ -124,8 +120,7 @@
     }
     
     // date's week day is on the first day of a multiple day interval
-    else if (datesWeekday == startWeekday
-             && datesWeekday != stopWeekday) {
+    else if ([self datesWeekdayIsOnTheFirstDayOfMultipleDayInterval:datesWeekday]) {
         
         if (datesHour >= [self startHours]
             && datesMinute >= [self startMinutes]) {
@@ -135,8 +130,7 @@
     }
     
     // date's week day is on the last day of a multiple day interval
-    else if (datesWeekday == stopWeekday
-             && datesWeekday != startWeekday) {
+    else if ([self datesWeekdayIsOnTheLastDayOfMultipleDayInterval:datesWeekday]) {
         
         if(datesHour <= [self stopHours]
            && datesMinute < [self stopMinutes]) {
@@ -192,9 +186,72 @@
 }
 
 #pragma mark -
+#pragma what kind of interval are we?
+
+- (BOOL)isAlwaysOpen
+{
+    BOOL isAlwaysOpen = NO;
+    
+    if (self.start == 0 && self.stop >= 10079)
+        isAlwaysOpen = YES;
+    
+    return isAlwaysOpen;
+}
+
+- (BOOL)isWeekendInterval
+{
+    BOOL isWeekendInterval = NO;
+    
+    if (self.start >= 6660 && self.start <= 7200 && self.stop >= 10079)
+        isWeekendInterval = YES;
+    
+    return isWeekendInterval;
+}
+
+- (BOOL)isValidForAllWeekdays
+{
+    BOOL isValidForAllWeekdays = NO;
+    
+    if ([self startWeekday] == 0 && [self stopWeekday] == 0)
+        isValidForAllWeekdays = YES;
+    
+    return isValidForAllWeekdays;
+}
+
+- (BOOL)startAndStopWeekdayEqualsWeekdayOfDateWeekday:(int)datesWeekday
+{
+    BOOL equals = NO;
+    
+    if (datesWeekday == [self startWeekday] && datesWeekday == [self stopWeekday])
+        equals = YES;
+    
+    return equals;
+}
+
+- (BOOL)datesWeekdayIsOnTheFirstDayOfMultipleDayInterval:(int)datesWeekday
+{
+    BOOL answer = NO;
+    
+    if (datesWeekday == [self startWeekday]
+        && datesWeekday != [self stopWeekday])
+        answer = YES;
+    
+    return answer;
+}
+
+- (BOOL)datesWeekdayIsOnTheLastDayOfMultipleDayInterval:(int)datesWeekday
+{
+    BOOL answer = NO;
+    
+    if (datesWeekday == [self stopWeekday]
+        && datesWeekday != [self startWeekday])
+        answer = YES;
+
+    return answer;
+}
+
+#pragma mark -
 #pragma mark Private methods
-
-
 
 - (int)startTotalMinutes
 {
@@ -235,13 +292,23 @@
 {
     return [OpeningInterval minutesFromTime:self.stop];
 }
+         
+- (int)startWeekday
+{
+    return [OpeningInterval dayOfWeekNumberFromTime:self.start];
+}
 
+- (int)stopWeekday
+{
+    return [OpeningInterval dayOfWeekNumberFromTime:self.stop];
+}
 
 #pragma mark -
 #pragma mark Class Methods
 
 #pragma mark Public
-+ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals // don't use this method unless you're sure you want to
+// don't use this method unless you're sure you want to
++ (NSString *)timeStringMergedIntervalFromIntervals:(NSArray *)intervals
 {
     NSString *timeString = @"";
     
