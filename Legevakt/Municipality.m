@@ -28,14 +28,7 @@
 + (void)findMunicipalityWithCode:(NSString *)code withDelegate:(id<MunicipalityDelegate>)delegate
 {
     PFQuery *query = [Municipality query];
-    
-    NSLog(@"code: %@", code);
-    
-    // remove leading zero (if any)
-    NSString *compliantCode = [NSString stringWithFormat:@"%d", [code intValue]];
-    
-    
-    [query whereKey:@"Kommunenummer" equalTo:compliantCode];
+    [query whereKey:@"Kommunenummer" equalTo:[self compliantCodeFromCode:code]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error && [objects count] > 0) {
             Municipality *municipality = (Municipality *)objects[0];
@@ -44,6 +37,35 @@
         else
             NSLog(@"Unable to find municipality in findMunicipalityWithCode: %@", error);
     }];
+}
+
++ (void)findMunicipalitiesWithCodes:(NSArray *)codes withDelegate:(id<MunicipalityDelegate>)delegate
+{
+    PFQuery *query = [Municipality query];
+    [query whereKey:@"Kommunenummer" containedIn:[self compliantCodesFromCodes:codes]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error && [objects count] > 0) {
+            [delegate foundMunicipalities:objects];
+        }
+        else
+            NSLog(@"Unable to find municipalities in findMunicipalitiesWithCodes:%@", error);
+    }];
+}
+
++ (NSString *)compliantCodeFromCode:(NSString *)code
+{
+    return [NSString stringWithFormat:@"%d", [code intValue]];
+}
+
++ (NSArray *)compliantCodesFromCodes:(NSArray *)codes
+{
+    NSMutableArray *compliantCodes = [[NSMutableArray alloc] init];
+    
+    for (id obj in codes) {
+        [compliantCodes addObject:[self compliantCodeFromCode:(NSString *)obj]];
+    }
+    
+    return compliantCodes;
 }
 
 + (NSString *)formattedMunicipalities:(NSArray *)municipalities

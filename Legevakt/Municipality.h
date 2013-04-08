@@ -14,6 +14,7 @@
 @protocol MunicipalityDelegate
 
 - (void)foundMunicipality:(Municipality *)municipality;
+- (void)foundMunicipalities:(NSArray *)municipalities;
 
 @end
 
@@ -24,6 +25,7 @@
 #pragma mark Class Methods
 + (NSString *)parseClassName;
 + (void)findMunicipalityWithCode:(NSString *)code withDelegate:(id<MunicipalityDelegate>)delegate;
++ (void)findMunicipalitiesWithCodes:(NSArray *)code withDelegate:(id<MunicipalityDelegate>)delegate;
 + (NSString *)formattedMunicipalities:(NSArray *)municipalities;
 
 @end
