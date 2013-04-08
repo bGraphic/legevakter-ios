@@ -115,31 +115,39 @@
     else if ([self isValidForAllWeekdays]
              || [self startAndStopWeekdayEqualsWeekdayOfDateWeekday:datesWeekday]) {
         
-        if (datesHour >= [self startHours]
-            && datesMinute >= [self startMinutes]
-            && datesHour <= [self stopHours]
-            && ([self stopMinutes] == 0 || datesMinute < [self stopMinutes])) {
+        if ((datesHour == [self startHours]
+             && datesMinute >= [self startMinutes])
+            || datesHour > [self startHours]) {
             
-            open = YES;
+            if ((datesHour == [self stopHours]
+                 && datesMinute < [self stopMinutes])
+                || datesHour < [self stopHours]) {
+                
+                open = YES;
+            }
         }
     }
     
     // date's week day is on the first day of a multiple day interval
     else if ([self datesWeekdayIsOnTheFirstDayOfMultipleDayInterval:datesWeekday]) {
         
-        if (datesHour >= [self startHours]
-            && datesMinute >= [self startMinutes]) {
-            
+        if ((datesHour == [self startHours]
+            && datesMinute >= [self startMinutes])
+            || datesHour > [self startHours]) {
+
             open = YES;
         }
+        
     }
     
     // date's week day is on the last day of a multiple day interval
     else if ([self datesWeekdayIsOnTheLastDayOfMultipleDayInterval:datesWeekday]) {
         
-        if(datesHour <= [self stopHours]
-           && datesMinute < [self stopMinutes]) {
-            
+        if((datesHour == [self stopHours]
+           && datesMinute < [self stopMinutes])
+           || datesHour < [self stopHours]
+           
+           ) {
             open = YES;
         }
     }
