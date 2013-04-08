@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "HealthService.h"
 
-@interface TESDetailViewController : UITableViewController
+@interface TESDetailViewController : UITableViewController <UITableViewDelegate>
 
 @property (strong, nonatomic) HealthService *detailItem;
 
-@property (weak, nonatomic) IBOutlet UITableViewCell *phoneNumberCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *AdressCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *WebpageCell;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
-@property (weak, nonatomic) IBOutlet UITableViewCell *OpeningHoursCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *OpeningHoursCommentCell;
+@property (weak, nonatomic) IBOutlet UILabel *webPageLabel;
 
+@property (weak, nonatomic) IBOutlet UITextView *openingHoursTextView;
+@property (weak, nonatomic) IBOutlet UITextView *openingHoursCommentTextView;
 
 
 @end

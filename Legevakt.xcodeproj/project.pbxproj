@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
+		1376BF7A17130EC90074ABB1 /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7917130EC90074ABB1 /* web.png */; };
+		1376BF7C17130EE60074ABB1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7B17130EE60074ABB1 /* phone.png */; };
+		1376BF80171310480074ABB1 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7F171310480074ABB1 /* address.png */; };
 		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
 		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
 		1376BF761712F74A0074ABB1 /* TESDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESDetailViewController.m; sourceTree = "<group>"; };
+		1376BF7917130EC90074ABB1 /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
+		1376BF7B17130EE60074ABB1 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		1376BF7F171310480074ABB1 /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
 		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
@@ -94,6 +100,16 @@
 			name = "data model";
 			sourceTree = "<group>";
 		};
+		1376BF7817130EA10074ABB1 /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				1376BF7F171310480074ABB1 /* address.png */,
+				1376BF7B17130EE60074ABB1 /* phone.png */,
+				1376BF7917130EC90074ABB1 /* web.png */,
+			);
+			name = gfx;
+			sourceTree = "<group>";
+		};
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +142,7 @@
 		17EA082A17024A80007C2B48 /* Legevakt */ = {
 			isa = PBXGroup;
 			children = (
+				1376BF7817130EA10074ABB1 /* gfx */,
 				1376BF741712EFFD0074ABB1 /* data model */,
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
 				17EA083417024A80007C2B48 /* TESAppDelegate.m */,
@@ -217,6 +234,9 @@
 				17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */,
 				17973A6E1710B5E900FBDF48 /* open.png in Resources */,
 				17973A701710C5E400FBDF48 /* closed.png in Resources */,
+				1376BF7A17130EC90074ABB1 /* web.png in Resources */,
+				1376BF7C17130EE60074ABB1 /* phone.png in Resources */,
+				1376BF80171310480074ABB1 /* address.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

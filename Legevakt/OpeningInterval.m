@@ -22,8 +22,8 @@
 #define DAYS_PER_WEEK 7
 #define WEEK_DAY_NAMES @[@"Mandag", @"Tirsdag", @"Onsdag", @"Torsdag", @"Fredag", @"Lørdag", @"Søndag"]
 #define ALL_DAYS @"Alle dager"
-#define OPEN_ALL_DAYS @"Åpent alle dager"
-#define OPEN_WEEKENDS @"Åpent helg"
+#define OPEN_ALL_DAYS @"Døgnåpent alle dager"
+#define OPEN_WEEKENDS @"Døgnåpent helg"
 #define MINUTES_TO_THURSDAY_AT_3_PM 6660
 #define MINUTES_TO_THURSDAY_AT_MIDNIGHT 7200
 #define MINUTES_TO_SUNDAY_AT_MIDNIGHT 10079
@@ -361,10 +361,16 @@
 {
     NSString *timeString = @"";
     
+    int i = 0;
     for (id obj in intervals) {
         OpeningInterval *interval = (OpeningInterval *)obj;
-        timeString = [timeString stringByAppendingFormat:@"%@\n", interval.description];
         
+        if(i < intervals.count-1)
+            timeString = [timeString stringByAppendingFormat:@"%@\n", interval.description];
+        else
+            timeString = [timeString stringByAppendingFormat:@"%@", interval.description];
+        
+        i++;
     }
 
     return timeString;

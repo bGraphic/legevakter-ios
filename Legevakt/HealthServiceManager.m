@@ -14,7 +14,7 @@
 + (void)findHealthServicesNearLocation:(CLLocation *)location withDelegate:(id<HealthServiceManagerDelegate>)delegate
 {
     PFQuery *query = [HealthService query];
-    [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location] withinKilometers:25.0];
+    [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [delegate manager:self foundHealthServicesNearby:objects];
