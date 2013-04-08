@@ -15,10 +15,12 @@
 @property (strong, readonly) NSMutableArray* applicableMunicipalities;
 
 - (NSString *)displayName;
-- (NSString *)phoneNumber;
-- (NSString *)address;
+- (NSString *)formattedPhoneNumber;
+- (NSString *)formattedWebPage;
+- (NSString *)formattedAddress;
 - (NSString *)formattedApplicableMunicipalities;
 - (NSString *)formattedDistanceFromLocation:(CLLocation *)location;
+- (NSString *)formattedOpeningHoursComment;
 - (NSString *)formattedOpeningHoursAsString;
 
 - (BOOL)isOpen;

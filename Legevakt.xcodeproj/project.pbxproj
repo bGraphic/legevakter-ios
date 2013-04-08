@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
 		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
+		1376BF761712F74A0074ABB1 /* TESDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESDetailViewController.m; sourceTree = "<group>"; };
 		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
@@ -76,6 +79,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1376BF741712EFFD0074ABB1 /* data model */ = {
+			isa = PBXGroup;
+			children = (
+				17973A711711D5E200FBDF48 /* Municipality.h */,
+				17973A721711D5E200FBDF48 /* Municipality.m */,
+				17EA086E1703467D007C2B48 /* OpeningHours.h */,
+				17EA086F1703467D007C2B48 /* OpeningHours.m */,
+				17EA087117038495007C2B48 /* OpeningInterval.h */,
+				17EA087217038495007C2B48 /* OpeningInterval.m */,
+				17EA086817030527007C2B48 /* HealthService.h */,
+				17EA086917030527007C2B48 /* HealthService.m */,
+			);
+			name = "data model";
+			sourceTree = "<group>";
+		};
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
@@ -108,22 +126,17 @@
 		17EA082A17024A80007C2B48 /* Legevakt */ = {
 			isa = PBXGroup;
 			children = (
+				1376BF741712EFFD0074ABB1 /* data model */,
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
 				17EA083417024A80007C2B48 /* TESAppDelegate.m */,
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
 				17EA08621702523B007C2B48 /* TESTableViewController.h */,
 				17EA08631702523B007C2B48 /* TESTableViewController.m */,
-				17EA086817030527007C2B48 /* HealthService.h */,
-				17EA086917030527007C2B48 /* HealthService.m */,
 				17EA086B17032580007C2B48 /* HealthServiceManager.h */,
 				17EA086C17032580007C2B48 /* HealthServiceManager.m */,
-				17EA086E1703467D007C2B48 /* OpeningHours.h */,
-				17EA086F1703467D007C2B48 /* OpeningHours.m */,
-				17EA087117038495007C2B48 /* OpeningInterval.h */,
-				17EA087217038495007C2B48 /* OpeningInterval.m */,
-				17973A711711D5E200FBDF48 /* Municipality.h */,
-				17973A721711D5E200FBDF48 /* Municipality.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
+				1376BF751712F74A0074ABB1 /* TESDetailViewController.h */,
+				1376BF761712F74A0074ABB1 /* TESDetailViewController.m */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -239,6 +252,7 @@
 				17EA08701703467D007C2B48 /* OpeningHours.m in Sources */,
 				17EA087317038495007C2B48 /* OpeningInterval.m in Sources */,
 				17973A731711D5E200FBDF48 /* Municipality.m in Sources */,
+				1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +303,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -313,7 +327,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -14,10 +14,12 @@
 //  Define Parse global Parse keys here
 #define HealthServiceDisplayName                @"HealthServiceDisplayName"
 #define HealthServicePhoneNumber                @"HealthServicePhone"
+#define HealthServiceWebPage                    @"HealthServiceWeb"
 #define HealthServiceStreetAddress              @"VisitAddressStreet"
 #define HealthServicePostalCode                 @"VisitAddressPostNr"
 #define HealthServicePostalPlace                @"VisitAddressPostName"
 #define HealthServiceGeoPoint                   @"geoPoint"
+#define HealthServiceOpeningHoursComment        @"OpeningHoursComment"
 #define HealthServiceOpeningHours               @"OpeningHours"
 #define HealthServiceApplicableMunicipalities   @"AppliesToMunicipalityCodes"
 
@@ -54,16 +56,23 @@
     return [self objectForKey:HealthServiceDisplayName];
 }
 
-- (NSString *)phoneNumber
+- (NSString *)formattedPhoneNumber
 {
-    return [self objectForKey:HealthServicePhoneNumber];
+    return [self formattedString:[self phoneNumber]];
 }
-- (NSString *)address
+
+- (NSString *)formattedWebPage
 {
-    NSString *address = [NSString stringWithFormat:@"%@, %@ %@",
-                         [self streetAddress],
-                         [self postalCode],
-                         [self postalPlace]];
+    return [self formattedString:[self webPage]];
+}
+
+- (NSString *)formattedAddress
+{
+    NSString *address = [NSString stringWithFormat:@"%@\n%@ %@",
+                         [self formattedString:[self streetAddress]],
+                         [self formattedString:[self postalCode]],
+                         [self formattedString:[self postalPlace]]
+                        ];
     return address;
 }
 
@@ -78,6 +87,11 @@
     return formattedDistanceString;
 }
 
+- (NSString *)formattedOpeningHoursComment
+{
+    return [self formattedString:[self openingHoursComment]];
+}
+
 - (NSString *)formattedOpeningHoursAsString
 {
     return [self.openingHours openingHoursAsString];
@@ -86,6 +100,14 @@
 - (BOOL)isOpen
 {
     return [self.openingHours isOpenWithDate:[NSDate date]];
+}
+
+- (NSString *) formattedString:(id) string
+{
+    if (string == [NSNull null])
+        return @"";
+    else
+        return string;
 }
 
 #pragma mark MunicipalityDelegate
@@ -99,6 +121,16 @@
 }
 
 #pragma mark private
+
+- (NSString *)phoneNumber
+{
+    return [self objectForKey:HealthServicePhoneNumber];
+}
+
+- (NSString *)webPage
+{
+    return [self objectForKey:HealthServiceWebPage];
+}
 
 - (NSString *)streetAddress
 {
@@ -125,6 +157,14 @@
     if (!_openingHours)
         _openingHours = [[OpeningHours alloc] initWithOpeningHoursString:[self objectForKey:HealthServiceOpeningHours]];
     return _openingHours;
+}
+
+- (NSString *)openingHoursComment
+{
+    if([self objectForKey:HealthServiceOpeningHoursComment] != [NSNull null])
+        return [self objectForKey:HealthServiceOpeningHoursComment];
+    else
+        return nil;
 }
 
 - (PFGeoPoint *)geoPointWithLocation:(CLLocation *)location
