@@ -9,6 +9,7 @@
 #import "TESTableViewController.h"
 #import "HealthService.h"
 #import "TESDetailViewController.h"
+#import "TESLegevaktCell.h"
 
 @interface TESTableViewController()
 
@@ -83,24 +84,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"LegevaktCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    TESLegevaktCell *cell = (TESLegevaktCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(TESLegevaktCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [healthService displayName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Avstand: %@", [healthService formattedDistanceFromLocation:self.myLocation]];
-    
-    if ([healthService isOpen])
-        cell.imageView.image = [UIImage imageNamed:@"open"];
-    else
-        cell.imageView.image = [UIImage imageNamed:@"closed"];
+    cell.myLocation = self.myLocation;
+    cell.healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
 }
 
 #pragma mark - Segue
@@ -111,7 +105,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         HealthService *healthService = [self.healthServices objectAtIndex:indexPath.row];
         
-        [[segue destinationViewController] setDetailItem:healthService];
+        [[segue destinationViewController] setHealthService:healthService];
     }
 }
 
