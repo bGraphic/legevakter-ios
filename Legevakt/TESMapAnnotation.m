@@ -29,7 +29,7 @@
 
 - (NSString *) subtitle
 {
-    return self.healthService.formattedPhoneNumber;
+    return [NSString stringWithFormat:@"%@ | Tel: %@", self.healthService.isOpen?@"Åpent":@"Stengt", self.healthService.formattedPhoneNumber];
 }
 
 + (TESMapAnnotation *) mapAnnotationForHealthService:(HealthService *) healthService

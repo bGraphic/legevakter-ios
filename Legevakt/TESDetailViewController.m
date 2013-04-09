@@ -66,6 +66,8 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [BGCommonGraphics backgroundView];
     
+    self.mapView.delegate = self;
+    
     [self configureView];
 }
 
@@ -156,5 +158,31 @@
 - (IBAction)openWebPage:(UIButton *)sender
 {
     [TESLegevaktActionManager openWebPage:self.healthService.formattedWebPage];
+}
+
+#pragma mark - MapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKPinAnnotationView *mapPin = nil;
+    if(annotation != map.userLocation)
+    {
+        static NSString *defaultPinID = @"defaultPin";
+        mapPin = (MKPinAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        
+        if (mapPin == nil )
+        {
+            mapPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                     reuseIdentifier:defaultPinID];
+            
+            HealthService *healthService = [(TESMapAnnotation *) annotation healthService];
+            mapPin.image = healthService.isOpen?[UIImage imageNamed:@"ER_open_pin"]:[UIImage imageNamed:@"ER_closed_pin"];
+            
+        }
+        else
+            mapPin.annotation = annotation;
+        
+    }
+    return mapPin;
 }
 @end

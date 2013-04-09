@@ -100,6 +100,8 @@
     }
 }
 
+#pragma mark - MapViewDelegate
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     self.selectedHealthService = [(TESMapAnnotation *) view.annotation healthService];
@@ -114,10 +116,14 @@
     {
         static NSString *defaultPinID = @"defaultPin";
         mapPin = (MKPinAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        
         if (mapPin == nil )
         {
             mapPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
                                                      reuseIdentifier:defaultPinID];
+            
+            HealthService *healthService = [(TESMapAnnotation *) annotation healthService];
+            mapPin.image = healthService.isOpen?[UIImage imageNamed:@"ER_open_pin"]:[UIImage imageNamed:@"ER_closed_pin"];
             
             if(self.healthServices)
             {
@@ -125,8 +131,6 @@
                 UIButton *disclosureButton = [UIButton buttonWithType: UIButtonTypeDetailDisclosure]; 
                 mapPin.rightCalloutAccessoryView = disclosureButton;
             }
-
-            
         }
         else
             mapPin.annotation = annotation;
