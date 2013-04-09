@@ -10,7 +10,7 @@
 #import <QuartzCore/CoreAnimation.h>
 #import "TESMapAnnotation.h"
 #import "TESMapViewController.h"
-#import <bGraphicCommon/BGCommonGraphics.h>
+#import "BGCommonGraphics.h"
 
 @interface TESDetailViewController ()
 
