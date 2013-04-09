@@ -12,22 +12,13 @@
 #import "TESMapViewController.h"
 #import "BGCommonGraphics.h"
 #import "TESLegevaktActionManager.h"
+#import "TESMapAnnotationView.h"
 
 @interface TESDetailViewController ()
 
 @end
 
 @implementation TESDetailViewController
-
-- (void)setHealthService:(id)newHealthService
-{
-    if (_healthService != newHealthService) {
-        _healthService = newHealthService;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
 
 - (void)configureView
 {
@@ -66,7 +57,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [BGCommonGraphics backgroundView];
     
-    self.mapView.delegate = self;
+//    self.mapView.delegate = self;
     
     [self configureView];
 }
@@ -89,6 +80,17 @@
     [self setDisplayNameLabel:nil];
     [super viewDidUnload];
 }
+
+- (void)setHealthService:(id)newHealthService
+{
+    if (_healthService != newHealthService) {
+        _healthService = newHealthService;
+        
+        // Update the view.
+        [self configureView];
+    }
+}
+
 
 #pragma mark - Segue
 
@@ -164,20 +166,16 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *mapPin = nil;
+    TESMapAnnotationView *mapPin = nil;
     if(annotation != map.userLocation)
     {
         static NSString *defaultPinID = @"defaultPin";
-        mapPin = (MKPinAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        mapPin = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         
         if (mapPin == nil )
         {
-            mapPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                     reuseIdentifier:defaultPinID];
-            
-            HealthService *healthService = [(TESMapAnnotation *) annotation healthService];
-            mapPin.image = healthService.isOpen?[UIImage imageNamed:@"ER_open_pin"]:[UIImage imageNamed:@"ER_closed_pin"];
-            
+            mapPin = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
+                                                      reuseIdentifier:defaultPinID];
         }
         else
             mapPin.annotation = annotation;
@@ -185,4 +183,5 @@
     }
     return mapPin;
 }
+
 @end

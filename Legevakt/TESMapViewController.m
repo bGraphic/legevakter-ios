@@ -9,6 +9,7 @@
 #import "TESMapViewController.h"
 #import "TESMapAnnotation.h"
 #import "TESDetailViewController.h"
+#import "TESMapAnnotationView.h"
 
 @interface TESMapViewController ()
 
@@ -37,16 +38,6 @@
 - (void)viewDidUnload {
     [self setMapView:nil];
     [super viewDidUnload];
-}
-
-- (void) setMyLocation:(CLLocation *)myLocation
-{
-    if(!_myLocation)
-    {
-        self.mapView.centerCoordinate = myLocation.coordinate;
-    }
-    
-    _myLocation = myLocation;
 }
 
 - (void) setHealthServices:(NSArray *)newHealthServiceList
@@ -102,7 +93,14 @@
 
 #pragma mark - MapViewDelegate
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKAnnotationView* annotationView = [mapView viewForAnnotation:userLocation];
+    annotationView.canShowCallout = NO;
+}
+
+
+- (void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     self.selectedHealthService = [(TESMapAnnotation *) view.annotation healthService];
     
@@ -111,19 +109,17 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *mapPin = nil;
+    TESMapAnnotationView *mapPin = nil;
+    
     if(annotation != map.userLocation)
     {
         static NSString *defaultPinID = @"defaultPin";
-        mapPin = (MKPinAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        mapPin = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         
         if (mapPin == nil )
         {
-            mapPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+            mapPin = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
                                                      reuseIdentifier:defaultPinID];
-            
-            HealthService *healthService = [(TESMapAnnotation *) annotation healthService];
-            mapPin.image = healthService.isOpen?[UIImage imageNamed:@"ER_open_pin"]:[UIImage imageNamed:@"ER_closed_pin"];
             
             if(self.healthServices)
             {
@@ -133,9 +129,12 @@
             }
         }
         else
+        {
             mapPin.annotation = annotation;
+        }
         
-    }
+    }   
+    
     return mapPin;
 }
 
