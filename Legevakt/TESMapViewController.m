@@ -82,7 +82,6 @@
             
             if(i == 0)
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
-               
             i++;
         }
     }

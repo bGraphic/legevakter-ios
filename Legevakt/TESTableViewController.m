@@ -39,8 +39,6 @@
         _healthServices = healthServices;
         
         [self.tableView reloadData];
-        
-        NSLog(@"health service");
     }
 }
 
