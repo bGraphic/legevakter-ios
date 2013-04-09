@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "HealthService.h"
 
-@interface TESMapViewController : UIViewController
+@interface TESMapViewController : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) HealthService *healthService;
 @property (strong, nonatomic) NSArray *healthServices;

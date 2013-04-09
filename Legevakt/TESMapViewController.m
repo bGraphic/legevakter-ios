@@ -8,8 +8,11 @@
 
 #import "TESMapViewController.h"
 #import "TESMapAnnotation.h"
+#import "TESDetailViewController.h"
 
 @interface TESMapViewController ()
+
+@property (nonatomic, strong) HealthService *selectedHealthService;
 
 @end
 
@@ -19,6 +22,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.mapView.delegate = self;
     
     [self configureView];
 }
@@ -85,6 +90,49 @@
             i++;
         }
     }
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showDetail"])
+    {
+        [[segue destinationViewController] setHealthService:self.selectedHealthService];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    self.selectedHealthService = [(TESMapAnnotation *) view.annotation healthService];
+    
+    [self performSegueWithIdentifier:@"showDetail" sender:self];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKPinAnnotationView *mapPin = nil;
+    if(annotation != map.userLocation)
+    {
+        static NSString *defaultPinID = @"defaultPin";
+        mapPin = (MKPinAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        if (mapPin == nil )
+        {
+            mapPin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                     reuseIdentifier:defaultPinID];
+            
+            if(self.healthServices)
+            {
+                mapPin.canShowCallout = YES;
+                UIButton *disclosureButton = [UIButton buttonWithType: UIButtonTypeDetailDisclosure]; 
+                mapPin.rightCalloutAccessoryView = disclosureButton;
+            }
+
+            
+        }
+        else
+            mapPin.annotation = annotation;
+        
+    }
+    return mapPin;
 }
 
 
