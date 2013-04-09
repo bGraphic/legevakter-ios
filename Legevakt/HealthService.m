@@ -123,8 +123,7 @@
 {
     if(!self.applicableMunicipalities)
         self.applicableMunicipalities = [[NSMutableArray alloc] init];
-    
-    [self.applicableMunicipalities addObjectsFromArray:municipalities];
+    self.applicableMunicipalities = [municipalities mutableCopy];
 }
 
 #pragma mark private
