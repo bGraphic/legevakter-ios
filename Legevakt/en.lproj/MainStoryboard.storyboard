@@ -245,7 +245,7 @@
                                             <rect key="frame" x="10" y="1" width="280" height="299"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <mapView clipsSubviews="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" showsUserLocation="YES" id="mYK-4m-pnN">
+                                                <mapView clipsSubviews="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" id="mYK-4m-pnN">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="299"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <gestureRecognizers/>
