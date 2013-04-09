@@ -44,6 +44,13 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.mapView.alpha = 1.0f;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,6 +86,8 @@
 {
     if([segue.identifier isEqualToString:@"showMap"])
     {
+        self.mapView.alpha = 0.4f;
+        
         [[segue destinationViewController] setHealthService:self.healthService];
     }
 }
