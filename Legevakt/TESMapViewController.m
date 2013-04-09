@@ -34,6 +34,16 @@
     [super viewDidUnload];
 }
 
+- (void)setHealthServiceList:(NSArray *)newHealthServiceList
+{
+    if (_healthServiceList != newHealthServiceList) {
+        _healthServiceList = newHealthServiceList;
+        
+        // Update the view.
+        [self configureView];
+    }
+}
+
 - (void)setHealthService:(id)newHealthService
 {
     if (_healthService != newHealthService) {
@@ -50,8 +60,16 @@
     
     if (self.healthService) {
         [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
-        [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
+    }
+    
+    if(self.healthServiceList)
+    {
+        for(HealthService *healthService in self.healthServiceList)
+        {
+            [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.myLocation.coordinate, 2000.f, 2000.f)];
+        }
     }
 }
 

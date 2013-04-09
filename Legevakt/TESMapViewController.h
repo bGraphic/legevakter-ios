@@ -13,6 +13,8 @@
 @interface TESMapViewController : UIViewController
 
 @property (strong, nonatomic) HealthService *healthService;
+@property (strong, nonatomic) NSArray *healthServiceList;
+@property (retain) CLLocation *myLocation;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

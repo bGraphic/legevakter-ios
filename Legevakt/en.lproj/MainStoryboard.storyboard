@@ -4,12 +4,70 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Main View Controller - Legevakter-->
+        <scene sceneID="Bp0-70-jiS">
+            <objects>
+                <viewController id="HXM-yq-PTO" customClass="TESMainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Hk-ey-vqw">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView contentMode="scaleToFill" id="3vw-0x-cBa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="cBr-7Z-AmX" kind="embed" identifier="embedMapViewController" id="7NC-ni-E94"/>
+                                </connections>
+                            </containerView>
+                            <containerView contentMode="scaleToFill" id="Xx6-b8-Q6q">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="slP-Ip-ti5" kind="embed" identifier="embedTableViewController" id="H6F-yo-Hpi"/>
+                                </connections>
+                            </containerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cn9-Ov-tdK">
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="NJR-4D-L5J"/>
+                                    <barButtonItem style="plain" id="irP-x7-tqE">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ACJ-Ij-gmf">
+                                            <rect key="frame" x="79" y="8" width="161" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Liste"/>
+                                                <segment title="Kart"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="mainViewChanged:" destination="HXM-yq-PTO" eventType="valueChanged" id="ywQ-jt-fua"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ci7-eo-KmZ"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Legevakter" id="v4v-g1-IfN"/>
+                    <connections>
+                        <outlet property="mapView" destination="3vw-0x-cBa" id="m2m-Tk-vDr"/>
+                        <outlet property="tableView" destination="Xx6-b8-Q6q" id="eD3-lY-MFu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K6y-d3-vXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1229" y="78"/>
+        </scene>
         <!--Table View Controller - Legevakter i nærheten-->
         <scene sceneID="Kio-M3-vpo">
             <objects>
                 <tableViewController id="slP-Ip-ti5" customClass="TESTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="pGP-CD-sPJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -62,14 +120,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690" y="110"/>
+            <point key="canvasLocation" x="1834" y="-222"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="0Ho-0F-VAY">
             <objects>
                 <tableViewController id="mej-22-RJ2" customClass="TESDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zub-wy-vqB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="hGs-ig-7Yc">
@@ -284,18 +342,18 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2191" y="110"/>
+            <point key="canvasLocation" x="2335" y="-222"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="eoc-fD-tgd">
             <objects>
                 <viewController id="cBr-7Z-AmX" customClass="TESMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fr9-2g-PLs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="MxW-Dg-PUF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
@@ -308,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9R-kd-8N4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="110"/>
+            <point key="canvasLocation" x="2330" y="454"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="haj-2X-C1M">
@@ -322,12 +380,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="slP-Ip-ti5" kind="relationship" relationship="rootViewController" id="vcE-4V-NEv"/>
+                        <segue destination="HXM-yq-PTO" kind="relationship" relationship="rootViewController" id="gs4-Tx-rG9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUW-oo-1lM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1164" y="110"/>
+            <point key="canvasLocation" x="782" y="78"/>
         </scene>
     </scenes>
     <resources>
@@ -361,6 +419,14 @@
                 <relationship kind="outlet" name="openingHoursLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
+        <class className="TESMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mainViewChanged:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UIView"/>
+            </relationships>
+        </class>
         <class className="TESMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMapViewController.h"/>
             <relationships>
@@ -377,6 +443,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="laf-Bg-xWD"/>
+        <segue reference="7NC-ni-E94"/>
     </inferredMetricsTieBreakers>
 </document>
