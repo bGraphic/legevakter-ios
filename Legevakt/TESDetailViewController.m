@@ -14,10 +14,10 @@
 
 @implementation TESDetailViewController
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setHealthService:(id)newHealthService
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (_healthService != newHealthService) {
+        _healthService = newHealthService;
         
         // Update the view.
         [self configureView];
@@ -28,12 +28,12 @@
 {
     // Update the user interface for the detail item.
     
-    if (self.detailItem) {
-        self.phoneNumberLabel.text = self.detailItem.formattedPhoneNumber;
-        self.addressLabel.text = self.detailItem.formattedAddress;
-        self.webPageLabel.text = self.detailItem.formattedWebPage;
-        self.openingHoursTextView.text = self.detailItem.formattedOpeningHoursAsString;
-        self.openingHoursCommentTextView.text = self.detailItem.formattedOpeningHoursComment;
+    if (self.healthService) {
+        self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
+        self.addressLabel.text = self.healthService.formattedAddress;
+        self.webPageLabel.text = self.healthService.formattedWebPage;
+        self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
+        self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
     }
 }
 
@@ -64,14 +64,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0) {
-        if (self.detailItem.formattedWebPage.length == 0)
+        if (self.healthService.formattedWebPage.length == 0)
             return 2;
         else
             return 3;
     }
     
     if (section == 1) {
-        if(self.detailItem.formattedOpeningHoursComment.length == 0)
+        if(self.healthService.formattedOpeningHoursComment.length == 0)
             return 1;
         else
             return 2;

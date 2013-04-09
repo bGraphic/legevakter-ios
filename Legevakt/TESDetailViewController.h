@@ -11,7 +11,7 @@
 
 @interface TESDetailViewController : UITableViewController <UITableViewDelegate>
 
-@property (strong, nonatomic) HealthService *detailItem;
+@property (strong, nonatomic) HealthService *healthService;
 
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
