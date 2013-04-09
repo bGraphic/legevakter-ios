@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		132CE75017140D1500BE191A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CE74F17140D1500BE191A /* MapKit.framework */; };
+		132CE7531714158D00BE191A /* TESMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 132CE7521714158D00BE191A /* TESMapAnnotation.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		1376BF7A17130EC90074ABB1 /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7917130EC90074ABB1 /* web.png */; };
 		1376BF7C17130EE60074ABB1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7B17130EE60074ABB1 /* phone.png */; };
@@ -34,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		132CE74F17140D1500BE191A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		132CE7511714158D00BE191A /* TESMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TESMapAnnotation.h; path = ../TESMapAnnotation.h; sourceTree = "<group>"; };
+		132CE7521714158D00BE191A /* TESMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TESMapAnnotation.m; path = ../TESMapAnnotation.m; sourceTree = "<group>"; };
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
 		1376BF761712F74A0074ABB1 /* TESDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESDetailViewController.m; sourceTree = "<group>"; };
 		1376BF7917130EC90074ABB1 /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132CE75017140D1500BE191A /* MapKit.framework in Frameworks */,
 				17EA082917024A80007C2B48 /* CoreGraphics.framework in Frameworks */,
 				17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */,
 				17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */,
@@ -116,6 +122,7 @@
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
+				132CE74F17140D1500BE191A /* MapKit.framework */,
 				17EA082A17024A80007C2B48 /* Legevakt */,
 				17EA082317024A80007C2B48 /* Frameworks */,
 				17EA082217024A80007C2B48 /* Products */,
@@ -145,6 +152,8 @@
 		17EA082A17024A80007C2B48 /* Legevakt */ = {
 			isa = PBXGroup;
 			children = (
+				132CE7511714158D00BE191A /* TESMapAnnotation.h */,
+				132CE7521714158D00BE191A /* TESMapAnnotation.m */,
 				1376BF7817130EA10074ABB1 /* gfx */,
 				1376BF741712EFFD0074ABB1 /* data model */,
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
@@ -279,6 +288,7 @@
 				17973A731711D5E200FBDF48 /* Municipality.m in Sources */,
 				1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */,
 				1376BF831713FB200074ABB1 /* TESLegevaktCell.m in Sources */,
+				132CE7531714158D00BE191A /* TESMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

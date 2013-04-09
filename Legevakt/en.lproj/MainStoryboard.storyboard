@@ -75,7 +75,7 @@
                         <sections>
                             <tableViewSection headerTitle="Kontaktinformasjon" id="Oiw-UV-emk">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="UWg-hL-DqM">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="UWg-hL-DqM">
                                         <rect key="frame" x="0.0" y="46" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -97,7 +97,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="65" id="A4K-hQ-8jh">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="65" id="A4K-hQ-8jh">
                                         <rect key="frame" x="0.0" y="102" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -121,7 +121,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="CHu-Rh-Hav">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="CHu-Rh-Hav">
                                         <rect key="frame" x="0.0" y="167" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -147,7 +147,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Åpningstider" id="sAh-ek-fxS">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="T3i-AW-vEr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="T3i-AW-vEr">
                                         <rect key="frame" x="0.0" y="269" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -166,7 +166,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="O6Z-yJ-XFJ">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="O6Z-yJ-XFJ">
                                         <rect key="frame" x="0.0" y="325" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -187,6 +187,26 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Kart" id="Jbt-u0-iVb">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="300" id="Ihq-FG-TaD">
+                                        <rect key="frame" x="0.0" y="427" width="320" height="302"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="299"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <mapView clipsSubviews="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" showsUserLocation="YES" id="mYK-4m-pnN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="299"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <gestureRecognizers/>
+                                                </mapView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="mej-22-RJ2" id="ieC-n5-sR2"/>
@@ -196,6 +216,8 @@
                     <navigationItem key="navigationItem" id="pLw-qj-zPi"/>
                     <connections>
                         <outlet property="addressLabel" destination="BHm-WT-XIW" id="Q7A-nL-EGE"/>
+                        <outlet property="mapView" destination="mYK-4m-pnN" id="fZ5-oy-Yhq"/>
+                        <outlet property="mapViewCell" destination="Ihq-FG-TaD" id="JL9-75-HDp"/>
                         <outlet property="openingHoursCommentTextView" destination="WdT-QE-xh0" id="y5M-X1-fGZ"/>
                         <outlet property="openingHoursTextView" destination="DAv-ie-vSU" id="4vD-sl-OuP"/>
                         <outlet property="phoneNumberLabel" destination="qvK-JG-kdX" id="KLe-bT-4oM"/>
@@ -236,6 +258,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TESDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mapViewCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="openingHoursCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="openingHoursTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="phoneNumberLabel" candidateClass="UILabel"/>
@@ -246,6 +270,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TESLegevaktCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="openingHoursLabel" candidateClass="UILabel"/>
             </relationships>

@@ -15,6 +15,7 @@
 @property (strong, readonly) NSMutableArray* applicableMunicipalities;
 
 - (NSString *)displayName;
+- (CLLocation *) location;
 - (NSString *)formattedPhoneNumber;
 - (NSString *)formattedWebPage;
 - (NSString *)formattedAddress;

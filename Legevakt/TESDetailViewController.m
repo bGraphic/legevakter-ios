@@ -7,6 +7,8 @@
 //
 
 #import "TESDetailViewController.h"
+#import <QuartzCore/CoreAnimation.h>
+#import "TESMapAnnotation.h"
 
 @interface TESDetailViewController ()
 
@@ -34,6 +36,10 @@
         self.webPageLabel.text = self.healthService.formattedWebPage;
         self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
         self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
+        
+        [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
+        [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
 }
 
@@ -41,6 +47,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.mapView.layer.masksToBounds = YES;
+    self.mapView.layer.cornerRadius = 7.f;
+    
     [self configureView];
 }
 
@@ -56,6 +66,9 @@
     [self setPhoneNumberLabel:nil];
     [self setAddressLabel:nil];
     [self setWebPageLabel:nil];
+    [self setMapView:nil];
+    [self setMapViewCell:nil];
+    [self setMapViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -77,7 +90,7 @@
             return 2;
     }
     
-    return 0;
+    return [super tableView:tableView numberOfRowsInSection:section];
         
 }
 

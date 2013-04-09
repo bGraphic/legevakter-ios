@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "HealthService.h"
 
 @interface TESDetailViewController : UITableViewController <UITableViewDelegate>
@@ -21,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *openingHoursTextView;
 @property (weak, nonatomic) IBOutlet UITextView *openingHoursCommentTextView;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *mapViewCell;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end

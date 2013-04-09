@@ -56,6 +56,18 @@
     return [self objectForKey:HealthServiceDisplayName];
 }
 
+- (CLLocation *) location
+{
+    PFGeoPoint *geoPoint = [self geoPoint];
+    
+    if((id)geoPoint != [NSNull null])
+    {
+        return [[CLLocation alloc] initWithLatitude:geoPoint.latitude longitude:geoPoint.longitude];
+    }
+    
+    return nil;
+}
+
 - (NSString *)formattedPhoneNumber
 {
     return [self formattedString:[self phoneNumber]];
