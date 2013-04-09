@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) HealthService *healthService;
 
+@property (weak, nonatomic) IBOutlet UILabel *displayNameLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 

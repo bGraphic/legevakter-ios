@@ -31,7 +31,9 @@
 {
     // Update the user interface for the detail item.
     
-    if (self.healthService) {
+    if (self.healthService)
+    {
+        self.displayNameLabel.text = self.healthService.displayName;
         self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
         self.addressLabel.text = self.healthService.formattedAddress;
         self.webPageLabel.text = self.healthService.formattedWebPage;
@@ -77,6 +79,7 @@
     [self setMapView:nil];
     [self setMapViewCell:nil];
     [self setMapViewCell:nil];
+    [self setDisplayNameLabel:nil];
     [super viewDidUnload];
 }
 
