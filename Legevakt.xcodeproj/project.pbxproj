@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */; };
 		1314CAA01714746900020043 /* TESMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9F1714746900020043 /* TESMapAnnotation.m */; };
+		1314CAA517147BB000020043 /* ER_call.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA117147BB000020043 /* ER_call.png */; };
+		1314CAA617147BB000020043 /* ER_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA217147BB000020043 /* ER_map.png */; };
+		1314CAA717147BB000020043 /* ER_map2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA317147BB000020043 /* ER_map2.png */; };
+		1314CAA817147BB000020043 /* ER_web.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA417147BB000020043 /* ER_web.png */; };
+		1314CAAB171482B600020043 /* ER_closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA9171482B600020043 /* ER_closed.png */; };
+		1314CAAC171482B600020043 /* ER_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAAA171482B600020043 /* ER_open.png */; };
 		132CE75017140D1500BE191A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CE74F17140D1500BE191A /* MapKit.framework */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
-		1376BF7A17130EC90074ABB1 /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7917130EC90074ABB1 /* web.png */; };
-		1376BF7C17130EE60074ABB1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7B17130EE60074ABB1 /* phone.png */; };
-		1376BF80171310480074ABB1 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7F171310480074ABB1 /* address.png */; };
 		1376BF831713FB200074ABB1 /* TESLegevaktCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESLegevaktCell.m */; };
 		13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B896A1171425FB0058B1A0 /* TESMapViewController.m */; };
 		13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D7D17144BF3004B42A4 /* Localizable.strings */; };
@@ -23,8 +26,6 @@
 		13FA7D8917144F5C004B42A4 /* PoisonInfo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */; };
 		13FA7D8B17144F62004B42A4 /* ERList_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8A17144F62004B42A4 /* ERList_114.png */; };
 		13FA7D8D17144FB7004B42A4 /* ERList_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8C17144FB7004B42A4 /* ERList_57.png */; };
-		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
-		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
 		17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082417024A80007C2B48 /* UIKit.framework */; };
 		17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082617024A80007C2B48 /* Foundation.framework */; };
@@ -46,12 +47,15 @@
 		1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESLegevaktActionManager.m; sourceTree = "<group>"; };
 		1314CA9E1714746900020043 /* TESMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapAnnotation.h; sourceTree = "<group>"; };
 		1314CA9F1714746900020043 /* TESMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapAnnotation.m; sourceTree = "<group>"; };
+		1314CAA117147BB000020043 /* ER_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_call.png; sourceTree = "<group>"; };
+		1314CAA217147BB000020043 /* ER_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_map.png; sourceTree = "<group>"; };
+		1314CAA317147BB000020043 /* ER_map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_map2.png; sourceTree = "<group>"; };
+		1314CAA417147BB000020043 /* ER_web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_web.png; sourceTree = "<group>"; };
+		1314CAA9171482B600020043 /* ER_closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_closed.png; sourceTree = "<group>"; };
+		1314CAAA171482B600020043 /* ER_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_open.png; sourceTree = "<group>"; };
 		132CE74F17140D1500BE191A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
 		1376BF761712F74A0074ABB1 /* TESDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESDetailViewController.m; sourceTree = "<group>"; };
-		1376BF7917130EC90074ABB1 /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
-		1376BF7B17130EE60074ABB1 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
-		1376BF7F171310480074ABB1 /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
 		1376BF811713FB1F0074ABB1 /* TESLegevaktCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESLegevaktCell.h; sourceTree = "<group>"; };
 		1376BF821713FB200074ABB1 /* TESLegevaktCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESLegevaktCell.m; sourceTree = "<group>"; };
 		13B896A0171425FB0058B1A0 /* TESMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapViewController.h; sourceTree = "<group>"; };
@@ -64,8 +68,6 @@
 		13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoisonInfo_114.png; sourceTree = "<group>"; };
 		13FA7D8A17144F62004B42A4 /* ERList_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_114.png; sourceTree = "<group>"; };
 		13FA7D8C17144FB7004B42A4 /* ERList_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_57.png; sourceTree = "<group>"; };
-		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
-		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
 		17973A721711D5E200FBDF48 /* Municipality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Municipality.m; sourceTree = "<group>"; };
 		17EA082117024A80007C2B48 /* Legevakt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Legevakt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,9 +129,12 @@
 		1376BF7817130EA10074ABB1 /* gfx */ = {
 			isa = PBXGroup;
 			children = (
-				1376BF7F171310480074ABB1 /* address.png */,
-				1376BF7B17130EE60074ABB1 /* phone.png */,
-				1376BF7917130EC90074ABB1 /* web.png */,
+				1314CAA9171482B600020043 /* ER_closed.png */,
+				1314CAAA171482B600020043 /* ER_open.png */,
+				1314CAA117147BB000020043 /* ER_call.png */,
+				1314CAA217147BB000020043 /* ER_map.png */,
+				1314CAA317147BB000020043 /* ER_map2.png */,
+				1314CAA417147BB000020043 /* ER_web.png */,
 			);
 			name = gfx;
 			sourceTree = "<group>";
@@ -200,8 +205,6 @@
 		17EA082B17024A80007C2B48 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				17973A6F1710C5E400FBDF48 /* closed.png */,
-				17973A6C1710B5E900FBDF48 /* open.png */,
 				17EA082C17024A80007C2B48 /* Legevakt-Info.plist */,
 				17EA082D17024A80007C2B48 /* InfoPlist.strings */,
 				17EA083017024A80007C2B48 /* main.m */,
@@ -267,11 +270,6 @@
 			files = (
 				17EA082F17024A80007C2B48 /* InfoPlist.strings in Resources */,
 				17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */,
-				17973A6E1710B5E900FBDF48 /* open.png in Resources */,
-				17973A701710C5E400FBDF48 /* closed.png in Resources */,
-				1376BF7A17130EC90074ABB1 /* web.png in Resources */,
-				1376BF7C17130EE60074ABB1 /* phone.png in Resources */,
-				1376BF80171310480074ABB1 /* address.png in Resources */,
 				13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */,
 				13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */,
 				13FA7D8517144F56004B42A4 /* Default.png in Resources */,
@@ -279,6 +277,12 @@
 				13FA7D8917144F5C004B42A4 /* PoisonInfo_114.png in Resources */,
 				13FA7D8B17144F62004B42A4 /* ERList_114.png in Resources */,
 				13FA7D8D17144FB7004B42A4 /* ERList_57.png in Resources */,
+				1314CAA517147BB000020043 /* ER_call.png in Resources */,
+				1314CAA617147BB000020043 /* ER_map.png in Resources */,
+				1314CAA717147BB000020043 /* ER_map2.png in Resources */,
+				1314CAA817147BB000020043 /* ER_web.png in Resources */,
+				1314CAAB171482B600020043 /* ER_closed.png in Resources */,
+				1314CAAC171482B600020043 /* ER_open.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

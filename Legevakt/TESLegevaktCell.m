@@ -57,10 +57,12 @@
         else
             self.distanceLabel.text = @"";
         
-        self.nameLabel.alpha = self.healthService.isOpen?1.0f:0.4f;
-        self.openingHoursLabel.alpha = self.healthService.isOpen?1.0f:0.4f;
-        self.distanceLabel.alpha = self.healthService.isOpen?1.0f:0.4f;
-        self.iconImageView.alpha = self.healthService.isOpen?0.8f:0.4f;
+        self.nameLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
+        self.openingHoursLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
+        self.distanceLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
+        self.iconImageView.alpha = self.healthService.isOpen?1.0f:0.6f;
+        
+        self.iconImageView.image = self.healthService.isOpen?[UIImage imageNamed:@"ER_open"]:[UIImage imageNamed:@"ER_closed"];
     }
 }
 
