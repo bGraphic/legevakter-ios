@@ -14,6 +14,7 @@
 		1376BF7C17130EE60074ABB1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7B17130EE60074ABB1 /* phone.png */; };
 		1376BF80171310480074ABB1 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 1376BF7F171310480074ABB1 /* address.png */; };
 		1376BF831713FB200074ABB1 /* TESLegevaktCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESLegevaktCell.m */; };
+		13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B896A1171425FB0058B1A0 /* TESMapViewController.m */; };
 		17973A6E1710B5E900FBDF48 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6C1710B5E900FBDF48 /* open.png */; };
 		17973A701710C5E400FBDF48 /* closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17973A6F1710C5E400FBDF48 /* closed.png */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
@@ -46,6 +47,8 @@
 		1376BF7F171310480074ABB1 /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
 		1376BF811713FB1F0074ABB1 /* TESLegevaktCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESLegevaktCell.h; sourceTree = "<group>"; };
 		1376BF821713FB200074ABB1 /* TESLegevaktCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESLegevaktCell.m; sourceTree = "<group>"; };
+		13B896A0171425FB0058B1A0 /* TESMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapViewController.h; sourceTree = "<group>"; };
+		13B896A1171425FB0058B1A0 /* TESMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapViewController.m; sourceTree = "<group>"; };
 		17973A6C1710B5E900FBDF48 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		17973A6F1710C5E400FBDF48 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 				1376BF761712F74A0074ABB1 /* TESDetailViewController.m */,
 				1376BF811713FB1F0074ABB1 /* TESLegevaktCell.h */,
 				1376BF821713FB200074ABB1 /* TESLegevaktCell.m */,
+				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
+				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */,
 				1376BF831713FB200074ABB1 /* TESLegevaktCell.m in Sources */,
 				132CE7531714158D00BE191A /* TESMapAnnotation.m in Sources */,
+				13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

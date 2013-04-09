@@ -9,6 +9,7 @@
 #import "TESDetailViewController.h"
 #import <QuartzCore/CoreAnimation.h>
 #import "TESMapAnnotation.h"
+#import "TESMapViewController.h"
 
 @interface TESDetailViewController ()
 
@@ -70,6 +71,16 @@
     [self setMapViewCell:nil];
     [self setMapViewCell:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - Segue
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showMap"])
+    {
+        [[segue destinationViewController] setHealthService:self.healthService];
+    }
 }
 
 #pragma mark - Table View
