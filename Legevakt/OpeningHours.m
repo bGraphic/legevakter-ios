@@ -25,14 +25,16 @@
 
 - (void)parseOpeningHoursFromString:(NSString *)string
 {
-    NSArray *components = [string componentsSeparatedByString:@","];
+    if (string != (id)[NSNull null]) {
+        NSArray *components = [string componentsSeparatedByString:@","];
     
-    for (id component in components) {
-        OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:component];
-        if (!intervals)
-            intervals = [NSMutableArray arrayWithObject:interval];
-        else
-            [intervals addObject:interval];
+        for (id component in components) {
+            OpeningInterval *interval = [[OpeningInterval alloc] initWithInterval:component];
+            if (!intervals)
+                intervals = [NSMutableArray arrayWithObject:interval];
+            else
+                [intervals addObject:interval];
+        }
     }
 }
 
