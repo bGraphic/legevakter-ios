@@ -125,7 +125,6 @@
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
-				132CE74F17140D1500BE191A /* MapKit.framework */,
 				17EA082A17024A80007C2B48 /* Legevakt */,
 				17EA082317024A80007C2B48 /* Frameworks */,
 				17EA082217024A80007C2B48 /* Products */,
@@ -144,6 +143,7 @@
 		17EA082317024A80007C2B48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				132CE74F17140D1500BE191A /* MapKit.framework */,
 				17EA082417024A80007C2B48 /* UIKit.framework */,
 				17EA082617024A80007C2B48 /* Foundation.framework */,
 				17EA082817024A80007C2B48 /* CoreGraphics.framework */,

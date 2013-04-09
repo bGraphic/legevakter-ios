@@ -10,6 +10,7 @@
 #import <QuartzCore/CoreAnimation.h>
 #import "TESMapAnnotation.h"
 #import "TESMapViewController.h"
+#import <bGraphicCommon/BGCommonGraphics.h>
 
 @interface TESDetailViewController ()
 
@@ -60,6 +61,9 @@
     
     self.mapView.layer.masksToBounds = YES;
     self.mapView.layer.cornerRadius = 7.f;
+    
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundView = [BGCommonGraphics backgroundView];
     
     [self configureView];
 }
