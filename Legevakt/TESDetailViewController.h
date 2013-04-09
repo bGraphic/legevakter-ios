@@ -27,4 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *mapViewCell;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+- (IBAction)placeCallAction:(UIButton *)sender;
+- (IBAction)openWebPage:(UIButton *)sender;
+
 @end

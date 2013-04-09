@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */; };
 		132CE75017140D1500BE191A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CE74F17140D1500BE191A /* MapKit.framework */; };
 		132CE7531714158D00BE191A /* TESMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 132CE7521714158D00BE191A /* TESMapAnnotation.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
@@ -41,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1314CA9B17146F0400020043 /* TESLegevaktActionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESLegevaktActionManager.h; sourceTree = "<group>"; };
+		1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESLegevaktActionManager.m; sourceTree = "<group>"; };
 		132CE74F17140D1500BE191A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		132CE7511714158D00BE191A /* TESMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TESMapAnnotation.h; path = ../TESMapAnnotation.h; sourceTree = "<group>"; };
 		132CE7521714158D00BE191A /* TESMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TESMapAnnotation.m; path = ../TESMapAnnotation.m; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				1376BF821713FB200074ABB1 /* TESLegevaktCell.m */,
 				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
+				1314CA9B17146F0400020043 /* TESLegevaktActionManager.h */,
+				1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				1376BF831713FB200074ABB1 /* TESLegevaktCell.m in Sources */,
 				132CE7531714158D00BE191A /* TESMapAnnotation.m in Sources */,
 				13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */,
+				1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import "TESMapAnnotation.h"
 #import "TESMapViewController.h"
 #import "BGCommonGraphics.h"
+#import "TESLegevaktActionManager.h"
 
 @interface TESDetailViewController ()
 
@@ -147,4 +148,13 @@
 }
 
 
+- (IBAction)placeCallAction:(UIButton *)sender
+{
+    [TESLegevaktActionManager placeCallTo:self.healthService.formattedPhoneNumber];
+}
+
+- (IBAction)openWebPage:(UIButton *)sender
+{
+    [TESLegevaktActionManager openWebPage:self.healthService.formattedWebPage];
+}
 @end
