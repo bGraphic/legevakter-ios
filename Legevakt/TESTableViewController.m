@@ -52,6 +52,8 @@
 
 - (void)startUpdatingLocation
 {
+    NSLog(@"starting location");
+    
     [self.locationManager startUpdatingLocation];
 }
 
@@ -59,6 +61,8 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    NSLog(@"found location");
+    
     self.myLocation = [locations lastObject];
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
     [manager stopUpdatingLocation];
