@@ -16,10 +16,6 @@
 
 @property (nonatomic, strong) BGInfoNavigationControllerDelegate *navDelegate;
 
-@property (strong,nonatomic) NSArray *healthServices;
-@property (retain) CLLocation *myLocation;
-@property (strong,nonatomic) CLLocationManager *locationManager;
-
 @end
 
 @implementation TESTableViewController
@@ -29,8 +25,6 @@
     [super viewDidLoad];
     
     [self configureInfoButton];
-    
-    [self startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,37 +33,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (CLLocationManager *)locationManager
+- (void) setHealthServices:(NSArray *)healthServices
 {
-    if (!_locationManager) {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-        _locationManager.distanceFilter = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    if(![_healthServices isEqualToArray:healthServices]) {
+        _healthServices = healthServices;
+        
+        [self.tableView reloadData];
+        
+        NSLog(@"health service");
     }
-    return _locationManager;
-}
-
-- (void)startUpdatingLocation
-{
-    [self.locationManager startUpdatingLocation];
-}
-
-# pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    self.myLocation = [locations lastObject];
-    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
-    [manager stopUpdatingLocation];
-}
-
-#pragma mark HealthServiceManagerDelegate
-
-- (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
-{
-    self.healthServices = healthServices;
-    [self.tableView reloadData];
 }
 
 #pragma mark - Table View

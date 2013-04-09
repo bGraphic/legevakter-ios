@@ -10,6 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "HealthServiceManager.h"
 
-@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, HealthServiceManagerDelegate>
+@interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSArray *healthServices;
+@property (strong, nonatomic) CLLocation *myLocation;
 
 @end

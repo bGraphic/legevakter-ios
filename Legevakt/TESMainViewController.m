@@ -15,6 +15,9 @@
 @property (nonatomic, strong) TESTableViewController *tableViewController;
 @property (nonatomic, strong) TESMapViewController *mapViewController;
 
+@property (retain) CLLocation *myLocation;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
 @end
 
 @implementation TESMainViewController
@@ -22,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -33,7 +38,6 @@
 - (IBAction)mainViewChanged:(id)sender
 {
     self.tableView.hidden = !self.tableView.hidden;
-
 }
 
 - (void)viewDidUnload {
@@ -41,6 +45,45 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
+
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    }
+    return _locationManager;
+}
+
+- (void)startUpdatingLocation
+{
+    NSLog(@"start");
+    
+    [self.locationManager startUpdatingLocation];
+}
+
+# pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"did update");
+    
+    self.myLocation = [locations lastObject];
+    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
+    [manager stopUpdatingLocation];
+}
+
+#pragma mark HealthServiceManagerDelegate
+
+- (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
+{
+    NSLog(@"found");
+    self.tableViewController.myLocation = self.myLocation;
+    self.tableViewController.healthServices = healthServices;
+}
+
 
 #pragma mark - Segue
 
@@ -51,11 +94,13 @@
     if([segueName isEqualToString:@"embedTableViewController"])
     {
         self.tableViewController = (TESTableViewController *) segue.destinationViewController;
+        
+        NSLog(@"Table");
     }
     
     if([segueName isEqualToString:@"embedMapViewController"])
     {
-        self.tableViewController = (TESMapViewController *) segue.destinationViewController;
+        self.mapViewController = (TESMapViewController *) segue.destinationViewController;
     }
 }
 
