@@ -59,8 +59,6 @@
 
 - (void)startUpdatingLocation
 {
-    NSLog(@"start");
-    
     [self.locationManager startUpdatingLocation];
 }
 
@@ -68,9 +66,10 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"did update");
-    
     self.myLocation = [locations lastObject];
+    self.tableViewController.myLocation = self.myLocation;
+    self.mapViewController.myLocation = self.myLocation;
+    
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
     [manager stopUpdatingLocation];
 }
@@ -79,9 +78,8 @@
 
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
 {
-    NSLog(@"found");
-    self.tableViewController.myLocation = self.myLocation;
     self.tableViewController.healthServices = healthServices;
+    self.mapViewController.healthServices = healthServices;
 }
 
 
@@ -94,8 +92,6 @@
     if([segueName isEqualToString:@"embedTableViewController"])
     {
         self.tableViewController = (TESTableViewController *) segue.destinationViewController;
-        
-        NSLog(@"Table");
     }
     
     if([segueName isEqualToString:@"embedMapViewController"])
