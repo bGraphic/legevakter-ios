@@ -41,8 +41,7 @@
         NSString *raw = [self objectForKey:HealthServiceApplicableMunicipalities];
         NSArray *tokenized = [raw componentsSeparatedByString:@" "];
         
-        for (id obj in tokenized)
-            [Municipality findMunicipalityWithCode:(NSString *)obj withDelegate:self];
+        [Municipality findMunicipalitiesWithCodes:tokenized withDelegate:self];
     }
 }
 
@@ -130,6 +129,13 @@
         self.applicableMunicipalities = [[NSMutableArray alloc] init];
     
     [self.applicableMunicipalities addObject:municipality];
+}
+
+- (void)foundMunicipalities:(NSArray *)municipalities
+{
+    if(!self.applicableMunicipalities)
+        self.applicableMunicipalities = [[NSMutableArray alloc] init];
+    self.applicableMunicipalities = [municipalities mutableCopy];
 }
 
 #pragma mark private
