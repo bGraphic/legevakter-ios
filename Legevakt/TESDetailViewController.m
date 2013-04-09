@@ -12,22 +12,13 @@
 #import "TESMapViewController.h"
 #import "BGCommonGraphics.h"
 #import "TESLegevaktActionManager.h"
+#import "TESMapAnnotationView.h"
 
 @interface TESDetailViewController ()
 
 @end
 
 @implementation TESDetailViewController
-
-- (void)setHealthService:(id)newHealthService
-{
-    if (_healthService != newHealthService) {
-        _healthService = newHealthService;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
 
 - (void)configureView
 {
@@ -66,6 +57,8 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [BGCommonGraphics backgroundView];
     
+//    self.mapView.delegate = self;
+    
     [self configureView];
 }
 
@@ -87,6 +80,17 @@
     [self setDisplayNameLabel:nil];
     [super viewDidUnload];
 }
+
+- (void)setHealthService:(id)newHealthService
+{
+    if (_healthService != newHealthService) {
+        _healthService = newHealthService;
+        
+        // Update the view.
+        [self configureView];
+    }
+}
+
 
 #pragma mark - Segue
 
@@ -157,4 +161,27 @@
 {
     [TESLegevaktActionManager openWebPage:self.healthService.formattedWebPage];
 }
+
+#pragma mark - MapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    TESMapAnnotationView *mapPin = nil;
+    if(annotation != map.userLocation)
+    {
+        static NSString *defaultPinID = @"defaultPin";
+        mapPin = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        
+        if (mapPin == nil )
+        {
+            mapPin = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
+                                                      reuseIdentifier:defaultPinID];
+        }
+        else
+            mapPin.annotation = annotation;
+        
+    }
+    return mapPin;
+}
+
 @end

@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "HealthService.h"
 
-@interface TESDetailViewController : UITableViewController <UITableViewDelegate>
+@interface TESDetailViewController : UITableViewController <UITableViewDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) HealthService *healthService;
 
