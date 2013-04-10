@@ -20,10 +20,12 @@
 
 - (void)searchWithString:(NSString *)searchString delegate:(id<HealthServiceManagerDelegate>)delegate
 {
-    self.unifiedSearchResults = nil;
-    self.unifiedSearchResultsDelegate = delegate;
-    [Municipality findMunicipalitiesWithSearchString:searchString delegate:self];
-    [self findHealthServicesWithDisplayNameMatching:searchString];
+    if (searchString.length > 0) {
+        self.unifiedSearchResults = nil;
+        self.unifiedSearchResultsDelegate = delegate;
+        [Municipality findMunicipalitiesWithSearchString:searchString delegate:self];
+        [self findHealthServicesWithDisplayNameMatching:searchString];
+    }
     
 
 }
