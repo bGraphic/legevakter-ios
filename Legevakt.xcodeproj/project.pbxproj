@@ -122,6 +122,8 @@
 				17EA087217038495007C2B48 /* OpeningInterval.m */,
 				17EA086817030527007C2B48 /* HealthService.h */,
 				17EA086917030527007C2B48 /* HealthService.m */,
+				17EA086B17032580007C2B48 /* HealthServiceManager.h */,
+				17EA086C17032580007C2B48 /* HealthServiceManager.m */,
 			);
 			name = "data model";
 			sourceTree = "<group>";
@@ -187,8 +189,6 @@
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
 				17EA08621702523B007C2B48 /* TESTableViewController.h */,
 				17EA08631702523B007C2B48 /* TESTableViewController.m */,
-				17EA086B17032580007C2B48 /* HealthServiceManager.h */,
-				17EA086C17032580007C2B48 /* HealthServiceManager.m */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 				1376BF751712F74A0074ABB1 /* TESDetailViewController.h */,
 				1376BF761712F74A0074ABB1 /* TESDetailViewController.m */,
