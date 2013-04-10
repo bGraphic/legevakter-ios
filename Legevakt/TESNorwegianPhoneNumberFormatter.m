@@ -31,7 +31,7 @@
     NSString *newFormat = @"$1 $2 $3 $4";
     
     if ([self hasNationalPrefix:unformattedPhoneNumber]) {
-        unformattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:@"+47" withString:@""];
+        unformattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:NATIONAL_PREFIX withString:@""];
     }
     
     if ([self isSpecialFiveDigitNumber:unformattedPhoneNumber]) {
