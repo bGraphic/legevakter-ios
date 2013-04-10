@@ -8,7 +8,19 @@
 
 #import "TESNorwegianPhoneNumberFormatter.h"
 
+#define NATIONAL_PREFIX @"+47"
+
 @implementation TESNorwegianPhoneNumberFormatter
+
+@synthesize useNationalPrefix = _useNationalPrefix;
+
+- (BOOL)useNationalPrefix
+{
+    if (!_useNationalPrefix)
+        _useNationalPrefix = NO;
+    
+    return _useNationalPrefix;
+}
 
 - (NSString *)stringForObjectValue:(NSString *)unformattedPhoneNumber
 {
@@ -18,10 +30,7 @@
     NSString *originalFormat = @"(\\d{2})(\\d{2})(\\d{2})(\\d{2})";
     NSString *newFormat = @"$1 $2 $3 $4";
     
-    NSString *nationalPrefix = @"";
-    
     if ([self hasNationalPrefix:unformattedPhoneNumber]) {
-        nationalPrefix = @"+47 ";
         unformattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:@"+47" withString:@""];
     }
     
@@ -41,7 +50,8 @@
 
     NSString *formattedPhoneNumber = [self replace:unformattedPhoneNumber usingOriginalFormat:originalFormat andNewFormat:newFormat];
     
-    formattedPhoneNumber = [NSString stringWithFormat:@"%@%@", nationalPrefix, formattedPhoneNumber];
+    if (self.useNationalPrefix)
+        formattedPhoneNumber = [NSString stringWithFormat:@"%@ %@", NATIONAL_PREFIX, formattedPhoneNumber];
     
     return formattedPhoneNumber;
 }

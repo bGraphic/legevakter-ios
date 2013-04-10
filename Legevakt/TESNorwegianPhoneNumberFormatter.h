@@ -10,6 +10,8 @@
 
 @interface TESNorwegianPhoneNumberFormatter : NSFormatter
 
+@property (nonatomic) BOOL useNationalPrefix;
+
 - (NSString *)stringForObjectValue:(NSString *)unformattedPhoneNumber;
 - (BOOL)getObjectValue:(out __autoreleasing id *)obj forString:(NSString *)string errorDescription:(out NSString *__autoreleasing *)error;
 
