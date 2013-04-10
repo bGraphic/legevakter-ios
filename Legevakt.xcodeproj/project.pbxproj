@@ -26,6 +26,7 @@
 		13FA7D8917144F5C004B42A4 /* PoisonInfo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */; };
 		13FA7D8B17144F62004B42A4 /* ERList_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8A17144F62004B42A4 /* ERList_114.png */; };
 		13FA7D8D17144FB7004B42A4 /* ERList_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8C17144FB7004B42A4 /* ERList_57.png */; };
+		173CA45B171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 173CA45A171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.m */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
 		17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082417024A80007C2B48 /* UIKit.framework */; };
 		17EA082717024A80007C2B48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082617024A80007C2B48 /* Foundation.framework */; };
@@ -68,6 +69,8 @@
 		13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoisonInfo_114.png; sourceTree = "<group>"; };
 		13FA7D8A17144F62004B42A4 /* ERList_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_114.png; sourceTree = "<group>"; };
 		13FA7D8C17144FB7004B42A4 /* ERList_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_57.png; sourceTree = "<group>"; };
+		173CA459171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESNorwegianPhoneNumberFormatter.h; sourceTree = "<group>"; };
+		173CA45A171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESNorwegianPhoneNumberFormatter.m; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
 		17973A721711D5E200FBDF48 /* Municipality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Municipality.m; sourceTree = "<group>"; };
 		17EA082117024A80007C2B48 /* Legevakt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Legevakt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +144,15 @@
 			name = gfx;
 			sourceTree = "<group>";
 		};
+		173CA45C17152A770071A7C2 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				173CA459171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.h */,
+				173CA45A171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.m */,
+			);
+			name = utilities;
+			sourceTree = "<group>";
+		};
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
@@ -180,24 +192,25 @@
 		17EA082A17024A80007C2B48 /* Legevakt */ = {
 			isa = PBXGroup;
 			children = (
-				1314CA9E1714746900020043 /* TESMapAnnotation.h */,
-				1314CA9F1714746900020043 /* TESMapAnnotation.m */,
-				1376BF7817130EA10074ABB1 /* gfx */,
-				1376BF741712EFFD0074ABB1 /* data model */,
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
 				17EA083417024A80007C2B48 /* TESAppDelegate.m */,
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
 				17EA08621702523B007C2B48 /* TESTableViewController.h */,
 				17EA08631702523B007C2B48 /* TESTableViewController.m */,
-				17EA082B17024A80007C2B48 /* Supporting Files */,
 				1376BF751712F74A0074ABB1 /* TESDetailViewController.h */,
 				1376BF761712F74A0074ABB1 /* TESDetailViewController.m */,
 				1376BF811713FB1F0074ABB1 /* TESLegevaktCell.h */,
 				1376BF821713FB200074ABB1 /* TESLegevaktCell.m */,
 				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
+				1314CA9E1714746900020043 /* TESMapAnnotation.h */,
+				1314CA9F1714746900020043 /* TESMapAnnotation.m */,
 				1314CA9B17146F0400020043 /* TESLegevaktActionManager.h */,
 				1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */,
+				1376BF741712EFFD0074ABB1 /* data model */,
+				173CA45C17152A770071A7C2 /* utilities */,
+				1376BF7817130EA10074ABB1 /* gfx */,
+				17EA082B17024A80007C2B48 /* Supporting Files */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -323,6 +336,7 @@
 				13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */,
 				1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */,
 				1314CAA01714746900020043 /* TESMapAnnotation.m in Sources */,
+				173CA45B171526140071A7C2 /* TESNorwegianPhoneNumberFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

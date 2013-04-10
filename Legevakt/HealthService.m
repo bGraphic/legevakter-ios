@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "OpeningHours.h"
 #import "Municipality.h"
+#import "TESNorwegianPhoneNumberFormatter.h"
 
 //  Define Parse global Parse keys here
 #define HealthServiceDisplayName                @"HealthServiceDisplayName"
@@ -69,7 +70,11 @@
 
 - (NSString *)formattedPhoneNumber
 {
-    return [self formattedString:[self phoneNumber]];
+    NSString *phoneNumber = [self formattedString:[self phoneNumber]];
+
+    TESNorwegianPhoneNumberFormatter *formatter = [[TESNorwegianPhoneNumberFormatter alloc] init];
+    
+    return [formatter stringForObjectValue:phoneNumber];
 }
 
 - (NSString *)formattedWebPage
