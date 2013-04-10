@@ -8,17 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Municipality.h"
 
 @class Parse;
 
 @protocol HealthServiceManagerDelegate
 
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices;
+- (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices;
 
 @end
 
-@interface HealthServiceManager : NSObject
+@interface HealthServiceManager : NSObject <MunicipalityDelegate, HealthServiceManagerDelegate>
 
+- (void)searchWithString:(NSString *)searchString delegate:(id)delegate;
 + (void)findHealthServicesNearLocation:(CLLocation *)location withDelegate:(id)delegate;
+
+
 
 @end

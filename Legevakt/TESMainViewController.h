@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HealthServiceManager.h"
 
-@interface TESMainViewController : UIViewController <CLLocationManagerDelegate, HealthServiceManagerDelegate>
+@interface TESMainViewController : UIViewController <CLLocationManagerDelegate, HealthServiceManagerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;

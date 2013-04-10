@@ -26,6 +26,7 @@
 + (NSString *)parseClassName;
 + (void)findMunicipalityWithCode:(NSString *)code withDelegate:(id<MunicipalityDelegate>)delegate;
 + (void)findMunicipalitiesWithCodes:(NSArray *)code withDelegate:(id<MunicipalityDelegate>)delegate;
++ (void)findMunicipalitiesWithSearchString:(NSString *)searchString delegate:(id<MunicipalityDelegate>)delegate;
 + (NSString *)formattedMunicipalities:(NSArray *)municipalities;
 
 @end

@@ -27,7 +27,7 @@
 
 + (void)findMunicipalityWithCode:(NSString *)code withDelegate:(id<MunicipalityDelegate>)delegate
 {
-    PFQuery *query = [Municipality query];
+    PFQuery *query = [[PFQuery alloc] initWithClassName:@"Municipality"];
     [query whereKey:@"Kommunenummer" equalTo:[self compliantCodeFromCode:code]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error && [objects count] > 0) {
@@ -41,7 +41,7 @@
 
 + (void)findMunicipalitiesWithCodes:(NSArray *)codes withDelegate:(id<MunicipalityDelegate>)delegate
 {
-    PFQuery *query = [Municipality query];
+    PFQuery *query = [[PFQuery alloc] initWithClassName:@"Municipality"];
     [query whereKey:@"Kommunenummer" containedIn:[self compliantCodesFromCodes:codes]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error && [objects count] > 0) {
@@ -66,6 +66,18 @@
     }
     
     return compliantCodes;
+}
+
++ (void)findMunicipalitiesWithSearchString:(NSString *)searchString delegate:(id<MunicipalityDelegate>)delegate
+{
+    PFQuery *query = [[PFQuery alloc] initWithClassName:@"Municipality"];
+    [query whereKey:@"Norsk" containsString:searchString];
+    [query setLimit:5];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [delegate foundMunicipalities:objects];
+        }
+    }];
 }
 
 + (NSString *)formattedMunicipalities:(NSArray *)municipalities

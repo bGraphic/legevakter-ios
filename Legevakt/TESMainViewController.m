@@ -82,6 +82,20 @@
     self.mapViewController.healthServices = healthServices;
 }
 
+- (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
+{
+    self.tableViewController.healthServices = healthServices;
+    [self.tableViewController.tableView reloadData];
+}
+
+#pragma mark UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    HealthServiceManager *manager = [[HealthServiceManager alloc] init];
+    [manager searchWithString:searchText delegate:self];
+}
+
 
 #pragma mark - Segue
 
