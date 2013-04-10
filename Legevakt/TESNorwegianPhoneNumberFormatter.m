@@ -14,15 +14,22 @@
 {
     NSString *formattedPhoneNumber = unformattedPhoneNumber;
     
-    if ([unformattedPhoneNumber length] == 8) {
-
-        formattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:@"(\\d{2})(\\d{2})(\\d{2})(\\d{2})"
-                                                                                       withString:@"$1 $2 $3 $4"
-                                                                                          options:NSRegularExpressionSearch
-                                                                                            range:NSMakeRange(0, [unformattedPhoneNumber length])];
+    NSString *originalFormat = @"(\\d{2})(\\d{2})(\\d{2})(\\d{2})";
+    if ([formattedPhoneNumber length] == 9) {
+        originalFormat = @"(\\d{2})(\\d{2}) (\\d{2})(\\d{2})";
     }
     
+    formattedPhoneNumber = [self replace:formattedPhoneNumber usingOriginalFormat:originalFormat];
+    
     return formattedPhoneNumber;
+}
+
+- (NSString *)replace:(NSString *)string usingOriginalFormat:(NSString *)originalFormat
+{
+    return [string stringByReplacingOccurrencesOfString:originalFormat
+                                             withString:@"$1 $2 $3 $4"
+                                                options:NSRegularExpressionSearch
+                                                  range:NSMakeRange(0, [string length])];
 }
 
 - (BOOL)getObjectValue:(out __autoreleasing id *)obj forString:(NSString *)string errorDescription:(out NSString *__autoreleasing *)error
