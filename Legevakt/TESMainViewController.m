@@ -9,6 +9,7 @@
 #import "TESMainViewController.h"
 #import "TESTableViewController.h"
 #import "TESMapViewController.h"
+#import "BGInfoNavigationControllerDelegate.h"
 
 @interface TESMainViewController ()
 
@@ -17,6 +18,8 @@
 
 @property (retain) CLLocation *myLocation;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) BGInfoNavigationControllerDelegate *navDelegate;
 
 @end
 
@@ -27,6 +30,8 @@
     [super viewDidLoad];
     
     [self startUpdatingLocation];
+    
+    [self configureInfoButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,6 +117,13 @@
     {
         self.mapViewController = (TESMapViewController *) segue.destinationViewController;
     }
+}
+
+#pragma mark - Info Button
+- (void)configureInfoButton
+{
+    self.navDelegate = [[BGInfoNavigationControllerDelegate alloc] init];
+    self.navigationController.delegate = self.navDelegate;
 }
 
 @end

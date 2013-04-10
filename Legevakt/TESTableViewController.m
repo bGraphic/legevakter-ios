@@ -10,21 +10,12 @@
 #import "HealthService.h"
 #import "TESDetailViewController.h"
 #import "TESLegevaktCell.h"
-#import "BGInfoNavigationControllerDelegate.h"
-
-@interface TESTableViewController()
-
-@property (nonatomic, strong) BGInfoNavigationControllerDelegate *navDelegate;
-
-@end
 
 @implementation TESTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self configureInfoButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,13 +73,6 @@
         
         [[segue destinationViewController] setHealthService:healthService];
     }
-}
-
-#pragma mark - Info Button
-- (void)configureInfoButton
-{
-    self.navDelegate = [[BGInfoNavigationControllerDelegate alloc] init];
-    self.navigationController.delegate = self.navDelegate;
 }
 
 @end
