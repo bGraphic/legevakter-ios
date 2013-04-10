@@ -12,22 +12,27 @@
 
 - (NSString *)stringForObjectValue:(NSString *)unformattedPhoneNumber
 {
-    NSString *formattedPhoneNumber = unformattedPhoneNumber;
-    
+    unformattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    // default format
     NSString *originalFormat = @"(\\d{2})(\\d{2})(\\d{2})(\\d{2})";
-    if ([formattedPhoneNumber length] == 9) {
-        originalFormat = @"(\\d{2})(\\d{2}) (\\d{2})(\\d{2})";
-    }
+    NSString *newFormat = @"$1 $2 $3 $4";
     
-    formattedPhoneNumber = [self replace:formattedPhoneNumber usingOriginalFormat:originalFormat];
+    // is cell phone number
+    if ([unformattedPhoneNumber hasPrefix:@"9"]) {
+        originalFormat = @"(\\d{3})(\\d{2})(\\d{3})";
+        newFormat = @"$1 $2 $3";
+    }
+
+    NSString *formattedPhoneNumber = [self replace:unformattedPhoneNumber usingOriginalFormat:originalFormat andNewFormat:newFormat];
     
     return formattedPhoneNumber;
 }
 
-- (NSString *)replace:(NSString *)string usingOriginalFormat:(NSString *)originalFormat
+- (NSString *)replace:(NSString *)string usingOriginalFormat:(NSString *)originalFormat andNewFormat:(NSString *)newFormat
 {
     return [string stringByReplacingOccurrencesOfString:originalFormat
-                                             withString:@"$1 $2 $3 $4"
+                                             withString:newFormat
                                                 options:NSRegularExpressionSearch
                                                   range:NSMakeRange(0, [string length])];
 }
