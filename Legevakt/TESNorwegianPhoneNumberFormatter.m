@@ -18,15 +18,86 @@
     NSString *originalFormat = @"(\\d{2})(\\d{2})(\\d{2})(\\d{2})";
     NSString *newFormat = @"$1 $2 $3 $4";
     
-    // is cell phone number
-    if ([unformattedPhoneNumber hasPrefix:@"9"]) {
+    NSString *nationalPrefix = @"";
+    
+    if ([self hasNationalPrefix:unformattedPhoneNumber]) {
+        nationalPrefix = @"+47 ";
+        unformattedPhoneNumber = [unformattedPhoneNumber stringByReplacingOccurrencesOfString:@"+47" withString:@""];
+    }
+    
+    if ([self isSpecialFiveDigitNumber:unformattedPhoneNumber]) {
+        originalFormat = @"(\\d{5})";
+        newFormat = @"$1";
+    }
+    else if ([self isSpecialEECHarmonizedNumber:unformattedPhoneNumber]) {
+        originalFormat = @"(\\d{3})(\\d{3})";
+        newFormat = @"$1 $2";
+    }
+    else if ([self isCellPhoneNumber:unformattedPhoneNumber]
+        || [self isSpecialTollNumber:unformattedPhoneNumber]) {
         originalFormat = @"(\\d{3})(\\d{2})(\\d{3})";
         newFormat = @"$1 $2 $3";
     }
 
     NSString *formattedPhoneNumber = [self replace:unformattedPhoneNumber usingOriginalFormat:originalFormat andNewFormat:newFormat];
     
+    formattedPhoneNumber = [NSString stringWithFormat:@"%@%@", nationalPrefix, formattedPhoneNumber];
+    
     return formattedPhoneNumber;
+}
+
+- (BOOL)hasNationalPrefix:(NSString *)phoneNumber
+{
+    BOOL hasNationalPrefix = NO;
+    
+    if ([phoneNumber hasPrefix:@"+47"])
+        hasNationalPrefix = YES;
+    
+    return hasNationalPrefix;
+}
+
+- (BOOL)isSpecialFiveDigitNumber:(NSString *)phoneNumber
+{
+    BOOL isSpecialFiveDigitNumber = NO;
+    
+    if ([phoneNumber length] == 5
+        && [phoneNumber hasPrefix:@"0"])
+        isSpecialFiveDigitNumber = YES;
+    
+    return isSpecialFiveDigitNumber;
+}
+
+- (BOOL)isSpecialEECHarmonizedNumber:(NSString *)phoneNumber
+{
+    BOOL isSpecialEEC = NO;
+    
+    if ([phoneNumber length] == 6
+        && [phoneNumber hasPrefix:@"116"])
+        isSpecialEEC = YES;
+    
+    return isSpecialEEC;
+}
+
+- (BOOL)isCellPhoneNumber:(NSString *)phoneNumber
+{
+    BOOL isCellPhoneNumber = NO;
+
+    if ([phoneNumber length] == 8
+        && ([phoneNumber hasPrefix:@"4"] || [phoneNumber hasPrefix:@"9"]))
+        isCellPhoneNumber = YES;
+         
+    return isCellPhoneNumber;
+}
+
+- (BOOL)isSpecialTollNumber:(NSString *)phoneNumber
+{
+    BOOL isSpecialTollNumber = NO;
+    
+    if ([phoneNumber length] == 8
+        && [phoneNumber hasPrefix:@"8"])
+        isSpecialTollNumber = YES;
+    
+    return isSpecialTollNumber;
 }
 
 - (NSString *)replace:(NSString *)string usingOriginalFormat:(NSString *)originalFormat andNewFormat:(NSString *)newFormat
