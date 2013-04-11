@@ -136,6 +136,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1350A0A41716E3CB00FF8364 /* table view */ = {
+			isa = PBXGroup;
+			children = (
+				1350A0911716C81100FF8364 /* TESTableDataSource.h */,
+				1350A0921716C81100FF8364 /* TESTableDataSource.m */,
+				1350A09E1716D52C00FF8364 /* TESTableDelegate.h */,
+				1350A09F1716D52C00FF8364 /* TESTableDelegate.m */,
+				1376BF811713FB1F0074ABB1 /* TESHealthServiceCell.h */,
+				1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */,
+				1350A08F1716AF3400FF8364 /* TESHealthServiceCell.xib */,
+			);
+			name = "table view";
+			sourceTree = "<group>";
+		};
 		1366BA4D1714C87200208968 /* map view */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +198,8 @@
 		1742547317152C9A0075ECBF /* utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1314CA9B17146F0400020043 /* TESHealthServiceActionManager.h */,
+				1314CA9C17146F0400020043 /* TESHealthServiceActionManager.m */,
 				1742547017152C910075ECBF /* TESNorwegianPhoneNumberFormatter.h */,
 				1742547117152C910075ECBF /* TESNorwegianPhoneNumberFormatter.m */,
 			);
@@ -229,6 +245,7 @@
 		17EA082A17024A80007C2B48 /* Legevakt */ = {
 			isa = PBXGroup;
 			children = (
+				1350A0A41716E3CB00FF8364 /* table view */,
 				1376BF741712EFFD0074ABB1 /* data model */,
 				1376BF7817130EA10074ABB1 /* gfx */,
 				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
@@ -238,19 +255,10 @@
 				17EA083417024A80007C2B48 /* TESAppDelegate.m */,
 				1376BF751712F74A0074ABB1 /* TESDetailViewController.h */,
 				1376BF761712F74A0074ABB1 /* TESDetailViewController.m */,
-				1314CA9B17146F0400020043 /* TESHealthServiceActionManager.h */,
-				1314CA9C17146F0400020043 /* TESHealthServiceActionManager.m */,
-				1376BF811713FB1F0074ABB1 /* TESHealthServiceCell.h */,
-				1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */,
-				1350A08F1716AF3400FF8364 /* TESHealthServiceCell.xib */,
 				1314CAB017148C0F00020043 /* TESMainViewController.h */,
 				1314CAB117148C0F00020043 /* TESMainViewController.m */,
 				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
-				1350A0911716C81100FF8364 /* TESTableDataSource.h */,
-				1350A0921716C81100FF8364 /* TESTableDataSource.m */,
-				1350A09E1716D52C00FF8364 /* TESTableDelegate.h */,
-				1350A09F1716D52C00FF8364 /* TESTableDelegate.m */,
 				1350A0A11716DAC800FF8364 /* TESTableViewController.h */,
 				1350A0A21716DAC800FF8364 /* TESTableViewController.m */,
 				1742547317152C9A0075ECBF /* utilities */,
