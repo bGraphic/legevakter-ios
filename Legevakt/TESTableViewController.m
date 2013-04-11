@@ -25,7 +25,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setHealthServiceDataSource:nil];
     [super viewDidUnload];
 }
 @end

@@ -96,7 +96,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"showMap"])
+    if([segue.identifier isEqualToString:@"showMapFromButton"] || [segue.identifier isEqualToString:@"showMapFromMap"])
     {
         self.mapView.alpha = 0.4f;
         
