@@ -12,9 +12,11 @@
 #import "TESMapViewController.h"
 #import "BGCommonGraphics.h"
 #import "TESHealthServiceActionManager.h"
-#import "TESMapAnnotationView.h"
+#import "TESMapDelegate.h"
 
 @interface TESDetailViewController ()
+
+@property (nonatomic, strong) TESMapDelegate *mapDelegate;
 
 @end
 
@@ -32,6 +34,9 @@
         self.webPageLabel.text = self.healthService.formattedWebPage;
         self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
         self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
+        
+        self.mapDelegate = [[TESMapDelegate alloc] init];
+        self.mapView.delegate = self.mapDelegate;
         
         [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
         [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
@@ -160,28 +165,6 @@
 - (IBAction)openWebPage:(UIButton *)sender
 {
     [TESHealthServiceActionManager openWebPage:self.healthService.formattedWebPage];
-}
-
-#pragma mark - MapViewDelegate
-
-- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
-{
-    TESMapAnnotationView *mapPin = nil;
-    if(annotation != map.userLocation)
-    {
-        static NSString *defaultPinID = @"defaultPin";
-        mapPin = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
-        
-        if (mapPin == nil )
-        {
-            mapPin = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
-                                                      reuseIdentifier:defaultPinID];
-        }
-        else
-            mapPin.annotation = annotation;
-        
-    }
-    return mapPin;
 }
 
 @end

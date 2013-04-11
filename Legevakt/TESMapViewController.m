@@ -10,10 +10,13 @@
 #import "TESMapAnnotation.h"
 #import "TESDetailViewController.h"
 #import "TESMapAnnotationView.h"
+#import "TESMapDelegate.h"
 
 @interface TESMapViewController ()
 
 @property (nonatomic, strong) HealthService *selectedHealthService;
+
+@property (nonatomic, strong) TESMapDelegate *mapDelegate;
 
 @end
 
@@ -24,9 +27,32 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.mapView.delegate = self;
+    self.mapDelegate = [[TESMapDelegate alloc] init];
+    self.mapView.delegate = self.mapDelegate;
     
     [self configureView];
+}
+
+- (void) setHealthService:(HealthService *)healthService
+{
+    if(_healthService != healthService)
+    {
+        _healthService = healthService;
+     
+        self.mapDelegate.showCallOut = NO;
+        self.mapDelegate.navigationController = nil;
+    }
+}
+
+- (void)setTableDataSource:(TESTableDataSource *)tableDataSource
+{
+    if(_tableDataSource != tableDataSource)
+    {
+        _tableDataSource = tableDataSource;
+        
+        self.mapDelegate.showCallOut = YES;
+        self.mapDelegate.navigationController = self.navigationController;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +75,19 @@
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
     
-    if(self.tableDataSource)
+    if(self.tableDataSource.healthServicesFiltered)
+    {
+        int i = 0;
+        for(HealthService *healthService in self.tableDataSource.healthServicesFiltered)
+        {
+            [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
+            
+            if(i == 0)
+                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
+            i++;
+        }
+    }
+    else
     {
         int i = 0;
         for(HealthService *healthService in self.tableDataSource.healthServices)
@@ -60,75 +98,8 @@
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
             i++;
         }
+
     }
 }
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"showDetailFromMap"])
-    {
-        [[segue destinationViewController] setHealthService:self.selectedHealthService];
-    }
-}
-
-#pragma mark - MapViewDelegate
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    MKAnnotationView* annotationView = [mapView viewForAnnotation:userLocation];
-    annotationView.canShowCallout = NO;
-}
-
-
-- (void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    HealthService *healthService = [(TESMapAnnotation *) view.annotation healthService];
- 
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    TESDetailViewController *detailView = [sb instantiateViewControllerWithIdentifier:@"detailView"];
-    detailView.healthService = healthService;
-    
-    [self.navigationController pushViewController:detailView animated:YES];
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
-{
-    TESMapAnnotationView *mapAnnotationView;
-    TESMapAnnotation *mapAnnotation;
-    
-    
-    if(annotation != map.userLocation)
-    {
-        static NSString *defaultPinID = @"defaultPin";
-        mapAnnotationView = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
-        mapAnnotation = (TESMapAnnotation *) annotation;
-        
-        if (mapAnnotationView == nil )
-        {
-            mapAnnotationView = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
-                                                     reuseIdentifier:defaultPinID];
-            
-            if(self.tableDataSource)
-            {
-                mapAnnotationView.canShowCallout = YES;
-                UIButton *disclosureButton = [UIButton buttonWithType: UIButtonTypeDetailDisclosure]; 
-                mapAnnotationView.rightCalloutAccessoryView = disclosureButton;
-                
-                if(self.tableDataSource.healthServicesFiltered && ![self.tableDataSource.healthServicesFiltered containsObject:mapAnnotation.healthService])
-                {
-                    mapAnnotationView.alpha = 0.4f;
-                }
-            }
-        }
-        else
-        {
-            mapAnnotationView.annotation = annotation;
-        }
-        
-    }   
-    
-    return mapAnnotationView;
-}
-
 
 @end
