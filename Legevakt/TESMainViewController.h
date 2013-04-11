@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "HealthServiceManager.h"
-#import "TESHealthServiceDataSource.h"
+#import "TESHealthServicesDataSource.h"
 
 @interface TESMainViewController : UIViewController <CLLocationManagerDelegate, HealthServiceManagerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;
-@property (strong, nonatomic) IBOutlet TESHealthServiceDataSource *searchHelthServicesDataSource;
+@property (strong, nonatomic) IBOutlet TESHealthServicesDataSource *searchHelthServicesDataSource;
 
 - (IBAction)mainViewChanged:(id)sender;
 

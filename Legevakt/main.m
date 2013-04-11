@@ -1,4 +1,4 @@
-ldiv_t//
+l//
 //  main.m
 //  Legevakt
 //

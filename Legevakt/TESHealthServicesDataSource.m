@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Tom Erik St√∏wer. All rights reserved.
 //
 
-#import "TESHealthServiceDataSource.h"
+#import "TESHealthServicesDataSource.h"
 #import "TESHealthServiceCell.h"
 
-@implementation TESHealthServiceDataSource
+@implementation TESHealthServicesDataSource
 
 #pragma mark - Table View
 
@@ -41,9 +41,9 @@
     cell.healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
 }
 
-+ (TESHealthServiceDataSource *) healthServiceDataSourceWithHealthservices:(NSArray *) healthServices andLocation:(CLLocation *) myLocation
++ (TESHealthServicesDataSource *) healthServiceDataSourceWithHealthservices:(NSArray *) healthServices andLocation:(CLLocation *) myLocation
 {
-    TESHealthServiceDataSource *healthServiceDataSource = [[self alloc] init];
+    TESHealthServicesDataSource *healthServiceDataSource = [[self alloc] init];
     healthServiceDataSource.healthServices = healthServices;
     healthServiceDataSource.myLocation = myLocation;
     

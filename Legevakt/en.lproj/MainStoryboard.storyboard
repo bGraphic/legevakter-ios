@@ -78,7 +78,7 @@
                         <outlet property="searchResultsDelegate" destination="HXM-yq-PTO" id="HKo-kn-CUD"/>
                     </connections>
                 </searchDisplayController>
-                <customObject id="enK-PT-lzh" customClass="TESHealthServiceDataSource"/>
+                <customObject id="enK-PT-lzh" customClass="TESHealthServicesDataSource"/>
             </objects>
             <point key="canvasLocation" x="1229" y="78"/>
         </scene>
@@ -101,7 +101,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="uCg-V6-0bd" customClass="TESHealthServiceDataSource"/>
+                <customObject id="uCg-V6-0bd" customClass="TESHealthServicesDataSource"/>
             </objects>
             <point key="canvasLocation" x="1834" y="-222"/>
         </scene>

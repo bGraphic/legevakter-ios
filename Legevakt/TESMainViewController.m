@@ -10,7 +10,7 @@
 #import "TESTableViewController.h"
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
-#import "TESHealthServiceDataSource.h"
+#import "TESHealthServicesDataSource.h"
 
 @interface TESMainViewController ()
 
