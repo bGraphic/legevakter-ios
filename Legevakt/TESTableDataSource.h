@@ -13,6 +13,7 @@
 @interface TESTableDataSource : NSObject <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *healthServices;
+@property (strong, nonatomic) NSMutableArray *healthServicesFiltered;
 
 @property (strong, nonatomic) CLLocation *myLocation;
 

@@ -11,8 +11,6 @@
 
 @interface TESTableDataSource ()
 
-@property (strong, nonatomic) NSMutableArray *healthServicesFiltered;
-
 @end
 
 @implementation TESTableDataSource

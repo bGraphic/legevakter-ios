@@ -94,7 +94,7 @@
 
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
 {
-    self.tableDataSource.healthServices = healthServices;
+    self.tableDataSource.healthServicesFiltered = [NSMutableArray arrayWithArray: healthServices];
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
