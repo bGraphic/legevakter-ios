@@ -26,43 +26,23 @@
     // Configure the view for the selected state
 }
 
-- (void)setHealthService:(id)newHealthService
+- (void) configureViewWithHealthService:(HealthService *) healthService andLocation:(CLLocation *) myLocation
 {
-    if (_healthService != newHealthService) {
-        _healthService = newHealthService;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
-
-- (void)setMyLocation:(CLLocation *)newMyLocation
-{
-    if(_myLocation.coordinate.latitude != newMyLocation.coordinate.latitude || _myLocation.coordinate.latitude != newMyLocation.coordinate.latitude)
-    {
-        _myLocation = newMyLocation;
-        
-        [self configureView];
-    }
-}
-
-- (void) configureView
-{
-    if (self.healthService) {
-        self.nameLabel.text = self.healthService.displayName;
-        self.openingHoursLabel.text = self.healthService.isOpen?@"Åpent":@"Stengt";
+    if (healthService) {
+        self.nameLabel.text = healthService.displayName;
+        self.openingHoursLabel.text = healthService.isOpen?@"Åpent":@"Stengt";
     
-        if(self.myLocation)
-            self.distanceLabel.text = [self.healthService formattedDistanceFromLocation:self.myLocation];
+        if(myLocation)
+            self.distanceLabel.text = [healthService formattedDistanceFromLocation:myLocation];
         else
             self.distanceLabel.text = @"";
         
-        self.nameLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
-        self.openingHoursLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
-        self.distanceLabel.alpha = self.healthService.isOpen?1.0f:0.6f;
-        self.iconImageView.alpha = self.healthService.isOpen?1.0f:0.6f;
+        self.nameLabel.alpha = healthService.isOpen?1.0f:0.6f;
+        self.openingHoursLabel.alpha = healthService.isOpen?1.0f:0.6f;
+        self.distanceLabel.alpha = healthService.isOpen?1.0f:0.6f;
+        self.iconImageView.alpha = healthService.isOpen?1.0f:0.6f;
         
-        self.iconImageView.image = self.healthService.isOpen?[UIImage imageNamed:@"ER_open"]:[UIImage imageNamed:@"ER_closed"];
+        self.iconImageView.image = healthService.isOpen?[UIImage imageNamed:@"ER_open"]:[UIImage imageNamed:@"ER_closed"];
     }
 }
 

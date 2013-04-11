@@ -101,8 +101,7 @@
         cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
     
-    cell.myLocation = self.myLocation;
-    cell.healthService = [self healthServiceAtIndexPath:indexPath];
+    [cell configureViewWithHealthService:[self healthServiceAtIndexPath:indexPath] andLocation:self.myLocation];
     
     return cell;
 }
