@@ -98,6 +98,19 @@
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
+#pragma mark UISearchControllerDelegate
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
+{
+    self.searchHelthServicesDataSource.unFilteredHealthServices = self.tableViewController.healthServiceDataSource.healthServices;
+}
+
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self.searchHelthServicesDataSource filterContentForSearchText:searchString];
+    
+    return YES;
+}
+
 #pragma mark UISearchBarDelegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

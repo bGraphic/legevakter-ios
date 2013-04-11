@@ -9,11 +9,22 @@
 #import "TESTableDataSource.h"
 #import "TESHealthServiceCell.h"
 
+@interface TESTableDataSource ()
+
+@end
+
 @implementation TESTableDataSource
 
 - (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath
 {
     return [self.healthServices objectAtIndex:indexPath.row];
+}
+
+- (void) filterContentForSearchText:(NSString*)searchText
+{    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF.displayName contains[c] %@)", searchText, searchText];
+    
+    self.healthServices = [NSMutableArray arrayWithArray:[self.unFilteredHealthServices filteredArrayUsingPredicate:predicate]];
 }
 
 #pragma mark - Table View
@@ -40,8 +51,6 @@
         [tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
         
         cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        NSLog(@"cell");
     }
     
     [self configureCell:cell atIndexPath:indexPath];
