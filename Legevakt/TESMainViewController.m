@@ -7,15 +7,16 @@
 //
 
 #import "TESMainViewController.h"
-#import "TESTableViewController.h"
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
 #import "TESTableDataSource.h"
 
 @interface TESMainViewController ()
 
-@property (nonatomic, strong) TESTableViewController *tableViewController;
 @property (nonatomic, strong) TESMapViewController *mapViewController;
+
+@property (strong, nonatomic) TESTableDataSource *tableDataSource;
+@property (strong, nonatomic) TESTableDelegate *tableDelegate;
 
 @property (retain) CLLocation *myLocation;
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -30,6 +31,14 @@
 {
     [super viewDidLoad];
     
+    self.tableDataSource = [[TESTableDataSource alloc] init];
+    self.tableDelegate = [[TESTableDelegate alloc] initWithViewController:self];
+
+    self.tableView.dataSource = self.tableDataSource;
+    self.tableView.delegate = self.tableDelegate;
+    self.searchDisplayController.searchResultsDataSource = self.tableDataSource;
+    self.searchDisplayController.searchResultsDelegate = self.tableDelegate;
+    
     [self startUpdatingLocation];
     
     [self configureInfoButton];
@@ -41,14 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)mainViewChanged:(id)sender
-{
-    self.tableView.hidden = !self.tableView.hidden;
-}
-
 - (void)viewDidUnload {
-    [self setTableView:nil];
-    [self setMapView:nil];
     [self setTableDataSource:nil];
     [self setTableDelegate:nil];
     [super viewDidUnload];
@@ -87,9 +89,7 @@
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
 {
     self.tableDataSource.healthServices = healthServices;
-    [self.tableViewController.tableView reloadData];
-    
-    self.mapViewController.healthServices = healthServices;
+    [self.tableView reloadData];
 }
 
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
@@ -120,25 +120,6 @@
     
     HealthServiceManager *manager = [[HealthServiceManager alloc] init];
     [manager searchWithString:searchBar.text delegate:self];
-}
-
-
-#pragma mark - Segue
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSString * segueName = segue.identifier;
-    
-    if([segueName isEqualToString:@"embedTableViewController"])
-    {
-        self.tableViewController = (TESTableViewController *) segue.destinationViewController;
-        self.tableViewController.tableView.dataSource = self.tableDataSource;
-        self.tableViewController.tableView.delegate = self.tableDelegate;
-    }
-    
-    if([segueName isEqualToString:@"embedMapViewController"])
-    {
-        self.mapViewController = (TESMapViewController *) segue.destinationViewController;
-    }
 }
 
 #pragma mark - Info Button

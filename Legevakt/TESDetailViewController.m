@@ -57,7 +57,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [BGCommonGraphics backgroundView];
     
-//    self.mapView.delegate = self;
+    self.mapView.delegate = self;
     
     [self configureView];
 }

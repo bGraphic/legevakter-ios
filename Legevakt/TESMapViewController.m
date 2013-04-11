@@ -40,26 +40,6 @@
     [super viewDidUnload];
 }
 
-- (void) setHealthServices:(NSArray *)newHealthServiceList
-{
-    if (_healthServices != newHealthServiceList) {
-        _healthServices = newHealthServiceList;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
-
-- (void)setHealthService:(id)newHealthService
-{
-    if (_healthService != newHealthService) {
-        _healthService = newHealthService;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
-
 - (void)configureView
 {
     // Update the user interface for the detail item.
@@ -69,10 +49,10 @@
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
     
-    if(self.healthServices)
+    if(self.tableDataSource)
     {
         int i = 0;
-        for(HealthService *healthService in self.healthServices)
+        for(HealthService *healthService in self.tableDataSource.healthServices)
         {
             [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
             
@@ -102,40 +82,52 @@
 
 - (void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    self.selectedHealthService = [(TESMapAnnotation *) view.annotation healthService];
+    HealthService *healthService = [(TESMapAnnotation *) view.annotation healthService];
+ 
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    TESDetailViewController *detailView = [sb instantiateViewControllerWithIdentifier:@"detailView"];
+    detailView.healthService = healthService;
     
-    [self performSegueWithIdentifier:@"showDetailFromMap" sender:self];
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    TESMapAnnotationView *mapPin = nil;
+    TESMapAnnotationView *mapAnnotationView;
+    TESMapAnnotation *mapAnnotation;
+    
     
     if(annotation != map.userLocation)
     {
         static NSString *defaultPinID = @"defaultPin";
-        mapPin = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        mapAnnotationView = (TESMapAnnotationView *)[map dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        mapAnnotation = (TESMapAnnotation *) annotation;
         
-        if (mapPin == nil )
+        if (mapAnnotationView == nil )
         {
-            mapPin = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
+            mapAnnotationView = [[TESMapAnnotationView alloc] initWithAnnotation:annotation
                                                      reuseIdentifier:defaultPinID];
             
-            if(self.healthServices)
+            if(self.tableDataSource)
             {
-                mapPin.canShowCallout = YES;
+                mapAnnotationView.canShowCallout = YES;
                 UIButton *disclosureButton = [UIButton buttonWithType: UIButtonTypeDetailDisclosure]; 
-                mapPin.rightCalloutAccessoryView = disclosureButton;
+                mapAnnotationView.rightCalloutAccessoryView = disclosureButton;
+                
+                if(self.tableDataSource.healthServicesFiltered && ![self.tableDataSource.healthServicesFiltered containsObject:mapAnnotation.healthService])
+                {
+                    mapAnnotationView.alpha = 0.4f;
+                }
             }
         }
         else
         {
-            mapPin.annotation = annotation;
+            mapAnnotationView.annotation = annotation;
         }
         
     }   
     
-    return mapPin;
+    return mapAnnotationView;
 }
 
 

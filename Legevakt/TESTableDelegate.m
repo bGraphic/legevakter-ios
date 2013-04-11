@@ -9,24 +9,53 @@
 #import "TESTableDelegate.h"
 #import "TESTableDataSource.h"
 #import "TESDetailViewController.h"
+#import "TESMapViewController.h"
 
 @implementation TESTableDelegate
 
+- (id) initWithViewController:(UIViewController *) viewController
+{
+    self = [super init];
+    if(self)
+    {
+        self.viewController = viewController;
+    }
+    
+    return self;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TESTableDataSource *healthServicesDataSource = tableView.dataSource;
-    HealthService *healthService = [healthServicesDataSource healthServiceAtIndexPath:indexPath];
-    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    TESDetailViewController *detailView = [sb instantiateViewControllerWithIdentifier:@"detailView"];
-    detailView.healthService = healthService;
+    TESTableDataSource *healthServicesDataSource = tableView.dataSource;
+    UIViewController *viewControllerToBePushed;
     
-    [self.viewController.navigationController pushViewController:detailView animated:YES];
+    if(indexPath.section == 0)
+    {
+        TESMapViewController *mapView = [sb instantiateViewControllerWithIdentifier:@"mapView"];
+        mapView.tableDataSource = healthServicesDataSource;
+        viewControllerToBePushed = mapView;
+    }
+    else
+    {
+        HealthService *healthService = [healthServicesDataSource healthServiceAtIndexPath:indexPath];
+        
+        TESDetailViewController *detailView = [sb instantiateViewControllerWithIdentifier:@"detailView"];
+        detailView.healthService = healthService;
+        
+        viewControllerToBePushed = detailView;
+    }
+        
+    if(self.viewController && viewControllerToBePushed)
+        [self.viewController.navigationController pushViewController:viewControllerToBePushed animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80.f;
+    if(indexPath.section == 0)
+        return 50.f;
+    else
+        return 80.f;
 }
 
 @end
