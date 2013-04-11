@@ -33,10 +33,6 @@
     [self startUpdatingLocation];
     
     [self configureInfoButton];
-    
-    UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
-    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
-    
 }
 
 - (void)didReceiveMemoryWarning

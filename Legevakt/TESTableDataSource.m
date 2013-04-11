@@ -33,7 +33,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"HealthServiceCell";
-    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if(!cell) {
+        UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
+        
+        cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        NSLog(@"cell");
+    }
     
     [self configureCell:cell atIndexPath:indexPath];
     

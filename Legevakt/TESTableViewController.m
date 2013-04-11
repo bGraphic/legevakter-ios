@@ -16,9 +16,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
 }
 
 - (void)didReceiveMemoryWarning
