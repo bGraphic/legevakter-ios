@@ -100,15 +100,16 @@
 
 #pragma mark UISearchBarDelegate
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSLog(@"Search for: %@", searchBar.text);
+    
     HealthServiceManager *manager = [[HealthServiceManager alloc] init];
-    [manager searchWithString:searchText delegate:self];
+    [manager searchWithString:searchBar.text delegate:self];
 }
 
 
 #pragma mark - Segue
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSString * segueName = segue.identifier;
