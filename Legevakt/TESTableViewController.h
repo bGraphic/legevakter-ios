@@ -11,6 +11,4 @@
 
 @interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet TESTableDataSource *healthServiceDataSource;
-
 @end

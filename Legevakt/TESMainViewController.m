@@ -49,7 +49,8 @@
 - (void)viewDidUnload {
     [self setTableView:nil];
     [self setMapView:nil];
-    [self setSearchHelthServicesDataSource:nil];
+    [self setTableDataSource:nil];
+    [self setTableDelegate:nil];
     [super viewDidUnload];
 }
 
@@ -74,8 +75,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.myLocation = [locations lastObject];
-    self.tableViewController.healthServiceDataSource.myLocation = self.myLocation;
-    self.searchHelthServicesDataSource.myLocation = self.myLocation;
+    self.tableDataSource.myLocation = self.myLocation;
     self.mapViewController.myLocation = self.myLocation;
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
@@ -86,8 +86,7 @@
 
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
 {
-    self.tableViewController.healthServiceDataSource.healthServices = healthServices;
-    self.searchHelthServicesDataSource.healthServices = healthServices;
+    self.tableDataSource.healthServices = healthServices;
     [self.tableViewController.tableView reloadData];
     
     self.mapViewController.healthServices = healthServices;
@@ -95,7 +94,7 @@
 
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
 {
-    self.searchHelthServicesDataSource.healthServices = healthServices;
+    self.tableDataSource.healthServices = healthServices;
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
@@ -103,12 +102,12 @@
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
-    [self.searchHelthServicesDataSource resetFilter];
+    [self.tableDataSource resetFilter];
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    [self.searchHelthServicesDataSource filterContentForSearchText:searchString];
+    [self.tableDataSource filterContentForSearchText:searchString];
     
     return YES;
 }
@@ -132,6 +131,8 @@
     if([segueName isEqualToString:@"embedTableViewController"])
     {
         self.tableViewController = (TESTableViewController *) segue.destinationViewController;
+        self.tableViewController.tableView.dataSource = self.tableDataSource;
+        self.tableViewController.tableView.delegate = self.tableDelegate;
     }
     
     if([segueName isEqualToString:@"embedMapViewController"])

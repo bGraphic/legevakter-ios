@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "HealthServiceManager.h"
 #import "TESTableDataSource.h"
+#import "TESTableDelegate.h"
 
 @interface TESMainViewController : UIViewController <CLLocationManagerDelegate, HealthServiceManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;
-@property (strong, nonatomic) IBOutlet TESTableDataSource *searchHelthServicesDataSource;
+@property (strong, nonatomic) IBOutlet TESTableDataSource *tableDataSource;
+@property (strong, nonatomic) IBOutlet TESTableDelegate *tableDelegate;
 
 - (IBAction)mainViewChanged:(id)sender;
 

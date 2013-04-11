@@ -64,7 +64,8 @@
                     <connections>
                         <outlet property="mapView" destination="3vw-0x-cBa" id="m2m-Tk-vDr"/>
                         <outlet property="searchDisplayController" destination="LQK-9q-OhJ" id="C5Z-f1-cBi"/>
-                        <outlet property="searchHelthServicesDataSource" destination="enK-PT-lzh" id="oT3-iY-4lj"/>
+                        <outlet property="tableDataSource" destination="enK-PT-lzh" id="e53-7N-bTI"/>
+                        <outlet property="tableDelegate" destination="DJh-mH-WGs" id="yEr-dh-1Ia"/>
                         <outlet property="tableView" destination="Xx6-b8-Q6q" id="eD3-lY-MFu"/>
                     </connections>
                 </viewController>
@@ -95,24 +96,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="uCg-V6-0bd" id="eHb-Zj-KCZ"/>
-                            <outlet property="delegate" destination="ClC-Ie-3Sf" id="Pld-Oy-sF2"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Legevakter i nærheten" id="Qbq-V8-mH9"/>
                     <connections>
-                        <outlet property="healthServiceDataSource" destination="uCg-V6-0bd" id="grx-S5-e4c"/>
                         <segue destination="mej-22-RJ2" kind="push" identifier="showDetailFromTable" id="Kkg-pZ-csh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="uCg-V6-0bd" customClass="TESTableDataSource"/>
-                <customObject id="ClC-Ie-3Sf" customClass="TESTableDelegate">
-                    <connections>
-                        <outlet property="viewController" destination="slP-Ip-ti5" id="hMx-DR-Sww"/>
-                    </connections>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="1834" y="-222"/>
         </scene>
@@ -394,7 +384,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhr-Fh-5nm"/>
         <segue reference="7NC-ni-E94"/>
+        <segue reference="Kkg-pZ-csh"/>
     </inferredMetricsTieBreakers>
 </document>
