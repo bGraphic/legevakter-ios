@@ -13,12 +13,12 @@
 @interface TESTableDataSource : NSObject <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *healthServices;
-@property (strong, nonatomic) NSArray *unFilteredHealthServices;
 
 @property (strong, nonatomic) CLLocation *myLocation;
 
 - (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath;
 
 - (void) filterContentForSearchText:(NSString*)searchText;
+- (void) resetFilter;
 
 @end

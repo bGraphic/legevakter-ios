@@ -11,20 +11,36 @@
 
 @interface TESTableDataSource ()
 
+@property (strong, nonatomic) NSMutableArray *healthServicesFiltered;
+
 @end
 
 @implementation TESTableDataSource
 
 - (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath
 {
-    return [self.healthServices objectAtIndex:indexPath.row];
+    if(self.healthServicesFiltered)
+        return [self.healthServicesFiltered objectAtIndex:indexPath.row];
+    else
+        return [self.healthServices objectAtIndex:indexPath.row];
 }
+#pragma mark - filter
 
 - (void) filterContentForSearchText:(NSString*)searchText
-{    
+{
+    if(!self.healthServicesFiltered)
+        self.healthServicesFiltered = [NSMutableArray arrayWithCapacity:self.healthServices.count];
+    else
+        [self.healthServicesFiltered removeAllObjects];
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF.displayName contains[c] %@)", searchText, searchText];
     
-    self.healthServices = [NSMutableArray arrayWithArray:[self.unFilteredHealthServices filteredArrayUsingPredicate:predicate]];
+    self.healthServicesFiltered = [NSMutableArray arrayWithArray:[self.healthServices filteredArrayUsingPredicate:predicate]];
+}
+
+- (void) resetFilter
+{
+    self.healthServicesFiltered = nil;
 }
 
 #pragma mark - Table View
@@ -37,8 +53,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return self.healthServices.count;
+    if(self.healthServicesFiltered)
+        return self.healthServicesFiltered.count;
+    else
+        return self.healthServices.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,15 +71,10 @@
         cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
     
-    [self configureCell:cell atIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (void)configureCell:(TESHealthServiceCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
     cell.myLocation = self.myLocation;
     cell.healthService = [self healthServiceAtIndexPath:indexPath];
+    
+    return cell;
 }
 
 @end

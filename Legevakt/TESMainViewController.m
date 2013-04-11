@@ -87,7 +87,7 @@
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
 {
     self.tableViewController.healthServiceDataSource.healthServices = healthServices;
-    self.searchHelthServicesDataSource.unFilteredHealthServices = healthServices;
+    self.searchHelthServicesDataSource.healthServices = healthServices;
     [self.tableViewController.tableView reloadData];
     
     self.mapViewController.healthServices = healthServices;
@@ -100,6 +100,11 @@
 }
 
 #pragma mark UISearchControllerDelegate
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+    [self.searchHelthServicesDataSource resetFilter];
+}
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
