@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TESHealthServicesDataSource.h"
+#import "TESTableDataSource.h"
 
 @interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet TESHealthServicesDataSource *healthServiceDataSource;
+@property (strong, nonatomic) IBOutlet TESTableDataSource *healthServiceDataSource;
 
 @end

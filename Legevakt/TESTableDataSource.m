@@ -6,10 +6,15 @@
 //  Copyright (c) 2013 Tom Erik St√∏wer. All rights reserved.
 //
 
-#import "TESHealthServicesDataSource.h"
+#import "TESTableDataSource.h"
 #import "TESHealthServiceCell.h"
 
-@implementation TESHealthServicesDataSource
+@implementation TESTableDataSource
+
+- (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath
+{
+    return [self.healthServices objectAtIndex:indexPath.row];
+}
 
 #pragma mark - Table View
 
@@ -38,16 +43,7 @@
 - (void)configureCell:(TESHealthServiceCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.myLocation = self.myLocation;
-    cell.healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
-}
-
-+ (TESHealthServicesDataSource *) healthServiceDataSourceWithHealthservices:(NSArray *) healthServices andLocation:(CLLocation *) myLocation
-{
-    TESHealthServicesDataSource *healthServiceDataSource = [[self alloc] init];
-    healthServiceDataSource.healthServices = healthServices;
-    healthServiceDataSource.myLocation = myLocation;
-    
-    return healthServiceDataSource;
+    cell.healthService = [self healthServiceAtIndexPath:indexPath];
 }
 
 @end

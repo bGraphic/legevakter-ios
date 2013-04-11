@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "HealthService.h"
 
-@interface TESHealthServicesDataSource : NSObject <UITableViewDataSource>
+@interface TESTableDataSource : NSObject <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *healthServices;
 @property (strong, nonatomic) CLLocation *myLocation;
 
-+ (TESHealthServicesDataSource *) healthServiceDataSourceWithHealthservices:(NSArray *) healthServices andLocation:(CLLocation *) myLocation;
-
+- (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath;
 
 @end

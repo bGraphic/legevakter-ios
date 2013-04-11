@@ -10,7 +10,7 @@
 #import "TESTableViewController.h"
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
-#import "TESHealthServicesDataSource.h"
+#import "TESTableDataSource.h"
 
 @interface TESMainViewController ()
 
@@ -36,6 +36,7 @@
     
     UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
     [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
+    
 }
 
 - (void)didReceiveMemoryWarning
