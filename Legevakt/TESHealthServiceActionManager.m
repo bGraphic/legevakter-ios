@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Tom Erik St√∏wer. All rights reserved.
 //
 
-#import "TESLegevaktActionManager.h"
+#import "TESHealthServiceActionManager.h"
 
-@implementation TESLegevaktActionManager
+@implementation TESHealthServiceActionManager
 
 + (BOOL) placeCallTo:(NSString *)number
 {

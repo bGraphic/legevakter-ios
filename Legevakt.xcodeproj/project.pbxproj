@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */; };
+		1314CA9D17146F0400020043 /* TESHealthServiceActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9C17146F0400020043 /* TESHealthServiceActionManager.m */; };
 		1314CAA01714746900020043 /* TESMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1314CA9F1714746900020043 /* TESMapAnnotation.m */; };
 		1314CAA517147BB000020043 /* ER_call.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA117147BB000020043 /* ER_call.png */; };
 		1314CAA617147BB000020043 /* ER_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAA217147BB000020043 /* ER_map.png */; };
@@ -51,8 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1314CA9B17146F0400020043 /* TESLegevaktActionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESLegevaktActionManager.h; sourceTree = "<group>"; };
-		1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESLegevaktActionManager.m; sourceTree = "<group>"; };
+		1314CA9B17146F0400020043 /* TESHealthServiceActionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESHealthServiceActionManager.h; sourceTree = "<group>"; };
+		1314CA9C17146F0400020043 /* TESHealthServiceActionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESHealthServiceActionManager.m; sourceTree = "<group>"; };
 		1314CA9E1714746900020043 /* TESMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapAnnotation.h; sourceTree = "<group>"; };
 		1314CA9F1714746900020043 /* TESMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapAnnotation.m; sourceTree = "<group>"; };
 		1314CAA117147BB000020043 /* ER_call.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_call.png; sourceTree = "<group>"; };
@@ -236,8 +236,8 @@
 				1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */,
 				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
-				1314CA9B17146F0400020043 /* TESLegevaktActionManager.h */,
-				1314CA9C17146F0400020043 /* TESLegevaktActionManager.m */,
+				1314CA9B17146F0400020043 /* TESHealthServiceActionManager.h */,
+				1314CA9C17146F0400020043 /* TESHealthServiceActionManager.m */,
 				1742547317152C9A0075ECBF /* utilities */,
 				1366BA4D1714C87200208968 /* map view */,
 				1376BF7817130EA10074ABB1 /* gfx */,
@@ -372,7 +372,7 @@
 				1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */,
 				1376BF831713FB200074ABB1 /* TESHealthServiceCell.m in Sources */,
 				13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */,
-				1314CA9D17146F0400020043 /* TESLegevaktActionManager.m in Sources */,
+				1314CA9D17146F0400020043 /* TESHealthServiceActionManager.m in Sources */,
 				1314CAA01714746900020043 /* TESMapAnnotation.m in Sources */,
 				1314CAB217148C0F00020043 /* TESMainViewController.m in Sources */,
 				1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */,

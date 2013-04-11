@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TESLegevaktActionManager : NSObject
+@interface TESHealthServiceActionManager : NSObject
 
 + (BOOL) placeCallTo:(NSString *)number;
 + (BOOL) openWebPage:(NSString *) webPageStringUrl;
