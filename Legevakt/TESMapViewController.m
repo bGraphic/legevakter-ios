@@ -85,7 +85,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"showDetail"])
+    if([segue.identifier isEqualToString:@"showDetailFromMap"])
     {
         [[segue destinationViewController] setHealthService:self.selectedHealthService];
     }
@@ -104,7 +104,7 @@
 {
     self.selectedHealthService = [(TESMapAnnotation *) view.annotation healthService];
     
-    [self performSegueWithIdentifier:@"showDetail" sender:self];
+    [self performSegueWithIdentifier:@"showDetailFromMap" sender:self];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Tom Erik St√∏wer. All rights reserved.
 //
 
-#import "TESLegevaktCell.h"
+#import "TESHealthServiceCell.h"
 
-@implementation TESLegevaktCell
+@implementation TESHealthServiceCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

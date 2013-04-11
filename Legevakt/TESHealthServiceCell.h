@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HealthService.h"
 
-@interface TESLegevaktCell : UITableViewCell
+@interface TESHealthServiceCell : UITableViewCell
 
 @property (strong, nonatomic) HealthService *healthService;
 @property (weak, nonatomic) CLLocation *myLocation;
