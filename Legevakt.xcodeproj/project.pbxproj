@@ -22,6 +22,7 @@
 		1314CABA1714B69500020043 /* ER_open_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 1314CAB81714B69500020043 /* ER_open_pin.png */; };
 		132CE75017140D1500BE191A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132CE74F17140D1500BE191A /* MapKit.framework */; };
 		1350A0901716AF3400FF8364 /* TESHealthServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1350A08F1716AF3400FF8364 /* TESHealthServiceCell.xib */; };
+		1350A0931716C81100FF8364 /* TESHealthServiceDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0921716C81100FF8364 /* TESHealthServiceDataSource.m */; };
 		1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1366BA4B1714C66600208968 /* TESMapAnnotationView.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		1376BF831713FB200074ABB1 /* TESHealthServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */; };
@@ -69,6 +70,8 @@
 		1314CAB81714B69500020043 /* ER_open_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ER_open_pin.png; sourceTree = "<group>"; };
 		132CE74F17140D1500BE191A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1350A08F1716AF3400FF8364 /* TESHealthServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TESHealthServiceCell.xib; sourceTree = "<group>"; };
+		1350A0911716C81100FF8364 /* TESHealthServiceDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESHealthServiceDataSource.h; sourceTree = "<group>"; };
+		1350A0921716C81100FF8364 /* TESHealthServiceDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESHealthServiceDataSource.m; sourceTree = "<group>"; };
 		1366BA4A1714C66600208968 /* TESMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapAnnotationView.h; sourceTree = "<group>"; };
 		1366BA4B1714C66600208968 /* TESMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapAnnotationView.m; sourceTree = "<group>"; };
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				1376BF741712EFFD0074ABB1 /* data model */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 				1350A08F1716AF3400FF8364 /* TESHealthServiceCell.xib */,
+				1350A0911716C81100FF8364 /* TESHealthServiceDataSource.h */,
+				1350A0921716C81100FF8364 /* TESHealthServiceDataSource.m */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				1314CAB217148C0F00020043 /* TESMainViewController.m in Sources */,
 				1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */,
 				1742547217152C910075ECBF /* TESNorwegianPhoneNumberFormatter.m in Sources */,
+				1350A0931716C81100FF8364 /* TESHealthServiceDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

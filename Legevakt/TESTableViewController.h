@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import "HealthServiceManager.h"
+#import "TESHealthServiceDataSource.h"
 
 @interface TESTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray *healthServices;
-@property (strong, nonatomic) CLLocation *myLocation;
+@property (strong, nonatomic) IBOutlet TESHealthServiceDataSource *healthServiceDataSource;
 
 @end

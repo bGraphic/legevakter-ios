@@ -10,6 +10,7 @@
 #import "TESTableViewController.h"
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
+#import "TESHealthServiceDataSource.h"
 
 @interface TESMainViewController ()
 
@@ -32,6 +33,9 @@
     [self startUpdatingLocation];
     
     [self configureInfoButton];
+    
+    UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
+    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +52,7 @@
 - (void)viewDidUnload {
     [self setTableView:nil];
     [self setMapView:nil];
+    [self setSearchHelthServicesDataSource:nil];
     [super viewDidUnload];
 }
 
@@ -72,7 +77,8 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.myLocation = [locations lastObject];
-    self.tableViewController.myLocation = self.myLocation;
+    self.tableViewController.healthServiceDataSource.myLocation = self.myLocation;
+    self.searchHelthServicesDataSource.myLocation = self.myLocation;
     self.mapViewController.myLocation = self.myLocation;
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
@@ -83,14 +89,16 @@
 
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
 {
-    self.tableViewController.healthServices = healthServices;
+    self.tableViewController.healthServiceDataSource.healthServices = healthServices;
+    [self.tableViewController.tableView reloadData];
+    
     self.mapViewController.healthServices = healthServices;
 }
 
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
 {
-    self.tableViewController.healthServices = healthServices;
-    [self.tableViewController.tableView reloadData];
+    self.searchHelthServicesDataSource.healthServices = healthServices;
+    [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 #pragma mark UISearchBarDelegate

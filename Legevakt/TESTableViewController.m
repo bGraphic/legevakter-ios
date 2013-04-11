@@ -18,52 +18,13 @@
     [super viewDidLoad];
     
     UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"ItemCell"];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) setHealthServices:(NSArray *)healthServices
-{
-    if(![_healthServices isEqualToArray:healthServices]) {
-        _healthServices = healthServices;
-        
-        [self.tableView reloadData];
-    }
-}
-
-#pragma mark - Table View
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return self.healthServices.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"ItemCell";
-    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    [self configureCell:cell atIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (void)configureCell:(TESHealthServiceCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    cell.myLocation = self.myLocation;
-    cell.healthService = (HealthService *)[self.healthServices objectAtIndex:indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,10 +38,14 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetailFromTable"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        HealthService *healthService = [self.healthServices objectAtIndex:indexPath.row];
+        TESHealthServiceCell *healthServiceCell = (TESHealthServiceCell *)[self.tableView.dataSource tableView:self.tableView cellForRowAtIndexPath:indexPath];
         
-        [[segue destinationViewController] setHealthService:healthService];
+        [[segue destinationViewController] setHealthService:healthServiceCell.healthService];
     }
 }
 
+- (void)viewDidUnload {
+    [self setHealthServiceDataSource:nil];
+    [super viewDidUnload];
+}
 @end
