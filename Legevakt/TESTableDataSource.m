@@ -41,24 +41,56 @@
     self.healthServicesFiltered = nil;
 }
 
-#pragma mark - Table View
+
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSUInteger count = 0;
+    
     if(self.healthServicesFiltered)
-        return self.healthServicesFiltered.count;
+        count = self.healthServicesFiltered.count;
     else
-        return self.healthServices.count;
+        count = self.healthServices.count;
+    
+    if(section == 0)
+    {
+        if (count == 0)
+            return 0;
+        else
+            return 1;
+    }
+    
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 0)
+    {
+        static NSString *MapCellIdentifier = @"MapViewCell";
+        
+        UITableViewCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
+        if(!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
+            
+            cell.textLabel.text = @"Se legevaktene i kart";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+            
+        
+        return cell;
+    }
+    
+    
     static NSString *CellIdentifier = @"HealthServiceCell";
     TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -69,8 +101,7 @@
         cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
     
-    cell.myLocation = self.myLocation;
-    cell.healthService = [self healthServiceAtIndexPath:indexPath];
+    [cell configureViewWithHealthService:[self healthServiceAtIndexPath:indexPath] andLocation:self.myLocation];
     
     return cell;
 }

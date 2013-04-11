@@ -10,6 +10,8 @@
 
 @interface TESTableDelegate : NSObject <UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIViewController *viewController;
+@property (weak, nonatomic) UIViewController *viewController;
+
+- (id) initWithViewController:(UIViewController *) viewController;
 
 @end

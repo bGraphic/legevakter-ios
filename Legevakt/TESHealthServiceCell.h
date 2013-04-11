@@ -11,12 +11,11 @@
 
 @interface TESHealthServiceCell : UITableViewCell
 
-@property (strong, nonatomic) HealthService *healthService;
-@property (weak, nonatomic) CLLocation *myLocation;
-
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *openingHoursLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
+- (void) configureViewWithHealthService:(HealthService *) healthService andLocation:(CLLocation *) location;
 
 @end

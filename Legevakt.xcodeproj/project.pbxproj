@@ -25,6 +25,7 @@
 		1350A0931716C81100FF8364 /* TESTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0921716C81100FF8364 /* TESTableDataSource.m */; };
 		1350A0A01716D52C00FF8364 /* TESTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A09F1716D52C00FF8364 /* TESTableDelegate.m */; };
 		1350A0A31716DAC800FF8364 /* TESTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0A21716DAC800FF8364 /* TESTableViewController.m */; };
+		1350A0A717171A3000FF8364 /* TESMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0A617171A3000FF8364 /* TESMapDelegate.m */; };
 		1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1366BA4B1714C66600208968 /* TESMapAnnotationView.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		1376BF831713FB200074ABB1 /* TESHealthServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */; };
@@ -77,6 +78,8 @@
 		1350A09F1716D52C00FF8364 /* TESTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableDelegate.m; sourceTree = "<group>"; };
 		1350A0A11716DAC800FF8364 /* TESTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESTableViewController.h; sourceTree = "<group>"; };
 		1350A0A21716DAC800FF8364 /* TESTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableViewController.m; sourceTree = "<group>"; };
+		1350A0A517171A3000FF8364 /* TESMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapDelegate.h; sourceTree = "<group>"; };
+		1350A0A617171A3000FF8364 /* TESMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapDelegate.m; sourceTree = "<group>"; };
 		1366BA4A1714C66600208968 /* TESMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapAnnotationView.h; sourceTree = "<group>"; };
 		1366BA4B1714C66600208968 /* TESMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapAnnotationView.m; sourceTree = "<group>"; };
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				1366BA4B1714C66600208968 /* TESMapAnnotationView.m */,
 				1314CA9E1714746900020043 /* TESMapAnnotation.h */,
 				1314CA9F1714746900020043 /* TESMapAnnotation.m */,
+				1350A0A517171A3000FF8364 /* TESMapDelegate.h */,
+				1350A0A617171A3000FF8364 /* TESMapDelegate.m */,
 			);
 			name = "map view";
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				1350A0931716C81100FF8364 /* TESTableDataSource.m in Sources */,
 				1350A0A01716D52C00FF8364 /* TESTableDelegate.m in Sources */,
 				1350A0A31716DAC800FF8364 /* TESTableViewController.m in Sources */,
+				1350A0A717171A3000FF8364 /* TESMapDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
