@@ -4,10 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller - Legevakter i nærheten-->
+        <!--Main View Controller-->
         <scene sceneID="Kio-M3-vpo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="slP-Ip-ti5" customClass="TESMainViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pGP-CD-sPJ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
@@ -22,12 +21,13 @@
                             </connections>
                         </searchBar>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Legevakter i nærheten" id="Qbq-V8-mH9"/>
+                    <navigationItem key="navigationItem" id="Qbq-V8-mH9"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="gdE-G8-X41" id="lcD-qx-bb0"/>
                         <segue destination="mej-22-RJ2" kind="push" identifier="showDetailFromTable" id="Kkg-pZ-csh"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="gdE-G8-X41">
                     <connections>
                         <outlet property="delegate" destination="slP-Ip-ti5" id="yOs-L4-1kN"/>

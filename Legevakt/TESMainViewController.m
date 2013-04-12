@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"main_view_controller_title", nil);
+    
     self.tableDataSource = [[TESTableDataSource alloc] init];
     self.tableDelegate = [[TESTableDelegate alloc] initWithNavigationController:self.navigationController];
 

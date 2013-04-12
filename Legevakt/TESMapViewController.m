@@ -66,6 +66,8 @@
     
     if (self.healthService)
     {
+        self.title = NSLocalizedString(@"detail_view_controller_title", nil);
+        
         self.mapDelegate.showCallOut = YES;
         
         [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
@@ -73,6 +75,8 @@
     }
     else
     {
+        self.title = NSLocalizedString(@"main_view_controller_title", nil);
+        
         self.mapDelegate.showCallOut = YES;
         self.mapDelegate.navigationController = self.navigationController;
     

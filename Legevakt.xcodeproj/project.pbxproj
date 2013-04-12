@@ -29,6 +29,7 @@
 		1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1366BA4B1714C66600208968 /* TESMapAnnotationView.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		1376BF831713FB200074ABB1 /* TESHealthServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */; };
+		139B026F17187EB1005238B0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 139B026D17187EB1005238B0 /* MainStoryboard.storyboard */; };
 		13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B896A1171425FB0058B1A0 /* TESMapViewController.m */; };
 		13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D7D17144BF3004B42A4 /* Localizable.strings */; };
 		13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8217144F53004B42A4 /* Default-568h@2x.png */; };
@@ -45,7 +46,6 @@
 		17EA082F17024A80007C2B48 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17EA082D17024A80007C2B48 /* InfoPlist.strings */; };
 		17EA083117024A80007C2B48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA083017024A80007C2B48 /* main.m */; };
 		17EA083517024A80007C2B48 /* TESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA083417024A80007C2B48 /* TESAppDelegate.m */; };
-		17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */; };
 		17EA086A17030527007C2B48 /* HealthService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA086917030527007C2B48 /* HealthService.m */; };
 		17EA086D17032580007C2B48 /* HealthServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA086C17032580007C2B48 /* HealthServiceManager.m */; };
 		17EA08701703467D007C2B48 /* OpeningHours.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EA086F1703467D007C2B48 /* OpeningHours.m */; };
@@ -86,6 +86,7 @@
 		1376BF761712F74A0074ABB1 /* TESDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESDetailViewController.m; sourceTree = "<group>"; };
 		1376BF811713FB1F0074ABB1 /* TESHealthServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESHealthServiceCell.h; sourceTree = "<group>"; };
 		1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESHealthServiceCell.m; sourceTree = "<group>"; };
+		139B026E17187EB1005238B0 /* nb */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = nb; path = nb.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		13B896A0171425FB0058B1A0 /* TESMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapViewController.h; sourceTree = "<group>"; };
 		13B896A1171425FB0058B1A0 /* TESMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapViewController.m; sourceTree = "<group>"; };
 		13FA7D7A17144BEA004B42A4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -105,12 +106,10 @@
 		17EA082617024A80007C2B48 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		17EA082817024A80007C2B48 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		17EA082C17024A80007C2B48 /* Legevakt-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Legevakt-Info.plist"; sourceTree = "<group>"; };
-		17EA082E17024A80007C2B48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		17EA083017024A80007C2B48 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		17EA083217024A80007C2B48 /* Legevakt-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Legevakt-Prefix.pch"; sourceTree = "<group>"; };
 		17EA083317024A80007C2B48 /* TESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TESAppDelegate.h; sourceTree = "<group>"; };
 		17EA083417024A80007C2B48 /* TESAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TESAppDelegate.m; sourceTree = "<group>"; };
-		17EA083D17024A80007C2B48 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		17EA086817030527007C2B48 /* HealthService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthService.h; sourceTree = "<group>"; };
 		17EA086917030527007C2B48 /* HealthService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthService.m; sourceTree = "<group>"; };
 		17EA086B17032580007C2B48 /* HealthServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthServiceManager.h; sourceTree = "<group>"; };
@@ -253,7 +252,6 @@
 				1350A0A41716E3CB00FF8364 /* table view */,
 				1376BF741712EFFD0074ABB1 /* data model */,
 				1376BF7817130EA10074ABB1 /* gfx */,
-				17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */,
 				1366BA4D1714C87200208968 /* map view */,
 				17EA082B17024A80007C2B48 /* Supporting Files */,
 				17EA083317024A80007C2B48 /* TESAppDelegate.h */,
@@ -263,6 +261,7 @@
 				1314CAB017148C0F00020043 /* TESMainViewController.h */,
 				1314CAB117148C0F00020043 /* TESMainViewController.m */,
 				13B896A0171425FB0058B1A0 /* TESMapViewController.h */,
+				139B026D17187EB1005238B0 /* MainStoryboard.storyboard */,
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
 				1350A0A11716DAC800FF8364 /* TESTableViewController.h */,
 				1350A0A21716DAC800FF8364 /* TESTableViewController.m */,
@@ -338,7 +337,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17EA082F17024A80007C2B48 /* InfoPlist.strings in Resources */,
-				17EA083E17024A80007C2B48 /* MainStoryboard.storyboard in Resources */,
 				13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */,
 				13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */,
 				13FA7D8517144F56004B42A4 /* Default.png in Resources */,
@@ -357,6 +355,7 @@
 				1314CAB91714B69500020043 /* ER_closed_pin.png in Resources */,
 				1314CABA1714B69500020043 /* ER_open_pin.png in Resources */,
 				1350A0901716AF3400FF8364 /* TESHealthServiceCell.xib in Resources */,
+				139B026F17187EB1005238B0 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +408,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		139B026D17187EB1005238B0 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				139B026E17187EB1005238B0 /* nb */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 		13FA7D7D17144BF3004B42A4 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -420,18 +427,9 @@
 		17EA082D17024A80007C2B48 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				17EA082E17024A80007C2B48 /* en */,
 				13FA7D7A17144BEA004B42A4 /* nb */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		17EA083C17024A80007C2B48 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				17EA083D17024A80007C2B48 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

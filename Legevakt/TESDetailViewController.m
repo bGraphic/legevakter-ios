@@ -22,39 +22,12 @@
 
 @implementation TESDetailViewController
 
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-    
-    if (self.healthService)
-    {
-        self.displayNameLabel.text = self.healthService.displayName;
-        self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
-        self.addressLabel.text = self.healthService.formattedAddress;
-        self.webPageLabel.text = self.healthService.formattedWebPage;
-        self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
-        self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
-        
-        self.mapDelegate = [[TESMapDelegate alloc] init];
-        self.mapView.delegate = self.mapDelegate;
-        
-        [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
-        [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
-        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.mapView.alpha = 1.0f;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.title = NSLocalizedString(@"detail_view_controller_title", nil);
     
     self.mapView.layer.masksToBounds = YES;
     self.mapView.layer.cornerRadius = 7.f;
@@ -66,6 +39,14 @@
     
     [self configureView];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.mapView.alpha = 1.0f;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -93,6 +74,28 @@
         
         // Update the view.
         [self configureView];
+    }
+}
+
+- (void)configureView
+{
+    // Update the user interface for the detail item.
+    
+    if (self.healthService)
+    {
+        self.displayNameLabel.text = self.healthService.displayName;
+        self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
+        self.addressLabel.text = self.healthService.formattedAddress;
+        self.webPageLabel.text = self.healthService.formattedWebPage;
+        self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
+        self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
+        
+        self.mapDelegate = [[TESMapDelegate alloc] init];
+        self.mapView.delegate = self.mapDelegate;
+        
+        [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
+        [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
 }
 
