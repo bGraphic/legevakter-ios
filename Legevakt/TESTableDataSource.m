@@ -8,6 +8,12 @@
 
 #import "TESTableDataSource.h"
 #import "TESHealthServiceCell.h"
+#import "TESViewInMapCell.h"
+#import "TESLoadAllCell.h"
+
+static NSString * const kTESHealthServiceCellIdentifier = @"HealthServiceCell";
+static NSString * const kTESLoadAllCellIdentifier = @"LoadMoreCell";
+static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 
 @interface TESTableDataSource ()
 
@@ -81,38 +87,42 @@
 {
     if(indexPath.section == 0)
     {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        TESViewInMapCell *cell = (TESViewInMapCell *)[tableView dequeueReusableCellWithIdentifier:kTESViewInMapCellIdentifier];
+        
+        if(!cell) {
+            UINib *nib = [UINib nibWithNibName:@"TESViewInMapCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:kTESViewInMapCellIdentifier];
             
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-            
-        if(self.healthServicesFiltered)
-            cell.textLabel.text = NSLocalizedString(@"search_results_in_map", nil);
-        else
-            cell.textLabel.text = NSLocalizedString(@"health_services_in_map", nil);
-
+            cell = (TESViewInMapCell *)[tableView dequeueReusableCellWithIdentifier:kTESViewInMapCellIdentifier];
+        }
+        
+        [cell configureCellIsSearchResult:self.healthServicesFiltered?YES:NO];
+        
         return cell;
     }
     
     if(indexPath.section == 2)
     {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
         
-            cell.textLabel.text = NSLocalizedString(@"load_all_health_services", nil);
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        if(!cell) {
+            UINib *nib = [UINib nibWithNibName:@"TESLoadAllCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:kTESLoadAllCellIdentifier];
+            
+            cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
+        }
         
         return cell;
     }
     
     
-    static NSString *CellIdentifier = @"HealthServiceCell";
-    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:kTESHealthServiceCellIdentifier];
     
     if(!cell) {
         UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
+        [tableView registerNib:nib forCellReuseIdentifier:kTESHealthServiceCellIdentifier];
         
-        cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:kTESHealthServiceCellIdentifier];
     }
     
     [cell configureViewWithHealthService:[self healthServiceAtIndexPath:indexPath] andLocation:self.myLocation];

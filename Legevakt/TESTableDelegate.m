@@ -12,6 +12,7 @@
 #import "TESMapViewController.h"
 #import "HealthServiceManager.h"
 #import "MBProgressHUD.h"
+#import "TESLoadAllCell.h"
 
 @implementation TESTableDelegate
 
@@ -40,18 +41,14 @@
     }
     else if(indexPath.section == 2)
     {
-        UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        [cell setUserInteractionEnabled:NO];
-        [cell setSelected:NO animated:YES];
-        [cell setAccessoryView:indicatorView];
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:indexPath];
         
-        [indicatorView startAnimating];
-        
+        [cell startActivity];
+    
         [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
             
-            [indicatorView stopAnimating];
+            [cell stopActivity];
             
             if(healthServices)
             {
@@ -77,8 +74,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 0 || indexPath.section == 2)
-        return 50.f;
+    if(indexPath.section == 0)
+        return 60.f;
     else
         return 80.f;
 }
