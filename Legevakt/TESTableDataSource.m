@@ -81,34 +81,25 @@
 {
     if(indexPath.section == 0)
     {
-        static NSString *MapCellIdentifier = @"MapViewCell";
-        
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             
-            cell.textLabel.text = @"Se legevaktene i kart";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
             
-        
+        if(self.healthServicesFiltered)
+            cell.textLabel.text = NSLocalizedString(@"search_results_in_map", nil);
+        else
+            cell.textLabel.text = NSLocalizedString(@"health_services_in_map", nil);
+
         return cell;
     }
     
     if(indexPath.section == 2)
     {
-        static NSString *MapCellIdentifier = @"MoreViewCell";
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
-            
-            cell.textLabel.text = @"Last inn alle legevaktene";
+            cell.textLabel.text = NSLocalizedString(@"load_all_health_services", nil);
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        }
         
         return cell;
     }
