@@ -38,9 +38,6 @@
     if(_healthService != healthService)
     {
         _healthService = healthService;
-     
-        self.mapDelegate.showCallOut = NO;
-        self.mapDelegate.navigationController = nil;
     }
 }
 
@@ -49,9 +46,6 @@
     if(_tableDataSource != tableDataSource)
     {
         _tableDataSource = tableDataSource;
-        
-        self.mapDelegate.showCallOut = YES;
-        self.mapDelegate.navigationController = self.navigationController;
     }
 }
 
@@ -70,35 +64,43 @@
 {
     // Update the user interface for the detail item.
     
-    if (self.healthService) {
+    if (self.healthService)
+    {
+        self.mapDelegate.showCallOut = YES;
+        
         [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
-    
-    if(self.tableDataSource.healthServicesFiltered)
-    {
-        int i = 0;
-        for(HealthService *healthService in self.tableDataSource.healthServicesFiltered)
-        {
-            [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
-            
-            if(i == 0)
-                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
-            i++;
-        }
-    }
     else
     {
-        int i = 0;
-        for(HealthService *healthService in self.tableDataSource.healthServices)
+        self.mapDelegate.showCallOut = YES;
+        self.mapDelegate.navigationController = self.navigationController;
+    
+        if(self.tableDataSource.healthServicesFiltered)
         {
-            [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
-            
-            if(i == 0)
-                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
-            i++;
+            int i = 0;
+            for(HealthService *healthService in self.tableDataSource.healthServicesFiltered)
+            {
+                [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
+                
+                if(i == 0)
+                    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
+                i++;
+            }
         }
+        else
+        {
+            int i = 0;
+            for(HealthService *healthService in self.tableDataSource.healthServices)
+            {
+                [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
+                
+                if(i == 0)
+                    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
+                i++;
+            }
 
+        }
     }
 }
 
