@@ -111,6 +111,7 @@
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     [self.tableDataSource resetFilter];
+    [self.tableView reloadData];
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
