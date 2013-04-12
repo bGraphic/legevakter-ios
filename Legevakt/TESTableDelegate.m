@@ -14,6 +14,13 @@
 #import "MBProgressHUD.h"
 #import "TESLoadAllCell.h"
 
+@interface TESTableDelegate ()
+
+@property (strong, nonatomic) TESMapViewController *mapViewController;
+@property (strong, nonatomic) TESMapViewController *filterMapViewController;
+
+@end
+
 @implementation TESTableDelegate
 
 - (id) initWithNavigationController:(UINavigationController *) navigationController
@@ -34,10 +41,26 @@
     UIViewController *viewControllerToBePushed;
     
     if(indexPath.section == 0)
-    {
-        TESMapViewController *mapView = [sb instantiateViewControllerWithIdentifier:@"mapView"];
-        mapView.tableDataSource = healthServicesDataSource;
-        viewControllerToBePushed = mapView;
+    {        
+        if(healthServicesDataSource.healthServicesFiltered)
+        {
+            if(!self.filterMapViewController)
+                self.filterMapViewController = [sb instantiateViewControllerWithIdentifier:@"mapView"];
+            
+            NSLog(@"filter");
+            
+            self.filterMapViewController.healthServices = healthServicesDataSource.healthServicesFiltered;
+            viewControllerToBePushed = self.filterMapViewController;
+        }
+        else
+        {
+            if(!self.mapViewController)
+                self.mapViewController = [sb instantiateViewControllerWithIdentifier:@"mapView"];
+            
+            self.mapViewController.healthServices = healthServicesDataSource.healthServices;
+            viewControllerToBePushed = self.mapViewController;
+
+        }
     }
     else if(indexPath.section == 2)
     {
@@ -55,6 +78,8 @@
                 healthServicesDataSource.healthServices = healthServices;
                 [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
                 [tableView reloadData];
+                
+                self.mapViewController.healthServices = healthServices;
             }
         }];
     }
