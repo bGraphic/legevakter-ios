@@ -11,6 +11,7 @@
 #import "TESDetailViewController.h"
 #import "TESMapViewController.h"
 #import "HealthServiceManager.h"
+#import "MBProgressHUD.h"
 
 @implementation TESTableDelegate
 
@@ -39,9 +40,19 @@
     }
     else if(indexPath.section == 2)
     {
-        [[tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled:NO];
+        UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setUserInteractionEnabled:NO];
+        [cell setSelected:NO animated:YES];
+        [cell setAccessoryView:indicatorView];
+        
+        [indicatorView startAnimating];
         
         [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
+            
+            [indicatorView stopAnimating];
+            
             if(healthServices)
             {
                 healthServicesDataSource.healthServices = healthServices;
