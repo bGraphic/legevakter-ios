@@ -247,6 +247,7 @@
                         <outlet property="displayNameLabel" destination="bYE-EQ-9ZM" id="UxE-v3-Kd7"/>
                         <outlet property="mapView" destination="mYK-4m-pnN" id="fZ5-oy-Yhq"/>
                         <outlet property="mapViewCell" destination="Ihq-FG-TaD" id="JL9-75-HDp"/>
+                        <outlet property="openInMapButton" destination="fkZ-pn-v67" id="UmK-pb-i6b"/>
                         <outlet property="openingHoursCommentTextView" destination="WdT-QE-xh0" id="y5M-X1-fGZ"/>
                         <outlet property="openingHoursTextView" destination="DAv-ie-vSU" id="4vD-sl-OuP"/>
                         <outlet property="phoneNumberLabel" destination="qvK-JG-kdX" id="KLe-bT-4oM"/>
@@ -311,32 +312,6 @@
         <image name="ER_map.png" width="89" height="88"/>
         <image name="ER_web.png" width="89" height="88"/>
     </resources>
-    <classes>
-        <class className="TESDetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openWebPage:" candidateClass="UIButton"/>
-                <relationship kind="action" name="placeCallAction:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="displayNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mapViewCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="openingHoursCommentTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="openingHoursTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="phoneNumberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="webPageLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TESMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMainViewController.h"/>
-        </class>
-        <class className="TESMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -104,7 +104,8 @@
     
         for(HealthService *healthService in self.healthServices)
         {
-            [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
+            if(healthService.location)
+                [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
         }
         
         NSSet *visibleAnnotationSet = [self.mapView annotationsInMapRect:self.mapView.visibleMapRect];

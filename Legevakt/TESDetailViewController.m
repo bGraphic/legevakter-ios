@@ -64,6 +64,7 @@
     [self setMapViewCell:nil];
     [self setMapViewCell:nil];
     [self setDisplayNameLabel:nil];
+    [self setOpenInMapButton:nil];
     [super viewDidUnload];
 }
 
@@ -96,6 +97,15 @@
         [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
         [self.mapView setCenterCoordinate:self.healthService.location.coordinate];
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
+
+        if(self.healthService.location)
+        {
+            self.openInMapButton.hidden = NO;
+        }
+        else
+        {
+            self.openInMapButton.hidden = YES;
+        }
     }
 }
 
@@ -113,6 +123,14 @@
 }
 
 #pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if(self.healthService.location)
+        return 3;
+    else
+        return 2;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
