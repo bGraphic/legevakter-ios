@@ -46,8 +46,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 2;
+    if(self.healthServices.count == kTESInitialHealthServicesLimit)
+        return 3;
+    else
+        return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -67,6 +69,11 @@
             return 1;
     }
     
+    if(section == 2)
+    {
+        return 1;
+    }
+    
     return count;
 }
 
@@ -76,7 +83,7 @@
     {
         static NSString *MapCellIdentifier = @"MapViewCell";
         
-        UITableViewCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
         if(!cell)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
@@ -86,6 +93,22 @@
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
             
+        
+        return cell;
+    }
+    
+    if(indexPath.section == 2)
+    {
+        static NSString *MapCellIdentifier = @"MoreViewCell";
+        
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
+        if(!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
+            
+            cell.textLabel.text = @"Last inn alle legevaktene";
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
         
         return cell;
     }

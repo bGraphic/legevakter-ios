@@ -80,17 +80,20 @@
     self.tableDataSource.myLocation = self.myLocation;
     self.mapViewController.myLocation = self.myLocation;
     
-    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withDelegate:self];
+    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
+        
+        if(healthServices)
+        {
+            self.tableDataSource.healthServices = healthServices;
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
     [manager stopUpdatingLocation];
 }
 
 #pragma mark HealthServiceManagerDelegate
-
-- (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices
-{
-    self.tableDataSource.healthServices = healthServices;
-    [self.tableView reloadData];
-}
 
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
 {
