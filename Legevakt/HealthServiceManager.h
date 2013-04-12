@@ -14,6 +14,7 @@
 
 @protocol HealthServiceManagerDelegate
 
+@optional
 - (void)manager:(id)manager foundHealthServicesNearby:(NSArray *)healthServices;
 - (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices;
 
@@ -23,6 +24,8 @@
 
 - (void)searchWithString:(NSString *)searchString delegate:(id)delegate;
 + (void)findHealthServicesNearLocation:(CLLocation *)location withDelegate:(id)delegate;
+
++ (void) findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock;
 
 + (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
 

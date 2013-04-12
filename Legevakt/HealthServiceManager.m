@@ -82,7 +82,27 @@
     }];
 }
 
-+ (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
++ (void) findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock
+{
+    [self findHealthServicesNearLocation:location withLimit:-1 andBlock:^(NSArray *healthServices) {
+        PFQuery *query = [[PFQuery alloc] initWithClassName:@"HealthService"];
+        
+        [query whereKey:@"geoPoint" equalTo:[NSNull null]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                NSLog(@"Found %d health locations with no geopoint", objects.count);
+                completionBlock([healthServices arrayByAddingObjectsFromArray:objects]);
+            }
+            else
+            {
+                NSLog(@"Unable to find health loactions with no geopoint because: %@", error);
+                completionBlock(healthServices);
+            }
+        }];
+    }];
+}
+
++ (void) findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
 
 {
     PFQuery *query = [[PFQuery alloc] initWithClassName:@"HealthService"];
@@ -95,11 +115,13 @@
     [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            NSLog(@"Found %d health locations near location", objects.count);
             completionBlock(objects);
         }
         else
-        {   completionBlock(nil);
-            NSLog(@"Unable to find places in findHealthServicesNearLocation: %@", error);
+        {
+            NSLog(@"Unable to find health loactions near location because: %@", error);
+            completionBlock(nil);
         }
     }];
 }

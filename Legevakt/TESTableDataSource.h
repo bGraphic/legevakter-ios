@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "HealthService.h"
 
+static int const kTESInitialHealthServicesLimit = 3;
+
 @interface TESTableDataSource : NSObject <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *healthServices;

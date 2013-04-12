@@ -80,7 +80,7 @@
     self.tableDataSource.myLocation = self.myLocation;
     self.mapViewController.myLocation = self.myLocation;
     
-    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: -1 andBlock:^(NSArray *healthServices) {
+    [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
         
         if(healthServices)
         {
