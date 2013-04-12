@@ -82,5 +82,26 @@
     }];
 }
 
++ (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
+
+{
+    PFQuery *query = [[PFQuery alloc] initWithClassName:@"HealthService"];
+    
+    if(limit > 0)
+        query.limit = limit;
+    else
+        query.limit = 1000;
+    
+    [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            completionBlock(objects);
+        }
+        else
+        {   completionBlock(nil);
+            NSLog(@"Unable to find places in findHealthServicesNearLocation: %@", error);
+        }
+    }];
+}
 
 @end

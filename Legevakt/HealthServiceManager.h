@@ -24,6 +24,8 @@
 - (void)searchWithString:(NSString *)searchString delegate:(id)delegate;
 + (void)findHealthServicesNearLocation:(CLLocation *)location withDelegate:(id)delegate;
 
++ (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
+
 
 
 @end
