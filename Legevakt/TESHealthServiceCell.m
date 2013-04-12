@@ -23,7 +23,7 @@
         self.nameLabel.text = healthService.displayName;
         self.openingHoursLabel.text = healthService.isOpen?@"Åpent":@"Stengt";
     
-        if(myLocation)
+        if(myLocation && healthService.location)
             self.distanceLabel.text = [healthService formattedDistanceFromLocation:myLocation];
         else
             self.distanceLabel.text = @"";

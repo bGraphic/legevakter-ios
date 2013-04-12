@@ -52,7 +52,7 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.healthServices.count == kTESInitialHealthServicesLimit)
+    if(self.healthServices.count == kTESInitialHealthServicesLimit && !self.healthServicesFiltered)
         return 3;
     else
         return 2;
