@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     self.tableDataSource = [[TESTableDataSource alloc] init];
-    self.tableDelegate = [[TESTableDelegate alloc] initWithViewController:self];
+    self.tableDelegate = [[TESTableDelegate alloc] initWithNavigationController:self.navigationController];
 
     self.tableView.dataSource = self.tableDataSource;
     self.tableView.delegate = self.tableDelegate;
