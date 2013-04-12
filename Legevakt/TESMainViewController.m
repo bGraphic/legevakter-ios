@@ -10,6 +10,7 @@
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
 #import "TESTableDataSource.h"
+#import "MBProgressHUD.h"
 
 @interface TESMainViewController ()
 
@@ -39,9 +40,15 @@
     self.searchDisplayController.searchResultsDataSource = self.tableDataSource;
     self.searchDisplayController.searchResultsDelegate = self.tableDelegate;
     
-    [self startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
     
     [self configureInfoButton];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    if(!self.tableDataSource.healthServices)
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,11 +74,6 @@
     return _locationManager;
 }
 
-- (void)startUpdatingLocation
-{
-    [self.locationManager startUpdatingLocation];
-}
-
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -82,12 +84,13 @@
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
         
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
         if(healthServices)
         {
             self.tableDataSource.healthServices = healthServices;
             [self.tableView reloadData];
         }
-        
     }];
     
     [manager stopUpdatingLocation];
