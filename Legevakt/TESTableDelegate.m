@@ -14,12 +14,12 @@
 
 @implementation TESTableDelegate
 
-- (id) initWithViewController:(UIViewController *) viewController
+- (id) initWithNavigationController:(UINavigationController *) navigationController
 {
     self = [super init];
     if(self)
     {
-        self.viewController = viewController;
+        self.navigationController = navigationController;
     }
     
     return self;
@@ -60,8 +60,8 @@
         viewControllerToBePushed = detailView;
     }
         
-    if(self.viewController && viewControllerToBePushed)
-        [self.viewController.navigationController pushViewController:viewControllerToBePushed animated:YES];
+    if(self.navigationController && viewControllerToBePushed)
+        [self.navigationController pushViewController:viewControllerToBePushed animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

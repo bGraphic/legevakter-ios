@@ -11,7 +11,7 @@
 
 @interface TESMapDelegate : NSObject <MKMapViewDelegate>
 
-@property (weak, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) UINavigationController *navigationController;
 @property (assign) BOOL showCallOut;
 
 @end
