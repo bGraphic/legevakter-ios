@@ -47,8 +47,6 @@
             if(!self.filterMapViewController)
                 self.filterMapViewController = [sb instantiateViewControllerWithIdentifier:@"mapView"];
             
-            NSLog(@"filter");
-            
             self.filterMapViewController.healthServices = healthServicesDataSource.healthServicesFiltered;
             viewControllerToBePushed = self.filterMapViewController;
         }

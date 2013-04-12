@@ -30,9 +30,9 @@
     self.mapDelegate = [[TESMapDelegate alloc] init];
     self.mapView.delegate = self.mapDelegate;
     
-    [self configureView];
-    
     [self initilizeMapRegion];
+    
+    [self configureView];
 }
 
 - (void) setHealthService:(HealthService *)healthService
@@ -105,6 +105,14 @@
         for(HealthService *healthService in self.healthServices)
         {
             [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
+        }
+        
+        NSSet *visibleAnnotationSet = [self.mapView annotationsInMapRect:self.mapView.visibleMapRect];
+        
+        if(visibleAnnotationSet.count == 0)
+        {
+            HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:0];
+            [self.mapView setCenterCoordinate:healthService.location.coordinate animated:YES];
         }
 
     }
