@@ -10,15 +10,6 @@
 
 @implementation TESHealthServiceCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -32,7 +23,7 @@
         self.nameLabel.text = healthService.displayName;
         self.openingHoursLabel.text = healthService.isOpen?@"Åpent":@"Stengt";
     
-        if(myLocation)
+        if(myLocation && healthService.location)
             self.distanceLabel.text = [healthService formattedDistanceFromLocation:myLocation];
         else
             self.distanceLabel.text = @"";

@@ -30,22 +30,32 @@
     self.mapDelegate = [[TESMapDelegate alloc] init];
     self.mapView.delegate = self.mapDelegate;
     
+    [self initilizeMapRegion];
+    
     [self configureView];
 }
 
 - (void) setHealthService:(HealthService *)healthService
 {
+    _healthServices = nil;
+    
     if(_healthService != healthService)
     {
         _healthService = healthService;
+        
+        [self configureView];
     }
 }
 
-- (void)setTableDataSource:(TESTableDataSource *)tableDataSource
+- (void) setHealthServices:(NSArray *)healthServices
 {
-    if(_tableDataSource != tableDataSource)
+    _healthService = nil;
+    
+    if(_healthServices != healthServices)
     {
-        _tableDataSource = tableDataSource;
+        _healthServices = healthServices;
+        
+        [self configureView];
     }
 }
 
@@ -60,47 +70,52 @@
     [super viewDidUnload];
 }
 
-- (void)configureView
+- (void) initilizeMapRegion
 {
-    // Update the user interface for the detail item.
-    
-    if (self.healthService)
-    {
-        self.mapDelegate.showCallOut = YES;
-        
-        [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
+    if (self.healthService) {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.healthService.location.coordinate, 2000.f, 2000.f)];
     }
     else
     {
+        HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:0];
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
+    }
+}
+
+- (void) configureView
+{
+    // Update the user interface for the detail item.
+    
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    if (self.healthService)
+    {
+        [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:self.healthService]];
+        self.title = NSLocalizedString(@"detail_view_controller_title", nil);
+        
+        self.mapDelegate.showCallOut = YES;
+    }
+    else
+    {
+        self.title = NSLocalizedString(@"main_view_controller_title", nil);
+        
         self.mapDelegate.showCallOut = YES;
         self.mapDelegate.navigationController = self.navigationController;
     
-        if(self.tableDataSource.healthServicesFiltered)
+        for(HealthService *healthService in self.healthServices)
         {
-            int i = 0;
-            for(HealthService *healthService in self.tableDataSource.healthServicesFiltered)
-            {
+            if(healthService.location)
                 [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
-                
-                if(i == 0)
-                    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
-                i++;
-            }
         }
-        else
+        
+        NSSet *visibleAnnotationSet = [self.mapView annotationsInMapRect:self.mapView.visibleMapRect];
+        
+        if(visibleAnnotationSet.count == 0)
         {
-            int i = 0;
-            for(HealthService *healthService in self.tableDataSource.healthServices)
-            {
-                [self.mapView addAnnotation:[TESMapAnnotation mapAnnotationForHealthService:healthService]];
-                
-                if(i == 0)
-                    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
-                i++;
-            }
+            HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:0];
+            [self.mapView setCenterCoordinate:healthService.location.coordinate animated:YES];
+        }
 
-        }
     }
 }
 

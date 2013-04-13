@@ -6,6 +6,13 @@
   Copyright (c) 2013 Tom Erik St√∏wer. All rights reserved.
 */
 
+"main_view_controller_title" = "Legevakter";
+"detail_view_controller_title" = "Legevaktinfo";
+
+"health_services_in_map" = "Se legevaktene i kart";
+"search_results_in_map" = "Se søkeresultatene i kart";
+
+"load_all_health_services" = "Last inn alle norske legevakter";
 
 "rate_app" = "Skriv en omtale av appen";
 "share_app" = "Tips en venn";

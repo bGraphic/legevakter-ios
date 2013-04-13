@@ -11,6 +11,15 @@
 #import "TESDetailViewController.h"
 #import "TESMapViewController.h"
 #import "HealthServiceManager.h"
+#import "MBProgressHUD.h"
+#import "TESLoadAllCell.h"
+
+@interface TESTableDelegate ()
+
+@property (strong, nonatomic) TESMapViewController *mapViewController;
+@property (strong, nonatomic) TESMapViewController *filterMapViewController;
+
+@end
 
 @implementation TESTableDelegate
 
@@ -32,21 +41,43 @@
     UIViewController *viewControllerToBePushed;
     
     if(indexPath.section == 0)
-    {
-        TESMapViewController *mapView = [sb instantiateViewControllerWithIdentifier:@"mapView"];
-        mapView.tableDataSource = healthServicesDataSource;
-        viewControllerToBePushed = mapView;
+    {        
+        if(healthServicesDataSource.healthServicesFiltered)
+        {
+            if(!self.filterMapViewController)
+                self.filterMapViewController = [sb instantiateViewControllerWithIdentifier:@"mapView"];
+            
+            self.filterMapViewController.healthServices = healthServicesDataSource.healthServicesFiltered;
+            viewControllerToBePushed = self.filterMapViewController;
+        }
+        else
+        {
+            if(!self.mapViewController)
+                self.mapViewController = [sb instantiateViewControllerWithIdentifier:@"mapView"];
+            
+            self.mapViewController.healthServices = healthServicesDataSource.healthServices;
+            viewControllerToBePushed = self.mapViewController;
+
+        }
     }
     else if(indexPath.section == 2)
     {
-        [[tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled:NO];
         
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        [cell startActivity];
+    
         [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
+            
+            [cell stopActivity];
+            
             if(healthServices)
             {
                 healthServicesDataSource.healthServices = healthServices;
                 [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
                 [tableView reloadData];
+                
+                self.mapViewController.healthServices = healthServices;
             }
         }];
     }
@@ -66,8 +97,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 0 || indexPath.section == 2)
-        return 50.f;
+    if(indexPath.section == 0)
+        return 60.f;
     else
         return 80.f;
 }

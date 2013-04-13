@@ -60,7 +60,7 @@
 {
     PFGeoPoint *geoPoint = [self geoPoint];
     
-    if((id)geoPoint != [NSNull null])
+    if(geoPoint)
     {
         return [[CLLocation alloc] initWithLatitude:geoPoint.latitude longitude:geoPoint.longitude];
     }

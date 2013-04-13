@@ -4,10 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller - Legevakter i nærheten-->
+        <!--Main View Controller-->
         <scene sceneID="Kio-M3-vpo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="slP-Ip-ti5" customClass="TESMainViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pGP-CD-sPJ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
@@ -22,12 +21,13 @@
                             </connections>
                         </searchBar>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Legevakter i nærheten" id="Qbq-V8-mH9"/>
+                    <navigationItem key="navigationItem" id="Qbq-V8-mH9"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="gdE-G8-X41" id="lcD-qx-bb0"/>
                         <segue destination="mej-22-RJ2" kind="push" identifier="showDetailFromTable" id="Kkg-pZ-csh"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w68-iH-K3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="gdE-G8-X41">
                     <connections>
                         <outlet property="delegate" destination="slP-Ip-ti5" id="yOs-L4-1kN"/>
@@ -247,6 +247,7 @@
                         <outlet property="displayNameLabel" destination="bYE-EQ-9ZM" id="UxE-v3-Kd7"/>
                         <outlet property="mapView" destination="mYK-4m-pnN" id="fZ5-oy-Yhq"/>
                         <outlet property="mapViewCell" destination="Ihq-FG-TaD" id="JL9-75-HDp"/>
+                        <outlet property="openInMapButton" destination="fkZ-pn-v67" id="UmK-pb-i6b"/>
                         <outlet property="openingHoursCommentTextView" destination="WdT-QE-xh0" id="y5M-X1-fGZ"/>
                         <outlet property="openingHoursTextView" destination="DAv-ie-vSU" id="4vD-sl-OuP"/>
                         <outlet property="phoneNumberLabel" destination="qvK-JG-kdX" id="KLe-bT-4oM"/>
@@ -311,32 +312,6 @@
         <image name="ER_map.png" width="89" height="88"/>
         <image name="ER_web.png" width="89" height="88"/>
     </resources>
-    <classes>
-        <class className="TESDetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openWebPage:" candidateClass="UIButton"/>
-                <relationship kind="action" name="placeCallAction:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="displayNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mapViewCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="openingHoursCommentTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="openingHoursTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="phoneNumberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="webPageLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TESMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMainViewController.h"/>
-        </class>
-        <class className="TESMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TESMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

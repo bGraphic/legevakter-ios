@@ -8,6 +8,12 @@
 
 #import "TESTableDataSource.h"
 #import "TESHealthServiceCell.h"
+#import "TESViewInMapCell.h"
+#import "TESLoadAllCell.h"
+
+static NSString * const kTESHealthServiceCellIdentifier = @"HealthServiceCell";
+static NSString * const kTESLoadAllCellIdentifier = @"LoadMoreCell";
+static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 
 @interface TESTableDataSource ()
 
@@ -46,7 +52,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.healthServices.count == kTESInitialHealthServicesLimit)
+    if(self.healthServices.count == kTESInitialHealthServicesLimit && !self.healthServicesFiltered)
         return 3;
     else
         return 2;
@@ -81,47 +87,42 @@
 {
     if(indexPath.section == 0)
     {
-        static NSString *MapCellIdentifier = @"MapViewCell";
+        TESViewInMapCell *cell = (TESViewInMapCell *)[tableView dequeueReusableCellWithIdentifier:kTESViewInMapCellIdentifier];
         
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
+        if(!cell) {
+            UINib *nib = [UINib nibWithNibName:@"TESViewInMapCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:kTESViewInMapCellIdentifier];
             
-            cell.textLabel.text = @"Se legevaktene i kart";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell = (TESViewInMapCell *)[tableView dequeueReusableCellWithIdentifier:kTESViewInMapCellIdentifier];
         }
-            
+        
+        [cell configureCellIsSearchResult:self.healthServicesFiltered?YES:NO];
         
         return cell;
     }
     
     if(indexPath.section == 2)
     {
-        static NSString *MapCellIdentifier = @"MoreViewCell";
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
         
-        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MapCellIdentifier];
+        if(!cell) {
+            UINib *nib = [UINib nibWithNibName:@"TESLoadAllCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:kTESLoadAllCellIdentifier];
             
-            cell.textLabel.text = @"Last inn alle legevaktene";
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
         }
         
         return cell;
     }
     
     
-    static NSString *CellIdentifier = @"HealthServiceCell";
-    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TESHealthServiceCell *cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:kTESHealthServiceCellIdentifier];
     
     if(!cell) {
         UINib *nib = [UINib nibWithNibName:@"TESHealthServiceCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:@"HealthServiceCell"];
+        [tableView registerNib:nib forCellReuseIdentifier:kTESHealthServiceCellIdentifier];
         
-        cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell = (TESHealthServiceCell *)[tableView dequeueReusableCellWithIdentifier:kTESHealthServiceCellIdentifier];
     }
     
     [cell configureViewWithHealthService:[self healthServiceAtIndexPath:indexPath] andLocation:self.myLocation];

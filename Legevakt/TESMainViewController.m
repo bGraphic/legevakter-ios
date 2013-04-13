@@ -11,6 +11,7 @@
 #import "BGInfoNavigationControllerDelegate.h"
 #import "TESTableDataSource.h"
 #import "HealthServiceManager.h"
+#import "MBProgressHUD.h"
 
 @interface TESMainViewController ()
 
@@ -32,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"main_view_controller_title", nil);
+    
     self.tableDataSource = [[TESTableDataSource alloc] init];
     self.tableDelegate = [[TESTableDelegate alloc] initWithNavigationController:self.navigationController];
 
@@ -40,9 +43,15 @@
     self.searchDisplayController.searchResultsDataSource = self.tableDataSource;
     self.searchDisplayController.searchResultsDelegate = self.tableDelegate;
     
-    [self startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
     
     [self configureInfoButton];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    if(!self.tableDataSource.healthServices)
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,6 +100,7 @@
     self.mapViewController.myLocation = self.myLocation;
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self updateDataSourceWithHealthServices:healthServices];
     }];
     
@@ -102,6 +112,7 @@
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     [self.tableDataSource resetFilter];
+    [self.tableView reloadData];
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
