@@ -18,11 +18,38 @@
                        withParameters:@{@"searchString": searchString}
                                 block:^(NSArray *healthServices, NSError *error) {
                                     if (!error) {
-                                        completionBlock(healthServices);
+                                        NSArray *unifiedResults = [HealthServiceManager unifiedSearchResultFromSearchResults:healthServices];
+                                        completionBlock(unifiedResults);
                                     } else {
                                         NSLog(@"error: %@", error);
                                     }
                                 }];
+}
+
++ (NSArray *)unifiedSearchResultFromSearchResults:(NSArray *)searchResults
+{
+    NSMutableArray *unifiedResults = [[NSMutableArray alloc] init];
+    for (HealthService *healthService in searchResults) {
+        if (![HealthServiceManager healthService:healthService isContainedInArray:unifiedResults]) {
+            [unifiedResults addObject:healthService];
+        }
+    }
+    return unifiedResults;
+}
+
++ (BOOL)healthService:(HealthService *)myHealthService isContainedInArray:(NSArray *)array
+{
+    BOOL answer = NO;
+    
+    for (HealthService *healthService in array) {
+        if ([healthService.displayName isEqualToString:myHealthService.displayName]) {
+            answer = YES;
+            break;
+        }
+    
+    }
+    
+    return answer;
 }
 
 + (void) findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock
