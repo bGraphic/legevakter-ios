@@ -91,6 +91,15 @@
     }
 }
 
+- (void)updateDataSourceWithSearchedHealthServices:(NSArray *)healthServices
+{
+    if(healthServices)
+    {
+        self.tableDataSource.healthServicesFiltered = healthServices;
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+}
+
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -130,7 +139,7 @@
 
     [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *healthServices) {
         NSLog(@"returned from search block with results: %d", healthServices.count);
-        [self updateDataSourceWithHealthServices:healthServices];
+        [self updateDataSourceWithSearchedHealthServices:healthServices];
     }];
 }
 

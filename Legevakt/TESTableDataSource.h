@@ -15,7 +15,7 @@ static int const kTESInitialHealthServicesLimit = 3;
 @interface TESTableDataSource : NSObject <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *healthServices;
-@property (strong, nonatomic) NSMutableArray *healthServicesFiltered;
+@property (strong, nonatomic) NSArray *healthServicesFiltered;
 
 @property (strong, nonatomic) CLLocation *myLocation;
 

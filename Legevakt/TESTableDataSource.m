@@ -32,14 +32,9 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 
 - (void) filterContentForSearchText:(NSString*)searchText
 {
-    if(!self.healthServicesFiltered)
-        self.healthServicesFiltered = [NSMutableArray arrayWithCapacity:self.healthServices.count];
-    else
-        [self.healthServicesFiltered removeAllObjects];
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF.displayName contains[c] %@)", searchText, searchText];
     
-    self.healthServicesFiltered = [NSMutableArray arrayWithArray:[self.healthServices filteredArrayUsingPredicate:predicate]];
+    self.healthServicesFiltered = [self.healthServices filteredArrayUsingPredicate:predicate];
 }
 
 - (void) resetFilter
