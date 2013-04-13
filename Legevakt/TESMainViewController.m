@@ -12,6 +12,7 @@
 #import "TESTableDataSource.h"
 #import "HealthServiceManager.h"
 #import "MBProgressHUD.h"
+#import "BGSearchBar.h"
 
 @interface TESMainViewController ()
 
@@ -46,6 +47,9 @@
     [self.locationManager startUpdatingLocation];
     
     [self configureInfoButton];
+    
+    BGSearchBar *bgSearchBar = (BGSearchBar *) self.searchDisplayController.searchBar;
+    bgSearchBar.borderColor = self.tableView.separatorColor;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -118,8 +122,17 @@
 
 #pragma mark UISearchControllerDelegate
 
+- (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    BGSearchBar *bgSearchBar = (BGSearchBar *) controller.searchBar;
+    [bgSearchBar setBorderHidden:YES];
+}
+
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
+    BGSearchBar *bgSearchBar = (BGSearchBar *) controller.searchBar;
+    [bgSearchBar setBorderHidden:NO];
+    
     [self.tableDataSource resetFilter];
     [self.tableView reloadData];
 }
