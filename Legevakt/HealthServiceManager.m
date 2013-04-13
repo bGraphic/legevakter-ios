@@ -13,28 +13,50 @@
 
 + (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *healthServices))completionBlock
 {
+    [HealthServiceManager universalSearchWithString:searchString andBlock:^(NSArray *searchStringInNameHealthServices, NSDictionary *searchStringInLocationNameHealthServices) {
+        completionBlock(searchStringInNameHealthServices);
+    }];
+}
 
-    [PFCloud callFunctionInBackground:@"searchForHealthServices"
++ (void)universalSearchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
+                                                                        NSDictionary *searchStringInLocationNameHealthServices))completionBlock
+{
+    [PFCloud callFunctionInBackground:@"universalSearchForHealthServices"
                        withParameters:@{@"searchString": searchString}
-                                block:^(NSArray *healthServices, NSError *error) {
+                                block:^(NSDictionary *result, NSError *error) {
                                     if (!error) {
-                                        NSArray *unifiedResults = [HealthServiceManager unifiedSearchResultFromSearchResults:healthServices];
-                                        completionBlock(unifiedResults);
+                                        NSArray *searchStringInNameHealthServices = [self makeHealthServicesCompliant:[result objectForKey:@"searchStringInNameHealthServices"]];
+                                        NSDictionary *searchStringInLocationNameHealthServices = [self makeHealthServicesDictionaryCompliant:[result objectForKey:@"searchStringInLocationNameHealthServices"]];
+                                        completionBlock(searchStringInNameHealthServices, searchStringInLocationNameHealthServices);
                                     } else {
                                         NSLog(@"error: %@", error);
                                     }
                                 }];
 }
 
-+ (NSArray *)unifiedSearchResultFromSearchResults:(NSArray *)searchResults
++ (NSDictionary *)makeHealthServicesDictionaryCompliant:(NSDictionary *)healthServicesDict
 {
-    NSMutableArray *unifiedResults = [[NSMutableArray alloc] init];
-    for (HealthService *healthService in searchResults) {
-        if (![HealthServiceManager healthService:healthService isContainedInArray:unifiedResults]) {
-            [unifiedResults addObject:healthService];
-        }
-    }
-    return unifiedResults;
+    NSMutableDictionary *compliantHealthServicesDict = [[NSMutableDictionary alloc] init];
+    
+    [healthServicesDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSArray *healthServices = (NSArray *)obj;
+        NSArray *compliantHealthServices = [self makeHealthServicesCompliant:healthServices];
+        [compliantHealthServicesDict setObject:compliantHealthServices forKey:key];
+    }];
+    
+    return compliantHealthServicesDict;
+}
+
++ (NSArray *)makeHealthServicesCompliant:(NSArray *)healthServices
+{
+    NSMutableArray *compliantHealthServices = [[NSMutableArray alloc] init];
+    
+    [healthServices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        HealthService *healthService = (HealthService *)[HealthService objectWithClassName:[HealthService parseClassName] dictionary:(NSDictionary *)obj];
+        [compliantHealthServices addObject:healthService];
+    }];
+    
+    return compliantHealthServices;
 }
 
 + (BOOL)healthService:(HealthService *)myHealthService isContainedInArray:(NSArray *)array

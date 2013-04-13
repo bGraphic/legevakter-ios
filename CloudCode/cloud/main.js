@@ -40,9 +40,24 @@ Parse.Cloud.define("searchForHealthServices", function(request, response) {
 	});
 
 });
+
+Parse.Cloud.define("universalSearchForHealthServices", function(request, response) {
+	var searchString = request.params.searchString;
+	var SearchModule = require('cloud/SearchModule.js').SearchModule;
+	var searchModule =  new SearchModule();
+
+	searchModule.universalSearch(searchString,
+	{
+		success: function(results) {
+			response.success(results);
+		},
+		error: function(error) {
+			response.error(error.message);
+		}
+	});
+});
+
 /* End */
-
-
 
 /* Creates geoPoints on all objects from lat and lon */
 Parse.Cloud.define("createGeoPoints", function(request, response) {
