@@ -10,6 +10,7 @@
 #import "TESMapViewController.h"
 #import "BGInfoNavigationControllerDelegate.h"
 #import "TESTableDataSource.h"
+#import "HealthServiceManager.h"
 
 @interface TESMainViewController ()
 
@@ -72,6 +73,15 @@
     [self.locationManager startUpdatingLocation];
 }
 
+- (void)updateDataSourceWithHealthServices:(NSArray *)healthServices
+{
+    if(healthServices)
+    {
+        self.tableDataSource.healthServices = healthServices;
+        [self.tableView reloadData];
+    }
+}
+
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -81,24 +91,10 @@
     self.mapViewController.myLocation = self.myLocation;
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
-        
-        if(healthServices)
-        {
-            self.tableDataSource.healthServices = healthServices;
-            [self.tableView reloadData];
-        }
-        
+        [self updateDataSourceWithHealthServices:healthServices];
     }];
     
     [manager stopUpdatingLocation];
-}
-
-#pragma mark HealthServiceManagerDelegate
-
-- (void)manager:(id)manager foundHealthServicesFromSearch:(NSArray *)healthServices
-{
-    self.tableDataSource.healthServicesFiltered = [NSMutableArray arrayWithArray: healthServices];
-    [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 #pragma mark UISearchControllerDelegate
@@ -120,9 +116,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"Search for: %@", searchBar.text);
-    
-    HealthServiceManager *manager = [[HealthServiceManager alloc] init];
-    [manager searchWithString:searchBar.text delegate:self];
+
+    [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *healthServices) {
+        NSLog(@"returned from search block with results: %d", healthServices.count);
+        [self updateDataSourceWithHealthServices:healthServices];
+    }];
 }
 
 #pragma mark - Info Button

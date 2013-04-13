@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HealthServiceManager.h"
 #import "TESTableDataSource.h"
 #import "TESTableDelegate.h"
 
-@interface TESMainViewController : UITableViewController <CLLocationManagerDelegate, HealthServiceManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@interface TESMainViewController : UITableViewController <CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @end
