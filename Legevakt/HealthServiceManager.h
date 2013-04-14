@@ -12,8 +12,7 @@
 
 @interface HealthServiceManager : NSObject
 
-+ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *healthServices))completionBlock __attribute__((deprecated));
-+ (void)universalSearchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
++ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
                                                                               NSDictionary *searchStringInLocationNameHealthServices))completionBlock;
 + (void)findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock;
 + (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;

@@ -11,17 +11,10 @@
 
 @implementation HealthServiceManager
 
-+ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *healthServices))completionBlock
-{
-    [HealthServiceManager universalSearchWithString:searchString andBlock:^(NSArray *searchStringInNameHealthServices, NSDictionary *searchStringInLocationNameHealthServices) {
-        completionBlock(searchStringInNameHealthServices);
-    }];
-}
-
-+ (void)universalSearchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
++ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
                                                                         NSDictionary *searchStringInLocationNameHealthServices))completionBlock
 {
-    [PFCloud callFunctionInBackground:@"universalSearchForHealthServices"
+    [PFCloud callFunctionInBackground:@"searchForHealthServicesWithString"
                        withParameters:@{@"searchString": searchString}
                                 block:^(NSDictionary *result, NSError *error) {
                                     if (!error) {
