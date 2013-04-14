@@ -49,11 +49,9 @@ var SearchUtil = function() {
 
 	var getHealthServicesInPlaceNameQuery = function(placeName) {
 		var query = new Parse.Query("HealthService");
-		var municipalityCode = placeName.get("municipalityCode");
+		var municipalityCode = placeName.get("municipalityCode").toString();
 		if (municipalityCode.length < 4)
 			municipalityCode = "0" + municipalityCode;
-		else
-			municipalityCode += "";
 		query.contains("AppliesToMunicipalityCodes", municipalityCode);
 		return query;
 	};
@@ -107,7 +105,7 @@ var SearchUtil = function() {
 				} else {
 					response.success(results);
 				}
-			}
+			};
 
 			Parse.Promise.when(query.find()).then(callBack, function(error) {
 				console.log("Error in 'recursiveHealthServicesInCountyQuery': " + error);
@@ -136,13 +134,13 @@ var SearchUtil = function() {
 				} else {
 					response.success(results);
 				}
-			}
-		}
+			};
 
-		Parse.Promise.when(query.find()).then(callBack, function(error) {
-			console.log("Error in 'recursiveHealthServicesInPlaceNameQuery': " + error);
-			response.error(error);
-		});
+			Parse.Promise.when(query.find()).then(callBack, function(error) {
+				console.log("Error in 'recursiveHealthServicesInPlaceNameQuery': " + error);
+				response.error(error);
+			});
+		}
 	};
 
 	return {
