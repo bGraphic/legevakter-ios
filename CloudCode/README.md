@@ -1,9 +1,2 @@
-CloudCode Unit Tests
-
-Requirements:
-Node.js and npm
-
-npm install mocha
-npm install expect.js
-
-For details: http://jimkubicek.com/blog/2013/01/26/unit-testing-parse-cloud-code/
+Files in ./cloud/ are Cloud functions and supporting modules
+Files in ./lib/ are Node.js modules that can be run locally. They are batch jobs.
