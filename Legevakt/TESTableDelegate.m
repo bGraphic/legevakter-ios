@@ -60,26 +60,44 @@
 
         }
     }
-    else if(indexPath.section == 2)
+    else if(indexPath.section == [healthServicesDataSource numberOfSectionsInTableView:tableView] - 1)
     {
-        
         TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:indexPath];
         
         [cell startActivity];
-    
-        [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
-            
-            [cell stopActivity];
-            
-            if(healthServices)
-            {
-                healthServicesDataSource.healthServices = healthServices;
-                [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
-                [tableView reloadData];
+        
+        if(healthServicesDataSource.healthServicesFiltered)
+        {
+            [HealthServiceManager searchWithString:@"Oslo" andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
                 
-                self.mapViewController.healthServices = healthServices;
-            }
-        }];
+                [cell stopActivity];
+                
+                if(searchStringInNameHealthServices)
+                    healthServicesDataSource.healthServicesFiltered = searchStringInNameHealthServices;
+                
+                if(searchStringInLocationNameHealthServices)
+                    healthServicesDataSource.healthServicesSearched  = searchStringInLocationNameHealthServices;
+                
+                [tableView reloadData];
+                    
+            }];
+        }
+        else
+        {
+            [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
+                
+                [cell stopActivity];
+                
+                if(healthServices)
+                {
+                    healthServicesDataSource.healthServices = healthServices;
+                    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
+                    [tableView reloadData];
+                    
+                    self.mapViewController.healthServices = healthServices;
+                }
+            }];
+        }
     }
     else
     {

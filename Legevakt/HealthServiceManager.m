@@ -11,46 +11,69 @@
 
 @implementation HealthServiceManager
 
-+ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *healthServices))completionBlock
++ (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
+                                                                        NSArray *searchStringInLocationNameHealthServices))completionBlock
 {
-
-    [PFCloud callFunctionInBackground:@"searchForHealthServices"
+    NSLog(@"Search for: %@", searchString);
+    
+    [PFCloud callFunctionInBackground:@"searchForHealthServicesWithString"
                        withParameters:@{@"searchString": searchString}
-                                block:^(NSArray *healthServices, NSError *error) {
-                                    if (!error) {
-                                        NSArray *unifiedResults = [HealthServiceManager unifiedSearchResultFromSearchResults:healthServices];
-                                        completionBlock(unifiedResults);
-                                    } else {
-                                        NSLog(@"error: %@", error);
+                                block:^(NSDictionary *result, NSError *error) {
+                                    if (!error)
+                                    {    
+                                        NSArray *searchStringInNameHealthServices = [result objectForKey:@"searchStringInNameHealthServices"];
+                                        NSArray *searchStringInLocationNameHealthServices = [result objectForKey:@"searchStringInLocationNameHealthServices"];
+                                        
+                                        NSLog(@"Found %d health services that matched: %@", searchStringInNameHealthServices.count, searchString);
+                                        NSLog(@"Found %d locations that matched: %@", searchStringInLocationNameHealthServices.count, searchString);
+                                        
+                                        completionBlock([self makeHealthServicesCompliant:searchStringInNameHealthServices], [self makeHealthServicesSectionsCompliant:searchStringInLocationNameHealthServices]);
+                                    }
+                                    else
+                                    {
+                                        NSLog(@"Found no health services with search string: %@ because: %@", searchString, error);
+                                        completionBlock(nil, nil);
                                     }
                                 }];
 }
 
-+ (NSArray *)unifiedSearchResultFromSearchResults:(NSArray *)searchResults
++ (NSArray *) makeHealthServicesSectionsCompliant:(NSArray *) healthServicesSections
 {
-    NSMutableArray *unifiedResults = [[NSMutableArray alloc] init];
-    for (HealthService *healthService in searchResults) {
-        if (![HealthServiceManager healthService:healthService isContainedInArray:unifiedResults]) {
-            [unifiedResults addObject:healthService];
-        }
-    }
-    return unifiedResults;
+    [healthServicesSections enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSArray *healthServices = [obj valueForKey:@"healthServices"];
+        NSArray *compliantHealthServices = [self makeHealthServicesCompliant:healthServices];
+        [obj setValue:compliantHealthServices forKey:@"healthServices"];
+    }];
+    
+    return healthServicesSections;
 }
 
-+ (BOOL)healthService:(HealthService *)myHealthService isContainedInArray:(NSArray *)array
++ (NSArray *)makeHealthServicesCompliant:(NSArray *) healthServices
 {
-    BOOL answer = NO;
+    NSMutableArray *compliantHealthServices = [[NSMutableArray alloc] init];
     
-    for (HealthService *healthService in array) {
-        if ([healthService.displayName isEqualToString:myHealthService.displayName]) {
-            answer = YES;
-            break;
-        }
+    [healthServices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        HealthService *healthService = (HealthService *)[HealthService objectWithClassName:[HealthService parseClassName] dictionary:(NSDictionary *)obj];
+        [compliantHealthServices addObject:healthService];
+    }];
     
-    }
-    
-    return answer;
+    return compliantHealthServices;
 }
+//
+//+ (BOOL)healthService:(HealthService *)myHealthService isContainedInArray:(NSArray *)array
+//{
+//    BOOL answer = NO;
+//    
+//    for (HealthService *healthService in array) {
+//        if ([healthService.displayName isEqualToString:myHealthService.displayName]) {
+//            answer = YES;
+//            break;
+//        }
+//    
+//    }
+//    
+//    return answer;
+//}
 
 + (void) findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock
 {
@@ -74,7 +97,6 @@
 }
 
 + (void) findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
-
 {
     PFQuery *query = [HealthService query];
     
@@ -86,12 +108,12 @@
     [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Found %d health locations near location", objects.count);
+            NSLog(@"Found %d health locations near current location", objects.count);
             completionBlock(objects);
         }
         else
         {
-            NSLog(@"Unable to find health loactions near location because: %@", error);
+            NSLog(@"Unable to find health loactions near current location because: %@", error);
             completionBlock(nil);
         }
     }];

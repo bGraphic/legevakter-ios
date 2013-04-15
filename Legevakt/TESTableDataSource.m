@@ -17,19 +17,103 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 
 @interface TESTableDataSource ()
 
+@property (readonly) BOOL showMapCell;
+@property (readonly) BOOL showLoadMoreCell;
+
 @end
 
 @implementation TESTableDataSource
 
+- (BOOL) showLoadMoreCell
+{
+    if(self.healthServicesSearched)
+        return NO;
+    else if(self.healthServicesFiltered)
+        return YES;
+    else if(self.healthServices)
+        return self.healthServices.count > kTESInitialHealthServicesLimit ? NO : YES;
+    else
+        return NO;
+}
+
+- (BOOL) showMapCell
+{
+    if(self.healthServicesSearched)
+        return NO;
+    else if(self.healthServicesFiltered)
+        return self.healthServicesFiltered.count == 0 ? NO : YES;
+    else if(self.healthServices)
+        return self.healthServices.count == 0 ? NO : YES;
+    else
+        return NO;
+}
+
+- (NSInteger) numberOfHealthServicesSections
+{
+    if(self.healthServicesSearched)
+        return self.healthServicesSearched.count+1; //+1 for filtered search
+    if (self.healthServicesFiltered)
+        return 1;
+    else if (self.healthServices)
+        return 1;
+    else
+        return 0;
+}
+
+- (NSString *) titleOfHealthServicesSection:(NSInteger) section
+{
+    section = section-1; // compensate for map section
+    
+    if(self.healthServicesSearched && section != 0)
+    {
+        section = section-1; // compensate for filtered health services
+        
+        NSDictionary *healthServicesSection = [self.healthServicesSearched objectAtIndex:section];
+        NSString *locationType = [healthServicesSection valueForKey:kTESLocationType];
+        NSString *locationName = [healthServicesSection valueForKey:kTESLocationName];
+        
+        if([locationType isEqualToString:kTESLocationTypeCounty])
+            return [NSString stringWithFormat:NSLocalizedString(@"county_location %@", nil), locationName];
+        else if([locationType isEqualToString:kTESLocationTypeMunicipality])
+            return [NSString stringWithFormat:NSLocalizedString(@"municipality_location %@", nil), locationName];
+        else if([locationType isEqualToString:kTESLocationTypePlace])
+            return [NSString stringWithFormat:NSLocalizedString(@"place_location %@", nil), locationName];
+        else
+            return locationName;
+    }
+    else
+        return nil;
+}
+
+- (NSInteger) numberOfHealthServicesInHealthServiceSection:(NSInteger) section
+{
+    section = section-1; // compensate for map section
+    
+    if(self.healthServicesSearched && section != 0) // if 0 it will go to filtered health services
+        return [[[self.healthServicesSearched objectAtIndex:section-1] valueForKey:@"healthServices"] count];
+    else if(self.healthServicesFiltered)
+        return self.healthServicesFiltered.count;
+    else if(self.healthServices)
+        return self.healthServices.count;
+    else
+        return 0;
+}
+
 - (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath
 {
-    if(self.healthServicesFiltered)
+    indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section-1]; // compensate for map section
+    
+    if(self.healthServicesSearched && indexPath.section != 0) // if 0 it will go to filtered health services
+        return [[[self.healthServicesSearched objectAtIndex:indexPath.section-1] valueForKey:@"healthServices"] objectAtIndex:indexPath.row];
+    else if(self.healthServicesFiltered)
         return [self.healthServicesFiltered objectAtIndex:indexPath.row];
-    else
+    else if (self.healthServices)
         return [self.healthServices objectAtIndex:indexPath.row];
+    else
+        return nil;
 }
-#pragma mark - filter
 
+#pragma mark - filter
 - (void) filterContentForSearchText:(NSString*)searchText
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF.displayName contains[c] %@)", searchText, searchText];
@@ -40,42 +124,36 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 - (void) resetFilter
 {
     self.healthServicesFiltered = nil;
+    self.healthServicesSearched = nil;
 }
 
 
 #pragma mark - Table View Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.healthServices.count == kTESInitialHealthServicesLimit && !self.healthServicesFiltered)
-        return 3;
-    else
-        return 2;
+    return [self numberOfHealthServicesSections] + 2; //+1 for map section, +1 for load more section
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSUInteger count = 0;
-    
-    if(self.healthServicesFiltered)
-        count = self.healthServicesFiltered.count;
-    else
-        count = self.healthServices.count;
-    
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{    
     if(section == 0)
-    {
-        if (count == 0)
-            return 0;
-        else
-            return 1;
+        return nil;
+    if (section == [self numberOfSectionsInTableView:tableView] - 1) {
+        return nil;
     }
     
-    if(section == 2)
-    {
-        return 1;
-    }
-    
-    return count;
+    return [self titleOfHealthServicesSection:section]; 
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(section == 0)
+        return self.showMapCell ? 1 : 0;
+    else if (section == [self numberOfSectionsInTableView:tableView] - 1)
+        return self.showLoadMoreCell ? 1 : 0;
+
+    return [self numberOfHealthServicesInHealthServiceSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -96,7 +174,7 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
         return cell;
     }
     
-    if(indexPath.section == 2)
+    if(indexPath.section == [self numberOfSectionsInTableView:tableView] - 1)
     {
         TESLoadAllCell *cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
         
@@ -106,6 +184,11 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
             
             cell = (TESLoadAllCell *)[tableView dequeueReusableCellWithIdentifier:kTESLoadAllCellIdentifier];
         }
+        
+        if(self.healthServicesFiltered)
+            cell.label.text = [NSString stringWithFormat:NSLocalizedString(@"load_health_services_for_location_string %@", nil), @"Oslo"];
+        else
+            cell.label.text = NSLocalizedString(@"load_all_health_services", nil);
         
         return cell;
     }

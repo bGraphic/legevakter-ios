@@ -13,6 +13,11 @@
 "search_results_in_map" = "Se søkeresultatene i kart";
 
 "load_all_health_services" = "Last inn alle norske legevakter";
+"load_health_services_for_location_string %@" = "Last inn legevakter som tilhører: %@";
+
+"county_location %@" = "%@ (fylke)";
+"municipality_location %@" = "%@ (kommune)";
+"place_location %@" = "%@ (stedsnavn)";
 
 "rate_app" = "Skriv en omtale av appen";
 "share_app" = "Tips en venn";
