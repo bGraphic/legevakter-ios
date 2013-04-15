@@ -95,7 +95,7 @@
         
         self.mapDelegate.showCallOut = YES;
     }
-    else
+    else if (self.healthServices)
     {
         self.title = NSLocalizedString(@"main_view_controller_title", nil);
         

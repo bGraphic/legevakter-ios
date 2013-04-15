@@ -33,4 +33,10 @@ static NSString * const kTESLocationTypePlace = @"place";
 - (void) filterContentForSearchText:(NSString*)searchText;
 - (void) resetFilter;
 
+- (void)updateTableView:(UITableView *) tableView withHealthServices:(NSArray *)healthServices;
+- (void)updateTableView:(UITableView *) tableView withFilteredHealthServices:(NSArray *)healthServices;
+- (void)updateTableView:(UITableView *) tableView withSearchedHealthServices:(NSArray *)healthServices;
+
+- (void) startAnimatingLoadMoreCellForTableView:(UITableView *) tableView;
+
 @end

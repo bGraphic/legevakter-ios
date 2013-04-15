@@ -62,42 +62,23 @@
     }
     else if(indexPath.section == [healthServicesDataSource numberOfSectionsInTableView:tableView] - 1)
     {        
-        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:indexPath];
-        
-        [cell startActivity];
+        [healthServicesDataSource startAnimatingLoadMoreCellForTableView:tableView];
         
         if(healthServicesDataSource.healthServicesFiltered)
         {
             [HealthServiceManager searchWithString:healthServicesDataSource.searchString andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
                 
-                [cell stopActivity];
-                
-                if(searchStringInNameHealthServices)
-                    healthServicesDataSource.healthServicesFiltered = searchStringInNameHealthServices;
-                
-                if(searchStringInLocationNameHealthServices)
-                    healthServicesDataSource.healthServicesSearched  = searchStringInLocationNameHealthServices;
-                
-                if(searchStringInLocationNameHealthServices) {
-                    [tableView reloadData];
-                }
+                [healthServicesDataSource updateTableView:tableView withFilteredHealthServices:searchStringInNameHealthServices];
+                [healthServicesDataSource updateTableView:tableView withSearchedHealthServices:searchStringInLocationNameHealthServices];
                 
             }];
         }
         else
         {
             [HealthServiceManager findAllHealthServicesNearLocation:healthServicesDataSource.myLocation withBlock:^(NSArray *healthServices) {
-                
-                [cell stopActivity];
-                
-                if(healthServices)
-                {
-                    healthServicesDataSource.healthServices = healthServices;
-                    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
-                    [tableView reloadData];
-                    
-                    self.mapViewController.healthServices = healthServices;
-                }
+
+                [healthServicesDataSource updateTableView:tableView withHealthServices:healthServices];
+                self.mapViewController.healthServices = healthServices;
             }];
         }
     }
