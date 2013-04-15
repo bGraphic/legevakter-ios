@@ -61,7 +61,7 @@
         }
     }
     else if(indexPath.section == [healthServicesDataSource numberOfSectionsInTableView:tableView] - 1)
-    {
+    {        
         TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:indexPath];
         
         [cell startActivity];
@@ -78,8 +78,10 @@
                 if(searchStringInLocationNameHealthServices)
                     healthServicesDataSource.healthServicesSearched  = searchStringInLocationNameHealthServices;
                 
-                [tableView reloadData];
-                    
+                if(searchStringInLocationNameHealthServices) {
+                    [tableView reloadData];
+                }
+                
             }];
         }
         else
