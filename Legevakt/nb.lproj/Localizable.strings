@@ -13,7 +13,8 @@
 "search_results_in_map" = "Se søkeresultatene i kart";
 
 "load_all_health_services" = "Last inn alle norske legevakter";
-"load_health_services_for_location_string %@" = "Last inn legevakter som tilhører: %@";
+"load_health_services_for_location_string %@" = "Søk etter legevakter som tilhører: %@";
+"cell_error_message" = "Legevakter kunne ikke lastes, prøv igjen.";
 
 "county_location %@" = "%@ (fylke)";
 "municipality_location %@" = "%@ (kommune)";

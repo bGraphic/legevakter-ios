@@ -86,33 +86,6 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)updateDataSourceWithHealthServices:(NSArray *)healthServices
-{
-    if(healthServices)
-    {
-        self.tableDataSource.healthServices = healthServices;
-        [self.tableView reloadData];
-    }
-}
-
-- (void)updateDataSourceWithFiltredHealthServices:(NSArray *)healthServices
-{
-    if(healthServices)
-    {
-        self.tableDataSource.healthServicesFiltered = healthServices;
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }
-}
-
-- (void)updateDataSourceWithSearchedHealthServices:(NSArray *)healthServices
-{
-    if(healthServices)
-    {
-        self.tableDataSource.healthServicesSearched = healthServices;
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }
-}
-
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -123,7 +96,7 @@
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self updateDataSourceWithHealthServices:healthServices];
+        [self.tableDataSource updateTableView:self.tableView withHealthServices:healthServices];
     }];
     
     [manager stopUpdatingLocation];
@@ -158,11 +131,12 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [self.tableDataSource startAnimatingLoadMoreCellForTableView:self.searchDisplayController.searchResultsTableView];
 
-    [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
-
-        [self updateDataSourceWithSearchedHealthServices:searchStringInLocationNameHealthServices];
-        [self updateDataSourceWithFiltredHealthServices:searchStringInNameHealthServices];
+    [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices)
+    {
+        [self.tableDataSource updateTableView:self.searchDisplayController.searchResultsTableView withFilteredHealthServices:searchStringInNameHealthServices];
+        [self.tableDataSource updateTableView:self.searchDisplayController.searchResultsTableView withSearchedHealthServices:searchStringInLocationNameHealthServices];
     }];
 }
 

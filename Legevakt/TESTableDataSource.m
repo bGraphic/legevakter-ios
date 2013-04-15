@@ -113,6 +113,66 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
         return nil;
 }
 
+#pragma mark - update data source
+
+- (void) startAnimatingLoadMoreCellForTableView:(UITableView *) tableView
+{
+    NSInteger moreCellSection = [self numberOfSectionsInTableView:tableView];
+    moreCellSection = moreCellSection-1;
+    
+    if([self tableView:tableView numberOfRowsInSection:moreCellSection] > 0)
+    {
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:moreCellSection]];
+        
+        [cell startActivity];
+    }
+}
+
+- (void) stopAnimatingLoadMoreCellForTableView:(UITableView *) tableView
+{
+    NSInteger moreCellSection = [self numberOfSectionsInTableView:tableView];
+    moreCellSection = moreCellSection-1;
+    
+    if([self tableView:tableView numberOfRowsInSection:moreCellSection] > 0)
+    {
+        TESLoadAllCell *cell = (TESLoadAllCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:moreCellSection]];
+        
+        [cell stopActivity];
+    }
+}
+
+- (void)updateTableView:(UITableView *) tableView withHealthServices:(NSArray *)healthServices
+{
+    
+    [self stopAnimatingLoadMoreCellForTableView:tableView];
+    
+    if(healthServices)
+    {
+        self.healthServices = healthServices;
+        [tableView reloadData];
+    }
+}
+
+- (void)updateTableView:(UITableView *) tableView withFilteredHealthServices:(NSArray *)healthServices
+{
+    [self stopAnimatingLoadMoreCellForTableView:tableView];
+    
+    if(healthServices)
+    {
+        self.healthServicesFiltered = healthServices;
+        [tableView reloadData];
+    }
+}
+
+- (void)updateTableView:(UITableView *) tableView withSearchedHealthServices:(NSArray *)healthServices
+{
+    if(healthServices)
+    {
+        self.healthServicesSearched = healthServices;
+        [tableView reloadData];
+    }
+}
+
 #pragma mark - filter
 - (void) filterContentForSearchText:(NSString*)searchText
 {

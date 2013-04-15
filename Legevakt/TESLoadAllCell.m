@@ -21,22 +21,26 @@ UIActivityIndicatorView *indicatorView;
 
 - (void) startActivity
 {
-    indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
     [self setUserInteractionEnabled:NO];
     [self setSelected:NO animated:YES];
     
-    indicatorView.frame = self.iconImageView.frame;
     self.iconImageView.hidden = YES;
-    
+ 
+    indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.frame = self.iconImageView.frame;
+    indicatorView.hidesWhenStopped = YES;
     [self addSubview:indicatorView];
-    
     [indicatorView startAnimating];
 }
 
 - (void) stopActivity
 {
+    self.label.text = NSLocalizedString(@"cell_error_message", nil);
+    
+    [self setUserInteractionEnabled:YES];
+    
     self.iconImageView.hidden = NO;
+    
     [indicatorView stopAnimating];
 }
 
