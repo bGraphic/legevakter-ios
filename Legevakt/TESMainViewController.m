@@ -91,11 +91,20 @@
     }
 }
 
-- (void)updateDataSourceWithSearchedHealthServices:(NSArray *)healthServices
+- (void)updateDataSourceWithFiltredHealthServices:(NSArray *)healthServices
 {
     if(healthServices)
     {
         self.tableDataSource.healthServicesFiltered = healthServices;
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+}
+
+- (void)updateDataSourceWithSearchedHealthServices:(NSArray *)healthServices
+{
+    if(healthServices)
+    {
+        self.tableDataSource.healthServicesSearched = healthServices;
         [self.searchDisplayController.searchResultsTableView reloadData];
     }
 }
@@ -126,6 +135,7 @@
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
+    [self.tableDataSource resetFilter];
     [self.tableDataSource filterContentForSearchText:searchString];
     
     return YES;
@@ -135,11 +145,11 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"Search for: %@", searchBar.text);
 
-    [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *healthServices) {
-        NSLog(@"returned from search block with results: %d", healthServices.count);
-        [self updateDataSourceWithSearchedHealthServices:healthServices];
+    [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
+
+        [self updateDataSourceWithSearchedHealthServices:searchStringInLocationNameHealthServices];
+        [self updateDataSourceWithFiltredHealthServices:searchStringInNameHealthServices];
     }];
 }
 

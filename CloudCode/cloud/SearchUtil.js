@@ -65,7 +65,7 @@ var SearchUtil = function() {
 
 			var callBack = function(healthServices) {
 				var locationNameHit = {
-					locatioName: municipality.get("Norsk"),
+					locationName: municipality.get("Norsk"),
 					locationType: "municipality",
 					healthServices: healthServices
 				};
