@@ -9,6 +9,7 @@
 #import "TESAppDelegate.h"
 #import "HealthService.h"
 #import "Municipality.h"
+#import "TestFlight.h"
 
 @implementation TESAppDelegate
 
@@ -17,8 +18,14 @@
     // Override point for customization after application launch.
     
     [self initializeParse];
+    [self initializeTestFlight];
     
     return YES;
+}
+
+- (void)initializeTestFlight
+{
+    [TestFlight takeOff:@"98aed06f-5de1-4b55-a055-4dd5acf13c3c"];
 }
 
 - (void)initializeParse
