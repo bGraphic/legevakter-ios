@@ -14,6 +14,12 @@
 #import "MBProgressHUD.h"
 #import "BGSearchBar.h"
 
+#ifdef DEBUG
+static NSTimeInterval const kBPForceUpdaterAfterInterval = 5.0f; //5 sec
+#else
+static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
+#endif
+
 @interface TESMainViewController ()
 
 @property (nonatomic, strong) TESMapViewController *mapViewController;
@@ -25,6 +31,10 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @property (nonatomic, strong) BGInfoNavigationControllerDelegate *navDelegate;
+
+@property (nonatomic, strong) NSDate *appDidEnterBackgroundDate;
+
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -44,18 +54,30 @@
     self.searchDisplayController.searchResultsDataSource = self.tableDataSource;
     self.searchDisplayController.searchResultsDelegate = self.tableDelegate;
     
-    [self.locationManager startUpdatingLocation];
-    
     [self configureInfoButton];
     
     BGSearchBar *bgSearchBar = (BGSearchBar *) self.searchDisplayController.searchBar;
     bgSearchBar.borderColor = self.tableView.separatorColor;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void) applicationDidEnterBackground:(NSNotification *)note
 {
-    if(!self.tableDataSource.healthServices)
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.appDidEnterBackgroundDate = [NSDate date];
+}
+
+- (void) applicationDidBecomeActive:(NSNotification *)note
+{
+    NSTimeInterval timeInterval = abs([self.appDidEnterBackgroundDate timeIntervalSinceNow]);
+    
+    if(!self.tableDataSource.healthServices || timeInterval > kBPForceUpdaterAfterInterval)
+    {
+        [self startUpdatingLocation];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,10 +105,32 @@
 
 - (void)startUpdatingLocation
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.locationManager startUpdatingLocation];
 }
 
+- (void)stopUpdatingLocation
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self.locationManager stopUpdatingLocation];
+}
+
 # pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [self stopUpdatingLocation];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [HealthServiceManager findAllHealthServicesAlphabeticalWithBlock:^(NSArray *healthServices) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self.tableDataSource updateTableView:self.tableView withHealthServices:healthServices];
+    }];
+    
+    NSLog(@"Location Error: %@", [error description]);
+
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {

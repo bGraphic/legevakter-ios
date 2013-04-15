@@ -75,6 +75,24 @@
 //    return answer;
 //}
 
++ (void) findAllHealthServicesAlphabeticalWithBlock:(void (^)(NSArray *healthServices))completionBlock
+{
+    PFQuery *query = [HealthService query];
+    query.limit = 1000;
+    [query orderByAscending:@"HealthServiceDisplayName"];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Found %d health locations near current location", objects.count);
+            completionBlock(objects);
+        }
+        else
+        {
+            NSLog(@"Unable to find health loactions near current location because: %@", error);
+            completionBlock(nil);
+        }
+    }];}
+
 + (void) findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock
 {
     [self findHealthServicesNearLocation:location withLimit:-1 andBlock:^(NSArray *healthServices) {

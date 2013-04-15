@@ -15,6 +15,7 @@
 + (void)searchWithString:(NSString *)searchString andBlock:(void (^)(NSArray *searchStringInNameHealthServices,
                                                                               NSArray *searchStringInLocationNameHealthServices))completionBlock;
 
++ (void) findAllHealthServicesAlphabeticalWithBlock:(void (^)(NSArray *healthServices))completionBlock;
 + (void)findAllHealthServicesNearLocation:(CLLocation *)location withBlock:(void (^)(NSArray *healthServices))completionBlock;
 + (void)findHealthServicesNearLocation:(CLLocation *)location withLimit:(int) limit andBlock:(void (^)(NSArray *healthServices))completionBlock;
 
