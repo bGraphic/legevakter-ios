@@ -109,19 +109,11 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)stopUpdatingLocation
-{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [self.locationManager stopUpdatingLocation];
-}
-
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    [self stopUpdatingLocation];
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.locationManager stopUpdatingLocation];
     
     [HealthServiceManager findAllHealthServicesAlphabeticalWithBlock:^(NSArray *healthServices) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -134,16 +126,16 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    [self.locationManager stopUpdatingLocation];
+    
     self.myLocation = [locations lastObject];
     self.tableDataSource.myLocation = self.myLocation;
     self.mapViewController.myLocation = self.myLocation;
     
     [HealthServiceManager findHealthServicesNearLocation:self.myLocation withLimit: kTESInitialHealthServicesLimit andBlock:^(NSArray *healthServices) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableDataSource updateTableView:self.tableView withHealthServices:healthServices];
     }];
-    
-    [manager stopUpdatingLocation];
 }
 
 #pragma mark UISearchControllerDelegate
