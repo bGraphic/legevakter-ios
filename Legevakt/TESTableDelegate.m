@@ -68,7 +68,7 @@
         
         if(healthServicesDataSource.healthServicesFiltered)
         {
-            [HealthServiceManager searchWithString:@"Oslo" andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
+            [HealthServiceManager searchWithString:healthServicesDataSource.searchString andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices) {
                 
                 [cell stopActivity];
                 
