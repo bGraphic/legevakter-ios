@@ -26,6 +26,8 @@ static NSString * const kTESLocationTypePlace = @"place";
 
 @property (strong, nonatomic) CLLocation *myLocation;
 
+@property (strong, nonatomic) NSString *searchString;
+
 - (HealthService *) healthServiceAtIndexPath:(NSIndexPath *) indexPath;
 
 - (void) filterContentForSearchText:(NSString*)searchText;

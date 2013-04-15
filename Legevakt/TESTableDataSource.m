@@ -116,6 +116,8 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
 #pragma mark - filter
 - (void) filterContentForSearchText:(NSString*)searchText
 {
+    self.searchString = searchText;
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF.displayName contains[c] %@)", searchText, searchText];
     
     self.healthServicesFiltered = [self.healthServices filteredArrayUsingPredicate:predicate];
@@ -186,7 +188,7 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
         }
         
         if(self.healthServicesFiltered)
-            cell.label.text = [NSString stringWithFormat:NSLocalizedString(@"load_health_services_for_location_string %@", nil), @"Oslo"];
+            cell.label.text = [NSString stringWithFormat:NSLocalizedString(@"load_health_services_for_location_string %@", nil), self.searchString];
         else
             cell.label.text = NSLocalizedString(@"load_all_health_services", nil);
         
