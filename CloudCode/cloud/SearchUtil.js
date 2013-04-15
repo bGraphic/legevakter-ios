@@ -65,7 +65,7 @@ var SearchUtil = function() {
 
 			var callBack = function(healthServices) {
 				var locationNameHit = {
-					locationName: municipality.get("Norsk"),
+					locationName: municipality.get("Norsk") + " i " + municipality.get("Fylke"),
 					locationType: "municipality",
 					healthServices: healthServices
 				};
@@ -120,26 +120,42 @@ var SearchUtil = function() {
 		} else {
 			var placeName = placeNames.pop();
 			var query = util.getHealthServicesInPlaceNameQuery(placeName);
+			var municipalityCode = placeName.get("municipalityCode").toString();
+			var municipalityByCodeQuery = new Parse.Query("Municipality");
+			municipalityByCodeQuery.equalTo("Kommunenummer", municipalityCode);
+			municipalityByCodeQuery.first({
+				success: function(municipality) {
+					if (!municipality)
+						response.error("Failed to retrieve municipality in 'recursiveHealthServicesInPlaceNameQuery'");
+					var callBack = function(healthServices) {
+						var locationNameHit = {
+							locationName: placeName.get("displayName") 
+								+ " i " 
+								+ municipality.get("Norsk")
+								+ ", "
+								+ municipality.get("Fylke"),
+							locationType: "place",
+							healthServices: healthServices
+						};
+						results.push(locationNameHit);
 
-			var callBack = function(healthServices) {
-				var locationNameHit = {
-					locationName: placeName.get("displayName"),
-					locationType: "place",
-					healthServices: healthServices
-				};
-				results.push(locationNameHit);
+						if (placeNames.length > 0) {
+							util.recursiveHealthServicesInPlaceNameQuery(util, placeNames, results, response);
+						} else {
+							response.success(results);
+						}
+					};
 
-				if (placeNames.length > 0) {
-					util.recursiveHealthServicesInPlaceNameQuery(util, placeNames, results, response);
-				} else {
-					response.success(results);
+					Parse.Promise.when(query.find()).then(callBack, function(error) {
+						console.log("Error in 'recursiveHealthServicesInPlaceNameQuery': " + error);
+						response.error(error);
+					});					
+				},
+				error: function(error) {
+					response.error(error);
 				}
-			};
-
-			Parse.Promise.when(query.find()).then(callBack, function(error) {
-				console.log("Error in 'recursiveHealthServicesInPlaceNameQuery': " + error);
-				response.error(error);
 			});
+
 		}
 	};
 
