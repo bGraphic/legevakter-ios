@@ -131,6 +131,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [self.tableDataSource startAnimatingLoadMoreCellForTableView:self.searchDisplayController.searchResultsTableView];
 
     [HealthServiceManager searchWithString:searchBar.text andBlock:^(NSArray *searchStringInNameHealthServices, NSArray *searchStringInLocationNameHealthServices)
     {
