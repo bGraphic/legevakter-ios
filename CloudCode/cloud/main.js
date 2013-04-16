@@ -45,8 +45,8 @@ Parse.Cloud.define("searchForHealthServicesWithString", function(request, respon
 Parse.Cloud.define("searchRewrite", function(request, response) {
 	var SearchModule = require('cloud/SearchModuleNew.js');
 	var options = {
-		searchString = request.params.searchString
-	}
+		searchString : request.params.searchString
+	};
 	var searchModule = new SearchModule(options);
 	searchModule.search({
 		success: function(results) {

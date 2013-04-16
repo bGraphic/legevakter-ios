@@ -58,5 +58,4 @@ SearchModule.prototype.searchHealthServiceNames = function() {
 
 	promise.promise();
 }
-
 exports.SearchModule = SearchModule;
