@@ -29,6 +29,11 @@
  	query.startsWith("NorskLowerCase", searchString);
  	return query;
  }
+ SearchQuery.prototype.getMunicipalityByCodeQuery = function(municipalityCode) {
+ 	var query = new Parse.Query("Municipality");
+ 	query.equalTo("Kommunenummer", municipalityCode);
+ 	return query;
+ }
  SearchQuery.prototype.getCountyNameQuery = function(searchString) {
  	var query = new Parse.Query("County");
  	query.startsWith("NorskLowerCase", searchString);

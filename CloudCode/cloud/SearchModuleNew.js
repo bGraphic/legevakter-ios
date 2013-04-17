@@ -8,7 +8,7 @@
  */
 
 /*
- * Keep a module-wide private pointer to self (to avoid scope issues)
+ * Keep a module-wide private pointer to self (to avoid scope confusion)
  */
 var _this;
 
@@ -37,6 +37,7 @@ function SearchModule (options) {
 
 	// Initialize the call stack (determines order of search)
   	this.callStack = [
+  		_this.searchPlaceNames,
 		_this.searchCountyNames,
 		_this.searchMunicipalityNames,
 		_this.searchHealthServiceNames
@@ -93,10 +94,11 @@ SearchModule.prototype.searchHealthServiceNames = function () {
 		_this.executeFromTopOfStack();
 	};
 	var error = function() {
-		_this.searchError(new Error("Error promising health services by names."));
+		var message = "Error promising health services by names.";
+		console.log(message);
+		_this.searchError(new Error(message));
 	};
-	var promise = _this.searchPromise.getPromise();
-	promise(query, callback, error);
+	_this.dispatchQuery(query, callback, error);
 }
 
 SearchModule.prototype.searchMunicipalityNames = function () {
@@ -113,10 +115,11 @@ SearchModule.prototype.searchMunicipalityNames = function () {
 		});
 	};
 	var error = function() {
-		_this.searchError(new Error("Error promising municipalities by name"));
+		var message = "Error promising municipalities by name.";
+		console.log(message);
+		_this.searchError(new Error(message));
 	};
-	var promise = _this.searchPromise.getPromise();
-	promise(query, callback, error);
+	_this.dispatchQuery(query, callback, error);
 }
 
 SearchModule.prototype.searchHealthServicesInMunicipality = function(municipalities, results, response) {
@@ -125,7 +128,6 @@ SearchModule.prototype.searchHealthServicesInMunicipality = function(municipalit
 	else {
 		var municipality = municipalities.pop();
 		var query = _this.searchQuery.getHealthServicesInMunicipalityQuery(municipality);
-
 		var callback = function(healthServices) {
 			var locationNameHit = {
 				locationName: municipality.get("Norsk") + " i " + municipality.get("Fylke"),
@@ -136,13 +138,10 @@ SearchModule.prototype.searchHealthServicesInMunicipality = function(municipalit
 
 			_this.searchHealthServicesInMunicipality(municipalities, results, response);
 		};
-
 		var error = function (error) {
 			response.error(error);
 		};
-
-		var promise = _this.searchPromise.getPromise();
-		promise(query, callback, error);
+		_this.dispatchQuery(query, callback, error);
 	}
 }
 
@@ -160,37 +159,122 @@ SearchModule.prototype.searchCountyNames = function() {
 		});
 	};
 	var error = function () {
-		_this.searchError(new Error("Error promising counties by name"));
+		var message = "Error promising counties by name.";
+		console.log(message);
+		_this.searchError(new Error(message));
 	};
-	var promise = _this.searchPromise.getPromise();
-	promise(query, callback, error);
+	_this.dispatchQuery(query, callback, error);
 }
 
 SearchModule.prototype.searchHealthServicesInCounty = function(counties, results, response) {
-		if (counties.length == 0)
-			response.success(results);
-		else {
-			var county = counties.pop();
-			var query = _this.searchQuery.getHealthServicesInCountyQuery(county);
-
-			var callback = function(healthServices) {
-				var locationNameHit = {
-					locationName: county.get("Norsk"),
-					locationType: "county",
-					healthServices: healthServices
-				};
-				results.push(locationNameHit);
-
-				_this.searchHealthServicesInCounty(counties, results, response);
+	if (counties.length == 0)
+		response.success(results);
+	else {
+		var county = counties.pop();
+		var query = _this.searchQuery.getHealthServicesInCountyQuery(county);
+		var callback = function(healthServices) {
+			var locationNameHit = {
+				locationName: county.get("Norsk"),
+				locationType: "county",
+				healthServices: healthServices
 			};
+			results.push(locationNameHit);
 
-			var error = function (error) {
-				response.error(error);
-			};
+			_this.searchHealthServicesInCounty(counties, results, response);
+		};
+		var error = function (error) {
+			response.error(error);
+		};
+		_this.dispatchQuery(query, callback, error);
+	}
+}
 
-			var promise = _this.searchPromise.getPromise();
-			promise(query, callback, error);
-		}
+SearchModule.prototype.searchPlaceNames = function() {
+	var query = _this.searchQuery.getPlaceNameQuery(_this.searchString);
+	var callback = function (placeNames) {
+		_this.searchHealthServicesInPlaceName(placeNames, [], {
+			success: function (results) {
+				_this.addToLocationNameResults(results);
+				_this.executeFromTopOfStack();
+			},
+			error: function (error) {
+				_this.searchError(error);
+			}
+		});
 	};
+	var error = function () {
+		var message = "Error promising place names by name.";
+		console.log(message);
+		_this.searchError(new Error(message));
+	};
+	_this.dispatchQuery(query, callback, error);
+}
 
+SearchModule.prototype.searchHealthServicesInPlaceName = function(placeNames, results, response) {
+	if (placeNames.length == 0) {
+		response.success(results);
+	} else {
+		var placeName = placeNames.pop();
+		var municipalityCode = placeName.get("municipalityCode").toString();
+		var query = _this.searchQuery.getMunicipalityByCodeQuery(municipalityCode);
+		var callback = function (municipalities) {
+			if (!municipalities.length)
+				response.error(new Error("No municipalities by that code"));
+
+			var municipality = municipalities[0];
+
+			if(!municipality) {
+				var message = "Failed to retrieve municipality by code.";
+				console.log(message);
+				_this.searchError(new Error(message));
+			}
+
+			_this.searchHealthServicesInPlaceNameMunicipality(placeName, municipality, {
+				success: function(localResults) {
+					results.push(localResults);
+					_this.searchHealthServicesInPlaceName(placeNames, results, response);
+				},
+				error: function (error) {
+					_this.searchError(error);
+				}
+			});
+		};
+		var error = function() {
+			var message = "Error promising municipality by code";
+			console.log(message);
+			_this.searchError(new Error(message));
+		};
+		_this.dispatchQuery(query, callback, error);
+	}
+}
+
+SearchModule.prototype.searchHealthServicesInPlaceNameMunicipality = function(placeName, municipality, response) {
+	var query = _this.searchQuery.getHealthServicesInPlaceNameQuery(placeName);
+	var callback = function(healthServices) {
+		var locationNameHit = {
+			locationName: placeName.get("displayName")
+				+ " i "
+				+ municipality.get("Norsk")
+				+ ", "
+				+ municipality.get("Fylke"),
+			locationType: "place",
+			healthServices: healthServices
+		};
+		response.success(locationNameHit);
+	};
+	var error = function() {
+		var message = "Error in 'searchHealthServicesInPlaceNameMunicipality'";
+		console.log(message);
+		_this.searchError(new Error(message));
+	};
+	_this.dispatchQuery(query, callback, error);
+}
+
+SearchModule.prototype.dispatchQuery = function(query, callback, error) {
+	Parse.Promise.when(query.find()).then(callback, error);
+}
+
+/**
+ * Finally export this module :-)
+ */
 module.exports = SearchModule;
