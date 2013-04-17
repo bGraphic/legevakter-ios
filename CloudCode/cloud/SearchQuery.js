@@ -1,78 +1,134 @@
 /**
- * Rewrite of SearchUtil.js
+ * SearchQuery.js - Parse Cloud Module for "Legevakter"
+ *
+ * Helper module for SearchModule.js - Handles Parse Queries
+ * 
+ * Copyright: Tom Erik Støwer 2013
+ * E-mail: testower@gmail.com
+ *
  */
 
- function SearchQuery() {
- // 	this.HealthService = Parse.Object.extend("HealthService");
- // 	this.Municipality = Parse.Object.extend("Municipality");
- // 	this.County = Parse.Object.extend("County");
- // 	this.PlaceName = Parse.Object.extend("PlaceName");
+/*
+ * Keep a module-wide 'private' pointer to self (to avoid scope confusion)
+ */
+ var _this;
 
- // 	this.keys {
- // 		keyHealthServiceDisplayNameLowerCase : 
- // 	}
- // 	this.keyHealthServiceDisplayNameLowerCase = "HealthServiceDisplayNameLowerCase";
- // 	this.keyMunicipalityNameLowerCase = "NorskLowerCase";
- // 	this.keyCountyNameLowerCase = "NorskLowerCase";
- // 	this.keyPlaceNameDisplayNameLowerCase = "displayNameLowerCase";
- // 	this.keyHealthServiceAppliesToMunicipalityCodes = "";
-	// this.keyHealthServiceAppliesToCountyCodes = "";
-	// this.keyMunicipalityCode = "";
+/**
+ * Constructur for SearchQuery - Sets up internal state
+ */
+ function SearchQuery() {
+
+	_this = this;
+	_this.query = undefined;
+
+ 	_this.HealthService = Parse.Object.extend("HealthService");
+ 	_this.Municipality = Parse.Object.extend("Municipality");
+ 	_this.County = Parse.Object.extend("County");
+ 	_this.PlaceName = Parse.Object.extend("PlaceName");
+
+ 	_this.keys = {
+ 		healthServiceDisplayName    	 	: "HealthServiceDisplayNameLowerCase",
+ 		municipalityName 					: "NorskLowerCase",
+ 		countyName 							: "NorskLowerCase",
+ 		placeNameDisplayName 				: "displayNameLowerCase",
+ 		appliesToMunicipalityCodes 			: "AppliesToMunicipalityCodes",
+ 		appliesToCountyCodes 				: "AppliesToCountyCodes",
+ 		municipalityCode 					: "Kommunenummer",
+ 		countyCode 							: "Fylkenummer",
+ 		placeNameMunicipalityCode			: "municipalityCode"
+ 	};
  }
- SearchQuery.prototype.getHealthServiceNameQuery = function(searchString) {
-	var query = new Parse.Query("HealthService");
-	query.contains("HealthServiceDisplayNameLowerCase", searchString);
-	return query;
+
+/**
+ * Call this method with callback and error after setting a query type
+ * This method unsets the current query after dispatching the query
+ */
+ SearchQuery.prototype.executeQueryWithCallbackAndError = function(callback, error) {
+ 	if (_this.query && callback && error)
+ 		Parse.Promise.when(_this.query.find()).then(callback, error).then(function() {
+ 			_this.query = undefined;
+ 		});
  }
- SearchQuery.prototype.getMunicipalityNameQuery = function(searchString) {
- 	var query = new Parse.Query("Municipality");
- 	query.startsWith("NorskLowerCase", searchString);
- 	return query;
+
+ /*
+  *	Methods that set the current query
+  */
+
+ // Search health service by their display name
+ SearchQuery.prototype.setHealthServiceNameQuery = function(searchString) {
+	var query = new Parse.Query(_this.HealthService);
+	query.contains(_this.keys.healthServiceDisplayName, searchString);
+	_this.query = query;
  }
- SearchQuery.prototype.getMunicipalityByCodeQuery = function(municipalityCode) {
- 	var query = new Parse.Query("Municipality");
- 	query.equalTo("Kommunenummer", municipalityCode);
- 	return query;
+
+ // Search municipalities by their name
+ SearchQuery.prototype.setMunicipalityNameQuery = function(searchString) {
+ 	var query = new Parse.Query(_this.Municipality);
+ 	query.startsWith(_this.keys.municipalityName, searchString);
+ 	_this.query = query;
  }
- SearchQuery.prototype.getCountyNameQuery = function(searchString) {
- 	var query = new Parse.Query("County");
- 	query.startsWith("NorskLowerCase", searchString);
- 	return query;
+
+ // Search municipalities by their numeric code
+ SearchQuery.prototype.setMunicipalityByCodeQuery = function(municipalityCode) {
+ 	var query = new Parse.Query(_this.Municipality);
+ 	query.equalTo(_this.keys.municipalityCode, municipalityCode);
+ 	_this.query = query;
  }
- SearchQuery.prototype.getPlaceNameQuery = function(searchString) {
- 	var query = new Parse.Query("PlaceName");
- 	query.startsWith("displayNameLowerCase", searchString);
+
+ // Search counties by their name
+ SearchQuery.prototype.setCountyNameQuery = function(searchString) {
+ 	var query = new Parse.Query(_this.County);
+ 	query.startsWith(_this.keys.countyName, searchString);
+ 	_this.query = query;
+ }
+
+ // Search place names by their display name
+ SearchQuery.prototype.setPlaceNameQuery = function(searchString) {
+ 	var query = new Parse.Query(_this.PlaceName);
+ 	query.startsWith(_this.keys.placeNameDisplayName, searchString);
  	query.limit(25); // somewhat arbitrary limit - discuss
- 	return query;
+ 	_this.query = query;
  }
- SearchQuery.prototype.getHealthServicesInMunicipalityQuery = function(municipality) {
- 	var query = new Parse.Query("HealthService");
- 	var municipalityCode = municipality.get("Kommunenummer");
+
+ // Search health services by applicable municipality
+ SearchQuery.prototype.setHealthServicesInMunicipalityQuery = function(municipality) {
+ 	var query = new Parse.Query(_this.HealthService);
+ 	var municipalityCode = municipality.get(_this.keys.municipalityCode);
  	if (municipalityCode.length < 4)
  		municipalityCode = "0" + municipalityCode;
- 	query.contains("AppliesToMunicipalityCodes", municipalityCode);
- 	return query;
+ 	query.contains(_this.keys.appliesToMunicipalityCodes, municipalityCode);
+ 	_this.query = query;
  }
- SearchQuery.prototype.getHealthServicesInCountyQuery = function(county) {
- 	var query = new Parse.Query("HealthService");
- 	var countyCode = county.get("Fylkenummer");
+
+ // Search health services by applicable county
+ SearchQuery.prototype.setHealthServicesInCountyQuery = function(county) {
+ 	var query = new Parse.Query(_this.HealthService);
+ 	var countyCode = county.get(_this.keys.countyCode);
  	if (countyCode.length < 2)
  		countyCode = "0" + countyCode;
- 	query.contains("AppliesToCountyCodes", countyCode);
- 	return query;
+ 	query.contains(_this.keys.appliesToCountyCodes, countyCode);
+ 	_this.query = query;
  }
- SearchQuery.prototype.getHealthServicesInPlaceNameQuery = function(placeName) {
- 	var query = new Parse.Query("HealthService");
- 	var municipalityCode = placeName.get("municipalityCode").toString();
+
+ // Search health services by applicable municipality for a place name
+ SearchQuery.prototype.setHealthServicesInPlaceNameQuery = function(placeName) {
+ 	var query = new Parse.Query(_this.HealthService);
+ 	var municipalityCode = placeName.get(_this.keys.placeNameMunicipalityCode).toString();
  	if (municipalityCode.length < 4)
  		municipalityCode = "0" + municipalityCode;
- 	query.contains("AppliesToMunicipalityCodes", municipalityCode);
- 	return query;
+ 	query.contains(_this.keys.appliesToMunicipalityCodes, municipalityCode);
+ 	_this.query = query;
  }
- SearchQuery.prototype.getMunicipalityByPlaceNameQuery = function(placeName) {
- 	var municipalityCode = placeName.get("municipalityCode").toString();
- 	var query = new Parse.Query("Municipality");
- 	query.equalTo("Kommunenummer", municipalityCode);
- 	return query;
+
+ // Search municipality by place name
+ SearchQuery.prototype.setMunicipalityByPlaceNameQuery = function(placeName) {
+ 	var municipalityCode = placeName.get(_this.keys.placeNameMunicipalityCode).toString();
+ 	var query = new Parse.Query(_this.Municipality);
+ 	query.equalTo(_this.keys.municipalityCode, municipalityCode);
+ 	_this.query = query;
  }
+
+ /**
+  * Export the module
+  */
  module.exports = SearchQuery;
