@@ -25,7 +25,7 @@ Parse.Cloud.beforeSave("County", function(request, response) {
 */
 
 Parse.Cloud.define("searchForHealthServicesWithString", function(request, response) {
-	var SearchModule = require('cloud/SearchModuleNew.js');
+	var SearchModule = require('cloud/SearchModule.js');
 	var options = {
 		searchString : request.params.searchString
 	};

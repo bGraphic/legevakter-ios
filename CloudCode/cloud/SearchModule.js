@@ -146,6 +146,7 @@ SearchModule.prototype._searchHealthServicesInMunicipality = function(municipali
 			var locationNameHit = {
 				locationName: municipality.get("Norsk") + " i " + municipality.get("Fylke"),
 				locationType: "municipality",
+				locationId: municipality.id,
 				healthServices: healthServices
 			};
 			results.push(locationNameHit);
@@ -191,6 +192,7 @@ SearchModule.prototype._searchHealthServicesInCounty = function(counties, result
 			var locationNameHit = {
 				locationName: county.get("Norsk"),
 				locationType: "county",
+				locationId: county.id,
 				healthServices: healthServices
 			};
 			results.push(locationNameHit);
@@ -276,6 +278,7 @@ SearchModule.prototype._searchHealthServicesInPlaceNameMunicipality = function(p
 				+ ", "
 				+ municipality.get("Fylke"),
 			locationType: "place",
+			locationId: placeName.id,
 			healthServices: healthServices
 		};
 		response.success(locationNameHit);
