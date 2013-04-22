@@ -69,17 +69,10 @@ static NSString * const kTESViewInMapCellIdentifier = @"ViewInMapCell";
         section = section-1; // compensate for filtered health services
         
         NSDictionary *healthServicesSection = [self.healthServicesSearched objectAtIndex:section];
-        NSString *locationType = [healthServicesSection valueForKey:kTESLocationType];
-        NSString *locationName = [healthServicesSection valueForKey:kTESLocationName];
         
-        if([locationType isEqualToString:kTESLocationTypeCounty])
-            return [NSString stringWithFormat:NSLocalizedString(@"county_location %@", nil), locationName];
-        else if([locationType isEqualToString:kTESLocationTypeMunicipality])
-            return [NSString stringWithFormat:NSLocalizedString(@"municipality_location %@", nil), locationName];
-        else if([locationType isEqualToString:kTESLocationTypePlace])
-            return [NSString stringWithFormat:NSLocalizedString(@"place_location %@", nil), locationName];
-        else
-            return locationName;
+        NSString *locationName = [healthServicesSection valueForKey:kTESLocationName];
+    
+        return locationName;
     }
     else
         return nil;
