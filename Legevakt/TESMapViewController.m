@@ -78,7 +78,7 @@
     else
     {
         HealthService *healthService = (HealthService *)[self.healthServices objectAtIndex:0];
-        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 2000.f, 2000.f)];
+        [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(healthService.location.coordinate, 50000.f, 50000.f)];
     }
 }
 
