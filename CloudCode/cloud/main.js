@@ -21,15 +21,16 @@ Parse.Cloud.beforeSave("County", function(request, response) {
 /* End Section */
 
 /* 
-  * Fritekstsøk
+  * Free text search
 */
 
 Parse.Cloud.define("searchForHealthServicesWithString", function(request, response) {
-	var searchString = request.params.searchString;
-	var SearchModule = require('cloud/SearchModule.js').SearchModule;
-	var searchModule = new SearchModule();
-
-	searchModule.search(searchString, {
+	var SearchModule = require('cloud/SearchModuleNew.js');
+	var options = {
+		searchString : request.params.searchString
+	};
+	var searchModule = new SearchModule(options);
+	searchModule.search({
 		success: function(results) {
 			response.success(results);
 		},
@@ -39,7 +40,9 @@ Parse.Cloud.define("searchForHealthServicesWithString", function(request, respon
 	});
 });
 
-/* End Fritekstsøk */
+/**
+ * End free text search
+ */
 
 /* Creates geoPoints on all objects from lat and lon */
 Parse.Cloud.define("createGeoPoints", function(request, response) {
