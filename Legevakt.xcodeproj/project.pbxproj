@@ -40,6 +40,7 @@
 		139B02851718A9D3005238B0 /* ER_load_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 139B02831718A9D3005238B0 /* ER_load_more.png */; };
 		139B02861718A9D3005238B0 /* ER_load_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 139B02841718A9D3005238B0 /* ER_load_more@2x.png */; };
 		13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B896A1171425FB0058B1A0 /* TESMapViewController.m */; };
+		13EA3393174E028A000975AF /* InfoPage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13EA3392174E028A000975AF /* InfoPage.plist */; };
 		13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D7D17144BF3004B42A4 /* Localizable.strings */; };
 		13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8217144F53004B42A4 /* Default-568h@2x.png */; };
 		13FA7D8517144F56004B42A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8417144F56004B42A4 /* Default.png */; };
@@ -109,6 +110,7 @@
 		139B02841718A9D3005238B0 /* ER_load_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ER_load_more@2x.png"; sourceTree = "<group>"; };
 		13B896A0171425FB0058B1A0 /* TESMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapViewController.h; sourceTree = "<group>"; };
 		13B896A1171425FB0058B1A0 /* TESMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapViewController.m; sourceTree = "<group>"; };
+		13EA3392174E028A000975AF /* InfoPage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoPage.plist; sourceTree = "<group>"; };
 		13FA7D7A17144BEA004B42A4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		13FA7D7C17144BF3004B42A4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		13FA7D8217144F53004B42A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				17EA083017024A80007C2B48 /* main.m */,
 				17EA083217024A80007C2B48 /* Legevakt-Prefix.pch */,
 				13FA7D7D17144BF3004B42A4 /* Localizable.strings */,
+				13EA3392174E028A000975AF /* InfoPage.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				139B02821718A8AD005238B0 /* ER_open@2x.png in Resources */,
 				139B02851718A9D3005238B0 /* ER_load_more.png in Resources */,
 				139B02861718A9D3005238B0 /* ER_load_more@2x.png in Resources */,
+				13EA3393174E028A000975AF /* InfoPage.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
