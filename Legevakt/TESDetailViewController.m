@@ -30,7 +30,9 @@
     self.title = NSLocalizedString(@"detail_view_controller_title", nil);
     
     self.mapView.layer.masksToBounds = YES;
-    self.mapView.layer.cornerRadius = 7.f;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        self.mapView.layer.cornerRadius = 7.f;
+    }
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [BGCommonGraphics backgroundView];
@@ -87,12 +89,8 @@
 {
     // Update the user interface for the detail item.
     
-    NSLog(@"configure vire");
-    
     if (self.healthService)
     {
-            NSLog(@"has health");
-        
         self.displayNameLabel.text = self.healthService.displayName;
         self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
         self.addressLabel.text = self.healthService.formattedAddress;
