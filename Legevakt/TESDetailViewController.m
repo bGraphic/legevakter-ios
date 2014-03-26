@@ -47,6 +47,11 @@
     self.mapView.alpha = 1.0f;
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -82,13 +87,18 @@
 {
     // Update the user interface for the detail item.
     
+    NSLog(@"configure vire");
+    
     if (self.healthService)
     {
+            NSLog(@"has health");
+        
         self.displayNameLabel.text = self.healthService.displayName;
         self.phoneNumberLabel.text = self.healthService.formattedPhoneNumber;
         self.addressLabel.text = self.healthService.formattedAddress;
         self.webPageLabel.text = self.healthService.formattedWebPage;
         self.openingHoursTextView.text = self.healthService.formattedOpeningHoursAsString;
+        
         self.openingHoursCommentTextView.text = self.healthService.formattedOpeningHoursComment;
         
         self.mapDelegate = [[TESMapDelegate alloc] init];
@@ -156,22 +166,16 @@
 {
     if(indexPath.section == 1 && indexPath.row == 0)
     {
-        CGRect frame = self.openingHoursTextView.frame;
-        frame.size.height = self.openingHoursTextView.contentSize.height;
-        frame.origin.y = frame.origin.y + 10.f;
-        self.openingHoursTextView.frame = frame;
+        CGSize size = [self.openingHoursTextView sizeThatFits:CGSizeMake(self.openingHoursTextView.frame.size.width, FLT_MAX)];
         
-        return self.openingHoursTextView.frame.size.height + 20.f;
+        return size.height+20.f;
     }
     
     if(indexPath.section == 1 && indexPath.row == 1)
     {
-        CGRect frame = self.openingHoursCommentTextView.frame;
-        frame.size.height = self.openingHoursCommentTextView.contentSize.height;
-        frame.origin.y = frame.origin.y + 10.f;
-        self.openingHoursCommentTextView.frame = frame;
+        CGSize size = [self.openingHoursCommentTextView sizeThatFits:CGSizeMake(self.openingHoursCommentTextView.frame.size.width, FLT_MAX)];
         
-        return  self.openingHoursCommentTextView.frame.size.height + 20.f;;
+        return  size.height+20.f;
     }
     
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

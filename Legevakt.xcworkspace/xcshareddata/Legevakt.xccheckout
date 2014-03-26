@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1BDFC0E1-A1F3-4C3E-90B2-8E72835E2195</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Legevakt</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C621CDC0-6011-472C-895D-80D70274B951</key>
+		<string>https://github.com/bGraphic/legevakter-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Legevakt.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C621CDC0-6011-472C-895D-80D70274B951</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bGraphic/legevakter-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C621CDC0-6011-472C-895D-80D70274B951</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C621CDC0-6011-472C-895D-80D70274B951</string>
+			<key>IDESourceControlWCCName</key>
+			<string>legevakter-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

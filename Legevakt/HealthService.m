@@ -7,7 +7,7 @@
 //
 
 #import "HealthService.h"
-#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
 #import "OpeningHours.h"
 #import "Municipality.h"
 #import "TESNorwegianPhoneNumberFormatter.h"

@@ -34,8 +34,6 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
 
 @property (nonatomic, strong) NSDate *appDidEnterBackgroundDate;
 
-@property (nonatomic, strong) MBProgressHUD *hud;
-
 @end
 
 @implementation TESMainViewController
@@ -105,6 +103,7 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
 
 - (void)startUpdatingLocation
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.locationManager startUpdatingLocation];
 }

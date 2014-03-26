@@ -7,6 +7,7 @@
 //
 
 #import "Municipality.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Municipality
 

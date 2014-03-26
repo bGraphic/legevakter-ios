@@ -26,6 +26,7 @@
 		1350A0A01716D52C00FF8364 /* TESTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A09F1716D52C00FF8364 /* TESTableDelegate.m */; };
 		1350A0A31716DAC800FF8364 /* TESTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0A21716DAC800FF8364 /* TESTableViewController.m */; };
 		1350A0A717171A3000FF8364 /* TESMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1350A0A617171A3000FF8364 /* TESMapDelegate.m */; };
+		136506C918E2DF5100797FEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 136506C818E2DF5100797FEA /* Images.xcassets */; };
 		1366BA4C1714C66600208968 /* TESMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1366BA4B1714C66600208968 /* TESMapAnnotationView.m */; };
 		1376BF771712F74A0074ABB1 /* TESDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF761712F74A0074ABB1 /* TESDetailViewController.m */; };
 		1376BF831713FB200074ABB1 /* TESHealthServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BF821713FB200074ABB1 /* TESHealthServiceCell.m */; };
@@ -90,6 +91,7 @@
 		1350A0A21716DAC800FF8364 /* TESTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESTableViewController.m; sourceTree = "<group>"; };
 		1350A0A517171A3000FF8364 /* TESMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapDelegate.h; sourceTree = "<group>"; };
 		1350A0A617171A3000FF8364 /* TESMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapDelegate.m; sourceTree = "<group>"; };
+		136506C818E2DF5100797FEA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1366BA4A1714C66600208968 /* TESMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESMapAnnotationView.h; sourceTree = "<group>"; };
 		1366BA4B1714C66600208968 /* TESMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESMapAnnotationView.m; sourceTree = "<group>"; };
 		1376BF751712F74A0074ABB1 /* TESDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESDetailViewController.h; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				13B896A1171425FB0058B1A0 /* TESMapViewController.m */,
 				1350A0A11716DAC800FF8364 /* TESTableViewController.h */,
 				1350A0A21716DAC800FF8364 /* TESTableViewController.m */,
+				136506C818E2DF5100797FEA /* Images.xcassets */,
 			);
 			path = Legevakt;
 			sourceTree = "<group>";
@@ -346,6 +349,11 @@
 				CLASSPREFIX = TES;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Tom Erik St√∏wer";
+				TargetAttributes = {
+					17EA082017024A80007C2B48 = {
+						DevelopmentTeam = XTD8UFAG85;
+					};
+				};
 			};
 			buildConfigurationList = 17EA081C17024A80007C2B48 /* Build configuration list for PBXProject "Legevakt" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -396,6 +404,7 @@
 				139B02811718A8AD005238B0 /* ER_closed@2x.png in Resources */,
 				139B02821718A8AD005238B0 /* ER_open@2x.png in Resources */,
 				139B02851718A9D3005238B0 /* ER_load_more.png in Resources */,
+				136506C918E2DF5100797FEA /* Images.xcassets in Resources */,
 				139B02861718A9D3005238B0 /* ER_load_more@2x.png in Resources */,
 				13EA3393174E028A000975AF /* InfoPage.plist in Resources */,
 			);
@@ -540,10 +549,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA5C1EAF860243329134BEBC /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Legevakt/Legevakt-Prefix.pch";
 				INFOPLIST_FILE = "Legevakt/Legevakt-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -552,10 +566,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA5C1EAF860243329134BEBC /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Legevakt/Legevakt-Prefix.pch";
 				INFOPLIST_FILE = "Legevakt/Legevakt-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
