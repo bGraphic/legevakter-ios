@@ -24,8 +24,8 @@
                                         NSArray *searchStringInNameHealthServices = [result objectForKey:@"searchStringInNameHealthServices"];
                                         NSArray *searchStringInLocationNameHealthServices = [result objectForKey:@"searchStringInLocationNameHealthServices"];
                                         
-                                        NSLog(@"Found %d health services that matched: %@", searchStringInNameHealthServices.count, searchString);
-                                        NSLog(@"Found %d locations that matched: %@", searchStringInLocationNameHealthServices.count, searchString);
+                                        NSLog(@"Found %lu health services that matched: %@", (unsigned long)searchStringInNameHealthServices.count, searchString);
+                                        NSLog(@"Found %lu locations that matched: %@", (unsigned long)searchStringInLocationNameHealthServices.count, searchString);
                                         
                                         completionBlock([self makeHealthServicesCompliant:searchStringInNameHealthServices], [self makeHealthServicesSectionsCompliant:searchStringInLocationNameHealthServices]);
                                     }
@@ -83,7 +83,7 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Found %d health locations near current location", objects.count);
+            NSLog(@"Found %lu health locations near current location", (unsigned long)objects.count);
             completionBlock(objects);
         }
         else
@@ -102,7 +102,7 @@
         [query whereKey:@"geoPoint" equalTo:[NSNull null]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                NSLog(@"Found %d health locations with no geopoint", objects.count);
+                NSLog(@"Found %lu health locations with no geopoint", (unsigned long)objects.count);
                 completionBlock([healthServices arrayByAddingObjectsFromArray:objects]);
             }
             else
@@ -126,7 +126,7 @@
     [query whereKey:@"geoPoint" nearGeoPoint:[PFGeoPoint geoPointWithLocation:location]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Found %d health locations near current location", objects.count);
+            NSLog(@"Found %lu health locations near current location", (unsigned long)objects.count);
             completionBlock(objects);
         }
         else

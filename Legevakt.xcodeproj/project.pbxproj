@@ -43,12 +43,6 @@
 		13B896A2171425FB0058B1A0 /* TESMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B896A1171425FB0058B1A0 /* TESMapViewController.m */; };
 		13EA3393174E028A000975AF /* InfoPage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13EA3392174E028A000975AF /* InfoPage.plist */; };
 		13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D7D17144BF3004B42A4 /* Localizable.strings */; };
-		13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8217144F53004B42A4 /* Default-568h@2x.png */; };
-		13FA7D8517144F56004B42A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8417144F56004B42A4 /* Default.png */; };
-		13FA7D8717144F58004B42A4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8617144F58004B42A4 /* Default@2x.png */; };
-		13FA7D8917144F5C004B42A4 /* PoisonInfo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */; };
-		13FA7D8B17144F62004B42A4 /* ERList_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8A17144F62004B42A4 /* ERList_114.png */; };
-		13FA7D8D17144FB7004B42A4 /* ERList_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 13FA7D8C17144FB7004B42A4 /* ERList_57.png */; };
 		1742547217152C910075ECBF /* TESNorwegianPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1742547117152C910075ECBF /* TESNorwegianPhoneNumberFormatter.m */; };
 		17973A731711D5E200FBDF48 /* Municipality.m in Sources */ = {isa = PBXBuildFile; fileRef = 17973A721711D5E200FBDF48 /* Municipality.m */; };
 		17EA082517024A80007C2B48 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EA082417024A80007C2B48 /* UIKit.framework */; };
@@ -115,12 +109,6 @@
 		13EA3392174E028A000975AF /* InfoPage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoPage.plist; sourceTree = "<group>"; };
 		13FA7D7A17144BEA004B42A4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		13FA7D7C17144BF3004B42A4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		13FA7D8217144F53004B42A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		13FA7D8417144F56004B42A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		13FA7D8617144F58004B42A4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoisonInfo_114.png; sourceTree = "<group>"; };
-		13FA7D8A17144F62004B42A4 /* ERList_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_114.png; sourceTree = "<group>"; };
-		13FA7D8C17144FB7004B42A4 /* ERList_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ERList_57.png; sourceTree = "<group>"; };
 		1742547017152C910075ECBF /* TESNorwegianPhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TESNorwegianPhoneNumberFormatter.h; sourceTree = "<group>"; };
 		1742547117152C910075ECBF /* TESNorwegianPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TESNorwegianPhoneNumberFormatter.m; sourceTree = "<group>"; };
 		17973A711711D5E200FBDF48 /* Municipality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Municipality.h; sourceTree = "<group>"; };
@@ -248,12 +236,6 @@
 		17EA081817024A80007C2B48 = {
 			isa = PBXGroup;
 			children = (
-				13FA7D8C17144FB7004B42A4 /* ERList_57.png */,
-				13FA7D8A17144F62004B42A4 /* ERList_114.png */,
-				13FA7D8817144F5C004B42A4 /* PoisonInfo_114.png */,
-				13FA7D8617144F58004B42A4 /* Default@2x.png */,
-				13FA7D8417144F56004B42A4 /* Default.png */,
-				13FA7D8217144F53004B42A4 /* Default-568h@2x.png */,
 				17EA082A17024A80007C2B48 /* Legevakt */,
 				17EA082317024A80007C2B48 /* Frameworks */,
 				17EA082217024A80007C2B48 /* Products */,
@@ -380,12 +362,6 @@
 			files = (
 				17EA082F17024A80007C2B48 /* InfoPlist.strings in Resources */,
 				13FA7D7B17144BF3004B42A4 /* Localizable.strings in Resources */,
-				13FA7D8317144F53004B42A4 /* Default-568h@2x.png in Resources */,
-				13FA7D8517144F56004B42A4 /* Default.png in Resources */,
-				13FA7D8717144F58004B42A4 /* Default@2x.png in Resources */,
-				13FA7D8917144F5C004B42A4 /* PoisonInfo_114.png in Resources */,
-				13FA7D8B17144F62004B42A4 /* ERList_114.png in Resources */,
-				13FA7D8D17144FB7004B42A4 /* ERList_57.png in Resources */,
 				1314CAA517147BB000020043 /* ER_call.png in Resources */,
 				1314CAA617147BB000020043 /* ER_map.png in Resources */,
 				1314CAA717147BB000020043 /* ER_map2.png in Resources */,

@@ -20,6 +20,8 @@
 "municipality_location %@" = "%@ (kommune)";
 "place_location %@" = "%@ (stedsnavn)";
 
+"info_title" = "Info";
+
 "rate_app" = "Skriv en omtale av appen";
 "share_app" = "Tips en venn";
 "support" = "Send e-post til brukerstøtte";

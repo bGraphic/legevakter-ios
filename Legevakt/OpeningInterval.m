@@ -158,7 +158,7 @@
 
 - (int)weekdayNumberFromDate:(NSDate *)date
 {
-    int weekdayNumber = [[self weekdayComponentsFromDate:date] weekday] - 1;
+    int weekdayNumber = (int)[[self weekdayComponentsFromDate:date] weekday] - 1;
     
     if (weekdayNumber == 0)
         weekdayNumber = 7;
@@ -167,12 +167,12 @@
 
 - (int)hourFromDate:(NSDate *)date
 {
-    return [[self hourComponentsFromDate:date] hour];
+    return (int)[[self hourComponentsFromDate:date] hour];
 }
 
 - (int)minuteFromDate:(NSDate *)date
 {
-    return [[self minuteComponentsFromDate:date] minute];
+    return (int)[[self minuteComponentsFromDate:date] minute];
 }
 
 - (NSDateComponents *)weekdayComponentsFromDate:(NSDate *)date
@@ -347,7 +347,7 @@
 {
     NSString *timeString = @"";
     
-    NSLog(@"number of intervals: %d", intervals.count);
+    NSLog(@"number of intervals: %d", (int)intervals.count);
     if (intervals.count == 7) {
         timeString = [timeString stringByAppendingFormat:@"%@: ", ALL_DAYS];
     }

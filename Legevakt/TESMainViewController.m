@@ -12,7 +12,6 @@
 #import "TESTableDataSource.h"
 #import "HealthServiceManager.h"
 #import "MBProgressHUD.h"
-#import "BGSearchBar.h"
 
 #ifdef DEBUG
 static NSTimeInterval const kBPForceUpdaterAfterInterval = 5.0f; //5 sec
@@ -53,9 +52,6 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
     self.searchDisplayController.searchResultsDelegate = self.tableDelegate;
     
     [self configureInfoButton];
-    
-    BGSearchBar *bgSearchBar = (BGSearchBar *) self.searchDisplayController.searchBar;
-    bgSearchBar.borderColor = self.tableView.separatorColor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
@@ -139,17 +135,8 @@ static NSTimeInterval const kBPForceUpdaterAfterInterval = 360.0f; //1hour
 
 #pragma mark UISearchControllerDelegate
 
-- (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    BGSearchBar *bgSearchBar = (BGSearchBar *) controller.searchBar;
-    [bgSearchBar setBorderHidden:YES];
-}
-
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
-    BGSearchBar *bgSearchBar = (BGSearchBar *) controller.searchBar;
-    [bgSearchBar setBorderHidden:NO];
-    
     [self.tableDataSource resetFilter];
     [self.tableView reloadData];
 }
